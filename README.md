@@ -39,10 +39,8 @@ Proyecto de DAW
   - Control de acceso a las funcionalidades según el estado del usuario.
     
 ### Roles
-  > Admin:
-   - Acceso a todas las vistas y gestión de los tableros disponibles.
-  > Cliente:
-   - Acceso a los tableros para interactuar con ellos.
+  - Admin: acceso a todas las vistas y gestión de los tableros disponibles.
+  - Cliente: acceso a los tableros para interactuar con ellos.
   
 ### Vistas
   - Home
@@ -57,29 +55,21 @@ Proyecto de DAW
 ## Arquitectura/Tecnología
  > La aplicación se desarrollará siguiendo una arquitectura cliente-servidor, separando claramente el frontend y el backend para facilitar el mantenimiento, la escalabilidad y el desarrollo del proyecto.
 ### Frontend
-  > Figma:
-   - Prototipado de la aplicación: definir su estructura, navegación y diseño de la interfaz.
-  > React:
-   - Desarrollo del frontend.
-  > Tailwind CSS:
-   - Diseño visual de la aplicación
+  > Figma: prototipado de la aplicación: definir su estructura, navegación y diseño de la interfaz.
+  > React: desarrollo del frontend.
+  > Tailwind CSS: diseño visual de la aplicación
   > Librerías:
    - React:
    - Tailwind CSS: 
 
 ### Backend
- > Laravel:
-   - Framework backend.
-  > Eloquent ORM:
-   - Interacción con la base de datos.
-  > MySql:
-   - Sistema gestor de base de datos relacional para almacenar usuarios, imágenes y tableros
+ > Laravel: framework backend.
+  > Eloquent ORM: interacción con la base de datos.
+  > MySql: sistema gestor de base de datos relacional para almacenar usuarios, imágenes y tableros
 
 ### Despliegue:
-   > Docker:
-    - Creación de contenedores para la aplicación y sus servicios.
-   > AWS (Amazon Web Service):
-    - Alojamiento de la aplicación.
+   > Docker: creación de contenedores para la aplicación y sus servicios.
+   > AWS (Amazon Web Service): alojamiento de la aplicación.
 
 ## Esquema entidad relación
   - 
