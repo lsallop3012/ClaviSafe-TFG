@@ -73,7 +73,7 @@ Proyecto de DAW
 
 ## Esquema entidad relación
 ### Entidad
-> Entidad: Usuario
+> Usuario
   - Atributos principales:
     - id_usuario (PK)
     - nom_usuario
@@ -82,7 +82,7 @@ Proyecto de DAW
     - rol (usuario / administrador)
     - fecha_registro
       
-> Entidad: Imagen
+> Imagen
   - Atributos principales:
     - id_imagen (PK)
     - nom_imagen
@@ -91,7 +91,7 @@ Proyecto de DAW
     - fecha_subida
     - id_usuario (FK)
 
-> Entidad: Tablero
+> Tablero
   - Atributos principales:
     - id_tablero (PK)
     - nom_tablero
@@ -100,14 +100,11 @@ Proyecto de DAW
     - id_usuario (FK)
       
 ### Relación
-> Relación:
-- Usuario 1 <-> N Imagen
+> Usuario 1 <-> N Imagen
 
-> Relación:
-- Usuario 1 <-> N Tablero
+> Usuario 1 <-> N Tablero
 
-> Relación:
-- Imagen M <-> N Tablero
+> Imagen M <-> N Tablero
   - Atributos principales:
     - id_tablero (FK)
     - id_imagen (FK)
