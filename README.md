@@ -53,22 +53,23 @@ Proyecto de DAW
     
 ## Arquitectura/Tecnología
 > La aplicación se desarrollará siguiendo una arquitectura cliente-servidor, separando claramente el frontend y el backend para facilitar el mantenimiento, la escalabilidad y el desarrollo del proyecto.
+
 ### Frontend
-> Figma: prototipado de la aplicación: definir su estructura, navegación y diseño de la interfaz.
-> React: desarrollo del frontend.
-> Tailwind CSS: diseño visual de la aplicación
-> Librerías:
+- Figma: prototipado de la aplicación: definir su estructura, navegación y diseño de la interfaz.
+- React: desarrollo del frontend.
+- Tailwind CSS: diseño visual de la aplicación
+- Librerías:
  - React:
  - Tailwind CSS: 
 
 ### Backend
-> Laravel: framework backend.
-> Eloquent ORM: interacción con la base de datos.
-> MySql: sistema gestor de base de datos relacional para almacenar usuarios, imágenes y tableros
+- Laravel: framework backend.
+- Eloquent ORM: interacción con la base de datos.
+- MySql: sistema gestor de base de datos relacional para almacenar usuarios, imágenes y tableros
 
 ### Despliegue:
-> Docker: creación de contenedores para la aplicación y sus servicios.
-> AWS (Amazon Web Service): alojamiento de la aplicación.
+- Docker: creación de contenedores para la aplicación y sus servicios.
+- AWS (Amazon Web Service): alojamiento de la aplicación.
 
 ## Esquema entidad relación
   - 
