@@ -7,7 +7,6 @@ Proyecto de DAW
 > Consiste en el desarrollo de una aplicación web centrada en la búsqueda y organización de imágenes. Los usuarios podrán descubrir contenido visual y guardarlo o clasificarlos de forma intuitiva y sencilla según sus intereses.
 
 ## Objetivos
-> Crear una aplicación funcional que permita a los usuarios guardar y organizar imágenes en tableros:
   - Crear una interfaz web sencilla e intuitiva.
   - Implementar un sistema de registro e inicio de sesión de usuarios.
   - Permitir la subida y visualización de imágenes en la plataforma.
@@ -53,23 +52,23 @@ Proyecto de DAW
   - CRUD Perfil
     
 ## Arquitectura/Tecnología
- > La aplicación se desarrollará siguiendo una arquitectura cliente-servidor, separando claramente el frontend y el backend para facilitar el mantenimiento, la escalabilidad y el desarrollo del proyecto.
+> La aplicación se desarrollará siguiendo una arquitectura cliente-servidor, separando claramente el frontend y el backend para facilitar el mantenimiento, la escalabilidad y el desarrollo del proyecto.
 ### Frontend
-  > Figma: prototipado de la aplicación: definir su estructura, navegación y diseño de la interfaz.
-  > React: desarrollo del frontend.
-  > Tailwind CSS: diseño visual de la aplicación
-  > Librerías:
-   - React:
-   - Tailwind CSS: 
+> Figma: prototipado de la aplicación: definir su estructura, navegación y diseño de la interfaz.
+> React: desarrollo del frontend.
+> Tailwind CSS: diseño visual de la aplicación
+> Librerías:
+ - React:
+ - Tailwind CSS: 
 
 ### Backend
- > Laravel: framework backend.
-  > Eloquent ORM: interacción con la base de datos.
-  > MySql: sistema gestor de base de datos relacional para almacenar usuarios, imágenes y tableros
+> Laravel: framework backend.
+> Eloquent ORM: interacción con la base de datos.
+> MySql: sistema gestor de base de datos relacional para almacenar usuarios, imágenes y tableros
 
 ### Despliegue:
-   > Docker: creación de contenedores para la aplicación y sus servicios.
-   > AWS (Amazon Web Service): alojamiento de la aplicación.
+> Docker: creación de contenedores para la aplicación y sus servicios.
+> AWS (Amazon Web Service): alojamiento de la aplicación.
 
 ## Esquema entidad relación
   - 
