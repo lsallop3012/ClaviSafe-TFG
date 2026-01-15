@@ -72,8 +72,41 @@ Proyecto de DAW
 - AWS (Amazon Web Service): alojamiento de la aplicación.
 
 ## Esquema entidad relación
-  - 
+### Entidad
+> Entidad: Usuario
+  - Atributos principales:
+    - id_usuario (PK)
+    - nom_usuario
+    - email
+    - contraseña
+    - rol (usuario / administrador)
+    - fecha_registro
+      
+> Entidad: Imagen
+  - Atributos principales:
+    - id_imagen (PK)
+    - nom_imagen
+    - descripcion
+    - ruta_imagen
+    - fecha_subida
+    - id_usuario (FK)
 
+> Entidad: Tablero
+  - Atributos principales:
+    - id_tablero (PK)
+    - nom_tablero
+    - descripcion
+    - fecha_creacion
+    - id_usuario (FK)
+      
+### Relación
+> Relación: Usuario 1 <-> N Imagen
+> Relación: Usuario 1 <-> N Tablero 
+> Relación: Imagen M <-> N Tablero
+  - Atributos principales:
+    - id_tablero (FK)
+    - id_imagen (FK)
+      
 ## Documentación técnica
 
 ## Bitácora del proyecto
