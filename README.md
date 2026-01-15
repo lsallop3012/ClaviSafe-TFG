@@ -59,8 +59,8 @@ Proyecto de DAW
 - React: desarrollo del frontend.
 - Tailwind CSS: diseño visual de la aplicación
 - Librerías:
- - React:
- - Tailwind CSS: 
+  - React:
+  - Tailwind CSS: 
 
 ### Backend
 - Laravel: framework backend.
