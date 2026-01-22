@@ -9,5 +9,7 @@ Proyecto presentado de DAW
 
 ## [Base de Datos](https://github.com/lsallop3012/DAW-TFG/wiki/4.-Base-de-Datos)
 
+## [Bitácora](https://github.com/lsallop3012/DAW-TFG/wiki/5.-Bitácora)
+
 ## Autor
 **Lucía Salido López**
