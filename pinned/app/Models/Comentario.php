@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tablero extends Model
+class Comentario extends Model
 {
     /**
-     * Atributos de la tabla Tablero.
+     * Atributos de la tabla Comentario.
      *
      * @var list<string>
      */
     protected $fillable = [
-        'nombre',
-        'descripcion',
-        'fecha_creacion',
+        'contenido',
         'user_id',
+        'imagen_id',
     ];
 }
