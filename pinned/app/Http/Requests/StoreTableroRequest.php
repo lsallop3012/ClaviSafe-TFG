@@ -23,6 +23,10 @@ class StoreTableroRequest extends FormRequest
     {
         return [
             //
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'fecha_creacion' => 'required|date|unique:tableros,fecha_creacion',
+            'user_id' => 'required|exists:users,id',
         ];
     }
 }
