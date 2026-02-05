@@ -20,6 +20,9 @@ class ImagenController extends Controller
     public function index()
     {
         //
+        $imagen = Imagen::all();
+        // también funciona el método return $image;
+        return $imagen -> toJson();
     }
 
     /**
