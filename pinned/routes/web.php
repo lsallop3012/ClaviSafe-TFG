@@ -10,11 +10,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth', 'role:admin')->group(function () {
-    Route::resource('imagenes', App\Http\Controllers\ImagenController::class);
-});
-
 
 Route::post('/login', AuthController::class, 'login');
 Route::get('/imagenes', ImagenController::class, 'index');
 Route::get('/tableros', TableroController::class, 'index');
+
+Route::middleware('auth', 'role:admin')->group(function () {
+    // Route::resource('imagenes', App\Http\Controllers\ImagenController::class);
+    Route::get('/imagenes', [ImagenController::class, 'index']);
+});
+
