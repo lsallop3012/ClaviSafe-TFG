@@ -8,7 +8,7 @@ class ImagenService
     /*
         Crea una imagen con los datos proporcionados
     */
-    public function crearImagen(array $datos): ImagenService
+    public function crearImagen(array $datos): Imagen
     {
         return Imagen::create($datos);
     }

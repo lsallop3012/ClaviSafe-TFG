@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreImagenRequest extends FormRequest
+class StoreImagenRequest extends ImagenRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,10 +21,10 @@ class StoreImagenRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        return array_merge($this->validaciones(), [          
             // Reglas de validación
             'imagen' => 'required|image',
-        ];
+        ]);
     }
 
     public function messages(): array
