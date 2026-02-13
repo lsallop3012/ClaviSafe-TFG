@@ -16,7 +16,7 @@ class ImagenController extends Controller
         $imagen = Imagen::paginate(5);
         return $imagen->toJson();
 
-        return ImagenResource::collection(Imagen::paginate(5));
+        // return ImagenResource::collection(Imagen::paginate(5));
     }
 
     public function store(Request $request)
