@@ -1,5 +1,9 @@
-# 🤖 Vaultix
+# 🤖Vaultix
 
-## ✨ Technologies
+## ✨Technologies
 
-## 🦄 Features
+## 🦄Features
+
+## 📍The Process
+
+## 🚦Running the Project
