@@ -1,3 +1,3 @@
-# 🔐Vaultix
+# 🤖 Vaultix
 
-## 📦Technologies
+## ✨ Technologies
