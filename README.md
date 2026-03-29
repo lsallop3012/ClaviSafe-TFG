@@ -1,8 +1,8 @@
-# 🤖Vaultix
+# 🥷🏻Vaultix
 
 ## ✨Technologies
 
-## 🦄Features
+## 🤺Features
 
 ## 📍The Process
 
