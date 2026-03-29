@@ -1,3 +1,5 @@
 # 🤖 Vaultix
 
 ## ✨ Technologies
+
+## 🦄 Features
