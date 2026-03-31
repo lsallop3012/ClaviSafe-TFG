@@ -10,22 +10,22 @@
 > - Se prioriza el aislamiento de la lógica crítica del dominio.
 > - Facilita la evolución del sistema y la incorporación de nuevas funcionalidades sin comprometer la integridad del dominio.
 ### Tecnologías
-> Para el backend se ha optado por las siguientes tecnologías:
-> - ASP.NET
-> - MySql
-> - ORM: EF Core
+Para el backend:
+ - ASP.NET
+ - MySql
+ - ORM: EF Core
 
-> Frontend
-> - Next.js
-> - Tailwind css
-> - Zustand
-> - TanStack Query
-> - React Hook Form
-> - Zod
+Para el Frontend:
+ - Next.js
+ - Tailwind css
+ - Zustand
+ - TanStack Query
+ - React Hook Form
+ - Zod
 
-> Despliegue
-> - Docker
-> - Amazon Web Services (AWS)
+Para el desplegado de la aplicación:
+ - Docker
+ - Amazon Web Services (AWS)
 ## Características
 
 ## Proceso
