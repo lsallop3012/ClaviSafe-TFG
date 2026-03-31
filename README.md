@@ -1,5 +1,5 @@
 # Vaultix
-## Gestor de contraseñas
+### Gestor de contraseñas
 
 ## Tecnologías
 
