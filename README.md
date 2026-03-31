@@ -1,9 +1,9 @@
-# 🥷🏻Vaultix
+# Vaultix
 
-## ✨Tecnologías
+## Tecnologías
 
-## 🤺Características
+## Características
 
-## 📍Proceso
+## Proceso
 
-## 🚦Como lanzar el proyecto
+## Como lanzar el proyecto
