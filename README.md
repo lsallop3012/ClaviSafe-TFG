@@ -14,6 +14,7 @@
 > - ASP.NET
 > - MySql
 > - ORM: EF Core
+
 > Frontend
 > - Next.js
 > - Tailwind css
@@ -21,6 +22,7 @@
 > - TanStack Query
 > - React Hook Form
 > - Zod
+
 > Despliegue
 > - Docker
 > - Amazon Web Services (AWS)
