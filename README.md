@@ -5,7 +5,10 @@
 > 
 ## Composición de la aplicación web
 ### Arquitectura 
-> Para el proyecto he decidido intentar seguir la estructura de un
+> Para el desarrollo del proyecto se ha adoptado una arquitectura basada en Domain-Driven Design (DDD) con el objetivo de separar claramente la lógica de negocio con el resto de capas de la aplicación.
+> De esta forma:
+> - Se prioriza el aislamiento de la lógica crítica del dominio.
+> - 
 ### Tecnologías
 > Para el proyecto he decidido intentar seguir la estructura de un
 > 
