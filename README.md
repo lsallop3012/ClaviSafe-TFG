@@ -1,9 +1,9 @@
 # 🔑 Vaultix
 ## Temática: _Gestor de contraseñas_
-## Descripción del proyecto
+## 1. Descripción del proyecto
 > Aplicación web diseñada para que un usuario almacene y gestione sus contraseñas de forma segura. La idea es ofrecer una solución sencilla y robusta para la gestión de credenciales.
-> 
-## Composición de la aplicación web
+
+## 2. Composición de la aplicación web
 ### Arquitectura 
 > Para el desarrollo del proyecto se ha adoptado una arquitectura basada en Domain-Driven Design (DDD) con el objetivo de separar claramente la lógica de negocio con el resto de capas de la aplicación.
 De esta forma:
@@ -26,8 +26,9 @@ De esta forma:
 > Para el desplegado de la aplicación:
 >  - Docker
 >  - Amazon Web Services (AWS)
-## Características
 
-## Proceso
+## 3. Características
 
-## Como lanzar el proyecto
+## 4. Proceso
+
+## 5. Como lanzar el proyecto
