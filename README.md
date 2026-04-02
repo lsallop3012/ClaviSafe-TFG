@@ -1,7 +1,7 @@
 # 🔑 Vaultix
 ## Temática: _Gestor de contraseñas_
 ## 1. Descripción del proyecto
-La aplicación web esta orientada a la gestión segura de contraseñas, la idea es que los usuarios puedan almacenar, organizar y acceder a las contraseñas que guarden en el programa de forma centralizada.
+La aplicación web esta orientada a la gestión segura de contraseñas, la idea es que los usuarios puedan de forma intuitiva y sencilla almacenar, organizar y acceder a las contraseñas que guarden en el programa de forma centralizada.
 
 ## 2. Composición de la aplicación web
 ### 2.1. Arquitectura 
