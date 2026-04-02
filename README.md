@@ -6,7 +6,7 @@ La aplicación web esta orientada a la gestión segura de contraseñas, la idea 
 ## 2. Composición de la aplicación web
 ### 2.1. Arquitectura 
 Para el desarrollo del proyecto se ha adoptado una arquitectura basada en Domain-Driven Design (DDD) con el objetivo de separar claramente la lógica de negocio con el resto de capas de la aplicación.
- - De esta forma:
+ > De esta forma:
   - Se prioriza el aislamiento de la lógica crítica del dominio.
   - Facilita la evolución del sistema y la incorporación de nuevas funcionalidades sin comprometer la integridad del dominio.
 ### 2.2. Tecnologías
