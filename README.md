@@ -1,4 +1,4 @@
-# 🔑 Vaultix
+# Vaultix
 ## Temática: _Gestor de contraseñas_
 ## 1. Descripción del proyecto
 El objetivo de Vaultix es proporcionar una solución segura y eficiente para la gestión de credenciales, permitiendo a los usuarios almacenar y acceder a sus contraseñas de forma centralizada.
