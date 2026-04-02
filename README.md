@@ -30,6 +30,8 @@ Para el desplegado de la aplicación:
 - Docker
 - Amazon Web Services (AWS)
 
+### 2.3. Figma
+
 ## 3. Características
 - Autenticación de usuarios.
 - Almacenamiento seguro de credenciales.
