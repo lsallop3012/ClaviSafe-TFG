@@ -11,21 +11,21 @@ Para el desarrollo del proyecto se ha adoptado una arquitectura basada en Domain
   - Facilita la evolución del sistema y la incorporación de nuevas funcionalidades sin comprometer la integridad del dominio.
 ### 2.2. Tecnologías
 Para el desarrollo del backend:
- - ASP.NET
- - MySql
- - ORM: EF Core
+- ASP.NET
+- MySql
+- ORM: EF Core
  
 Para el desarrollo del Frontend:
- - Next.js
- - Tailwind css
- - Zustand
- - TanStack Query
- - React Hook Form
- - Zod
+- Next.js
+- Tailwind css
+- Zustand
+- TanStack Query
+- React Hook Form
+- Zod
  
 Para el desplegado de la aplicación:
- - Docker
- - Amazon Web Services (AWS)
+- Docker
+- Amazon Web Services (AWS)
 
 ## 3. Características
 
