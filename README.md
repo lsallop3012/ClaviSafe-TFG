@@ -40,4 +40,5 @@ Para el desplegado de la aplicación:
 
 ## 4. Proceso
 - [Enlace al bitácora del proyecto.](https://github.com/lsallop3012/Vaultix-TFG/wiki/Proceso)
+
 ## 5. Como lanzar el proyecto
