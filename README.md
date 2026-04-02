@@ -30,7 +30,13 @@ Para el desplegado de la aplicación:
 - Amazon Web Services (AWS)
 
 ## 3. Características
+- Autenticación de usuarios.
+- Almacenamiento seguro de credenciales.
+- Validación de datos tanto en frontend como en backend.
+- Interfaz sencilla e intuitiva.
+- Gestión centralizada de contraseñas.
+- Arquitectura desacoplada basada en DDD.
 
 ## 4. Proceso
-
+[Enlace al bitácora del proyecto.](https://github.com/lsallop3012/Vaultix-TFG/wiki/Proceso)
 ## 5. Como lanzar el proyecto
