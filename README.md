@@ -31,7 +31,8 @@ Para el desplegado de la aplicación:
 - Amazon Web Services (AWS)
 
 ### 2.3. Figma
-
+- [Enlace al figma del proyecto.](https://www.figma.com/design/8GFuKDbj6VZdQVJeb1DoGL/Vaultix?node-id=0-1&t=0BuwWcZZkr1OX8LP-1)
+  
 ## 3. Características
 - Autenticación de usuarios.
 - Almacenamiento seguro de credenciales.
