@@ -1,8 +1,9 @@
-# Vaultix
-## Temática: _Gestor de contraseñas_
+# Moodly
+## Temática: _Gestor de imágenes_
 ## 1. Descripción del proyecto
-El objetivo de Vaultix es proporcionar una solución segura y eficiente para la gestión de credenciales, permitiendo a los usuarios almacenar y acceder a sus contraseñas de forma centralizada.
-La aplicación está pensada para facilitar el uso diario de credenciales, permitiendo organizarlas y consultarlas de manera sencilla en un único lugar. Así el usuario puede tener un mayor control sobre sus cuentas y evitar la necesidad de recordar múltiples contraseñas o gestionarlas de forma desordenada.
+El objetivo de Moodly es proporcionar una plataforma web de gestión y descubrimiento de imágenes basada en una experiencia similar a Pinterest, donde los usuarios puedan explorar, guardar y organizar contenido visual de forma intuitiva.
+La aplicación está diseñada para facilitar la inspiración visual diaria, permitiendo a los usuarios crear colecciones personalizadas de imágenes (boards), subir contenido propio o guardar imágenes de otros usuarios dentro de su perfil.
+De esta forma, el usuario puede centralizar sus intereses visuales en un único lugar, organizar ideas por temáticas y acceder a ellas de manera rápida y estructurada.
 
 ## 2. Composición de la aplicación web
 ### 2.1. Arquitectura 
