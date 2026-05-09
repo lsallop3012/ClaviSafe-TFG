@@ -1,12 +1,15 @@
 name: gestor-moodly
+
+version: '3.8'
+
 services:
-  web:
-    build: .
+
+  backend:
+    build: ./backend
     ports:
       - "${HTTP_PORT}:80"
     volumes:
-      - ../:/var/www/html
-    user: "${UID}:${GID}"
+      - ./backend:/var/www/html
     environment:
       - COMPOSER_ALLOW_SUPERUSER=${COMPOSER_ALLOW_SUPERUSER}
       - HOME=/tmp
@@ -21,10 +24,10 @@ services:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "${MYSQL_PORT}:4008"
+      - "${MYSQL_PORT}:3306"
     volumes:
-      - db_database:/var/lib/mysql
-  
+      - db_dataTableros:/var/lib/mysql
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     environment:
@@ -37,4 +40,4 @@ services:
       - db
 
 volumes:
-  db_database:
+  db_dataTableros:
