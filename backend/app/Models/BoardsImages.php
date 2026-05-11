@@ -5,20 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class BoardsImages extends Model
 {
-    /** @use HasFactory<\Database\Factories\CommentFactory> */
+    /** @use HasFactory<\Database\Factories\BoardsImagesFactory> */
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $table = 'boards_images';
+
     protected $fillable = [
-        'user_id',
+        'board_id',
         'image_id',
-        'content',
     ];
 
-    public function user()
+    // Relationships
+    public function board()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Board::class);
     }
 
     public function image()

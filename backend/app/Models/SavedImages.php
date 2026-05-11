@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class SavedImages extends Model
 {
-    /** @use HasFactory<\Database\Factories\CommentFactory> */
+    /** @use HasFactory<\Database\Factories\SavedImagesFactory> */
     use HasFactory;
+
+    protected $table = 'saved_images';
 
     protected $fillable = [
         'user_id',
         'image_id',
-        'content',
     ];
 
     public function user()

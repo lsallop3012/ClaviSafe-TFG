@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'rol_id'
     ];
 
     /**
@@ -46,4 +47,36 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Relationships
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class);
+    }
+
+    public function boards()
+    {
+        return $this->hasMany(Board::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    // public function saveImages()
+    // {
+    //     return $this->hasMany(SaveImage::class);
+    // }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
 }
