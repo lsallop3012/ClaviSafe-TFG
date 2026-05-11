@@ -1,0 +1,21 @@
+:root {
+    /* Background colors */
+    --background-light-mode: rgb(204, 241, 241);
+    --background-dark-mode: rgb(54, 68, 68);
+    --background-text-color: rgb(6, 32, 32);
+
+    /* Buttons colors */
+    --button-border-color: rgb(0, 4, 255);
+    --button-background-color: rgb(196, 197, 226);
+
+    /* Grid colors */
+    --grid-border-color: rgb(30, 255, 0);
+    --grid-background-color: rgb(216, 226, 216);
+
+    /* Cards colors */
+    --card-border-color: rgb(204, 0, 255);
+    --card-background-color: rgb(230, 209, 235);
+    --card-secondary-color: rgb(222, 238, 180);
+    --card-text-color: rgb(5, 24, 24);
+
+}
