@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeleteImageRequest extends FormRequest
+class StoreCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +22,20 @@ class DeleteImageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|exists:images,id',
+            'content' => 'required|string',
+            'user_id' => 'required|exists:users,id',
+            'image_id' => 'required|exists:images,id',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'id.required' => 'Image ID is required.',
-            'id.exists' => 'The specified image does not exist.',
+            'content.required' => 'Content is required.',
+            'user_id.required' => 'User is required.',
+            'user_id.exists' => 'Selected user does not exist.',
+            'image_id.required' => 'Image is required.',
+            'image_id.exists' => 'Selected image does not exist.',
         ];
     }
 }
