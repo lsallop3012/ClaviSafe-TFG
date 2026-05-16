@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Board;
 use Illuminate\Http\Request;
+use App\Services\BoardService;
 
 class BoardController extends Controller
 {
-    public function index()
+
+    public function index(BoardService $boardService)
     {
-        return Board::with(['user', 'images'])->get();
+        $boards = $boardService->list();
+        return response()->json($boards);
     }
 
     public function store(Request $request)

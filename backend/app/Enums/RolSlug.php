@@ -4,6 +4,6 @@ namespace App\Enums;
 
 enum RolSlug: string
 {
-    case ADMIN = 'admin';
-    case USER = 'user';
+    case ADMIN = 'Admin';
+    case USER = 'User';
 }

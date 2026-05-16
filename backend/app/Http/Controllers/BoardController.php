@@ -8,10 +8,9 @@ use App\Services\BoardService;
 
 class BoardController extends Controller
 {
-    public function index(BoardService $boardService)
+    public function index()
     {
-        $boards = $boardService->list();
-        return response()->json($boards);
+        return view('boards.index');
     }
 
     public function store(Request $request, BoardService $boardService)
