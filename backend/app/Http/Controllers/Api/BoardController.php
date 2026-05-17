@@ -16,23 +16,17 @@ class BoardController extends Controller
         return response()->json($boards);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, BoardService $boardService)
     {
-        $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'description' => ['sometimes', 'nullable', 'string'],
-            'user_id' => ['required', 'exists:users,id'],
-            'image_ids' => ['sometimes', 'array'],
-            'image_ids.*' => ['integer', 'exists:images,id'],
-        ]);
 
-        $board = Board::create($data);
+        $name = $request->input("name");
+        $description = $request->input("description");
+        $user_id = $request->input("user_id");
+        $image_ids = $request->input("image_ids", []);
 
-        if (isset($data['image_ids'])) {
-            $board->images()->sync($data['image_ids']);
-        }
+        $boardService->create(['name' => $name, 'description' => $description, 'user_id' => $user_id]);
 
-        return response($board->load(['user', 'images']), 201);
+        return response()->json(['message' => 'Board created successfully'], 201);
     }
 
     public function show(Board $board)

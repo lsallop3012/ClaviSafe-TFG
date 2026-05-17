@@ -13,7 +13,6 @@ class ImageController extends Controller
         $imagenes = $imageService->list();
         return response()->json($imagenes);
     }
-
     public function store(Request $request, ImageService $imageService)
     {
         $nombre = $request->input("name");

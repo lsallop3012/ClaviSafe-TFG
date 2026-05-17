@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8'],
-            'rol_id' => ['required', 'exists:rols,id'],
+            'rol_id' => ['required', 'exists:roles,id'],
         ]);
 
         $data['password'] = Hash::make($data['password']);
@@ -41,7 +42,7 @@ class UserController extends Controller
             'name' => ['sometimes', 'string', 'max:255'],
             'email' => ['sometimes', 'email', 'max:255', 'unique:users,email,' . $user->id],
             'password' => ['sometimes', 'string', 'min:8'],
-            'rol_id' => ['sometimes', 'exists:rols,id'],
+            'rol_id' => ['sometimes', 'exists:roles,id'],
         ]);
 
         if (isset($data['password'])) {

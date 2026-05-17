@@ -12,14 +12,14 @@ class AuthController extends Controller
     {
         $credenciales = $request->only('email', 'password');
 
-        // Authentication
+        // Busca el usuario y lo autentica
         if (Auth::attempt($credenciales)) {
             $user = Auth::user();
             /** @var \App\Models\User $user */
             $token = $user->createToken('api-token')->plainTextToken;
             return response()->json(['token' => $token]);
         } else {
-            return response()->json(['message' => 'Authentication failed'], 401);
+            return response()->json(['message' => 'Credenciales incorrectas'], 401);
         }
     }
 }

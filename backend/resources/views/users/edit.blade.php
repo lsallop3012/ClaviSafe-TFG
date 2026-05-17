@@ -45,7 +45,7 @@
 
     <label>Rol</label>
     <select name="rol_id">
-        @foreach ($rols as $rol)
+        @foreach ($roles as $rol)
         <option value="{{ $rol->id }}" @selected(old('rol_id', $user->rol->id) == $rol->id)>{{ $rol->name }}</option>
         @endforeach
     </select>
