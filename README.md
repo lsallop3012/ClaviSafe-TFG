@@ -59,15 +59,9 @@ Para el desplegado de la aplicación:
 - Amazon Web Services (AWS)
 
 ### 2.3. Figma
-- [Enlace al figma del proyecto.](https://www.figma.com/design/8GFuKDbj6VZdQVJeb1DoGL/Vaultix?node-id=0-1&t=0BuwWcZZkr1OX8LP-1)
+- [Enlace al figma del proyecto.]()
   
 ## 3. Características
-- Autenticación de usuarios.
-- Almacenamiento seguro de credenciales.
-- Validación de datos tanto en frontend como en backend.
-- Interfaz sencilla e intuitiva.
-- Gestión centralizada de contraseñas.
-- Arquitectura desacoplada basada en DDD.
 
 ## 4. Proceso
 - [Enlace al bitácora del proyecto.](https://github.com/lsallop3012/Vaultix-TFG/wiki/Proceso)
