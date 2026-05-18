@@ -21,7 +21,5 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::resource('images', ImageController::class);
-    Route::resource('boards', BoardController::class);
-    Route::resource('users', UserController::class);
-});
+    Route::resource('tareas', BoardController::class);
+    });

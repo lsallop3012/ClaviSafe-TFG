@@ -3,14 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Enums\RoleSlug;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Controller
+// Authenticatable proporciona la funcionalidad de autenticación al modelo User
+class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasFactory, HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -21,7 +24,7 @@ class User extends Controller
         'name',
         'email',
         'password',
-        'rol_id'
+        'role_id'
     ];
 
     /**
@@ -47,10 +50,9 @@ class User extends Controller
         ];
     }
 
-    // Relationships
-    public function rol()
+    public function role()
     {
-        return $this->belongsTo(Rol::class);
+        return $this->belongsTo(Role::class);
     }
 
     public function boards()
@@ -78,4 +80,14 @@ class User extends Controller
         return $this->hasMany(Like::class);
     }
 
+    public function isAdmin()
+    {
+        $administratorRole = Role::where('slug', RoleSlug::ADMIN)->first();
+        return $this->role->id === $administratorRole->id;
+    }
+
+    public function isUser()
+    {
+        return $this->role->slug === 'user';
+    }
 }

@@ -4,9 +4,10 @@
 
 
     /* Background colors */
-    --background-light-mode: rgb(204, 241, 241);
-    --background-dark-mode: rgb(54, 68, 68);
-    --background-text-color: rgb(6, 32, 32);
+    --background-light-mode: #F6F2F5;
+    --background-text-color-light-mode: #353535;
+    --background-dark-mode: #49213E;
+    --background-text-color-dark-mode: #F5F5F5;
 
     /* Buttons colors */
     --button-border-color: rgb(0, 4, 255);

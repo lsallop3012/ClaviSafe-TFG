@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return User::with(['rol', 'boards', 'images', 'comments', 'likes'])->get();
+        return User::with(['role', 'boards', 'images', 'comments', 'likes'])->get();
     }
 
     public function store(Request $request)
@@ -21,19 +21,19 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8'],
-            'rol_id' => ['required', 'exists:roles,id'],
+            'role_id' => ['required', 'exists:roles,id'],
         ]);
 
         $data['password'] = Hash::make($data['password']);
 
         $user = User::create($data);
 
-        return response($user->load(['rol', 'boards', 'images', 'comments', 'likes']), 201);
+        return response($user->load(['role', 'boards', 'images', 'comments', 'likes']), 201);
     }
 
     public function show(User $user)
     {
-        return $user->load(['rol', 'boards', 'images', 'comments', 'likes']);
+        return $user->load(['role', 'boards', 'images', 'comments', 'likes']);
     }
 
     public function update(Request $request, User $user)
@@ -42,7 +42,7 @@ class UserController extends Controller
             'name' => ['sometimes', 'string', 'max:255'],
             'email' => ['sometimes', 'email', 'max:255', 'unique:users,email,' . $user->id],
             'password' => ['sometimes', 'string', 'min:8'],
-            'rol_id' => ['sometimes', 'exists:roles,id'],
+            'role_id' => ['sometimes', 'exists:roles,id'],
         ]);
 
         if (isset($data['password'])) {
@@ -51,7 +51,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return $user->load(['rol', 'boards', 'images', 'comments', 'likes']);
+        return $user->load(['role', 'boards', 'images', 'comments', 'likes']);
     }
 
     public function destroy(User $user)

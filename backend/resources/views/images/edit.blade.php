@@ -1,46 +1,46 @@
 @extends('layouts.main')
-<h1>Editar Imagen</h1>
+<h1>Edit Image</h1>
 
-<form method="POST" action="{{ route('imagenes.update', $imagen->id) }}">
+<form method="POST" action="{{ route('images.update', $image->id) }}">
     @csrf
     @method('PUT')
-    <input type="hidden" name="id" value="<?= htmlspecialchars($imagen->id) ?>">
+    <input type="hidden" name="id" value="<?= htmlspecialchars($image->id) ?>">
 
     <label>Nombre:</label><br>
-    <input type="text" name="titulo" value="<?= htmlspecialchars($imagen->nombre) ?>" required><br><br>
+    <input type="text" name="titulo" value="<?= htmlspecialchars($image->nombre) ?>" required><br><br>
 
     <br /><br />
 
     <label>Url:</label><br>
-    <input type="text" name="url" value="<?= htmlspecialchars($imagen->url) ?>" required><br><br>
+    <input type="text" name="url" value="<?= htmlspecialchars($image->url) ?>" required><br><br>
 
     <br /><br />
 
     <label>Descripción:</label><br>
-    <input type="text" name="descripcion" value="<?= htmlspecialchars($imagen->descripcion) ?>" required><br><br>
+    <input type="text" name="descripcion" value="<?= htmlspecialchars($image->descripcion) ?>" required><br><br>
 
     <br /><br />
 
-    <label>Fecha_creacion</label>
-    <input type="date" name="fecha_creacion" value="{{ old('fecha_creacion', $imagen->fecha_creacion) }}">
-    @error('fecha_creacion')
+    <label>Created At</label>
+    <input type="date" name="created_at" value="{{ old('created_at', $image->created_at) }}">
+    @error('created_at')
     <div class="error">{{ $message }}</div>
     @enderror
 
     <br /><br />
 
-    <label>Tablero:</label><br>
-    <select name="tablero_id">
+    <label>Board:</label><br>
+    <select name="board_id">
         <option value=""></option>
-        <?php foreach ($tableros as $tablero): ?>
-            <option value="<?= $tablero['id'] ?>" <?= $tablero['id'] == $imagen['tablero_id'] ? 'selected' : '' ?>><?= htmlspecialchars($tablero['nombre']) ?></option>
+        <?php foreach ($boards as $board): ?>
+            <option value="<?= $board['id'] ?>" <?= $board['id'] == $image['board_id'] ? 'selected' : '' ?>><?= htmlspecialchars($board['nombre']) ?></option>
         <?php endforeach; ?>
     </select><br><br>
 
     <br /><br />
 
     <select name="user_id">
-        <option value="">-- Selecciona un usuario --</option>
+        <option value="">-- Select a user --</option>
         @foreach($users as $user)
         <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
             {{ $user->name }}
@@ -53,7 +53,7 @@
 
     <br /><br />
 
-    <button type="submit">Modificar</button>
+    <button type="submit">Modify</button>
 </form>
 
-<p><a href="{{ route('imagenes.index') }}">Volver a la lista de imágenes</a></p>
+<p><a href="{{ route('images.index') }}">Back to Images List</a></p>
