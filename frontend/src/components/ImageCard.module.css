@@ -1,0 +1,101 @@
+.card {
+  position: relative;
+  break-inside: avoid;
+  margin: 0 0 16px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--surface);
+  transition: transform .2s, box-shadow .2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+}
+
+.imgLink {
+  display: block;
+  width: 100%;
+}
+
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  opacity: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, transparent 40%, transparent 60%, rgba(0,0,0,.45) 100%);
+  border-radius: 16px;
+  transition: opacity .15s;
+  pointer-events: none;
+}
+
+.card:hover .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.saveBtn {
+  align-self: flex-end;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.saveBtn:hover { filter: brightness(.95); }
+
+.saveBtnActive {
+  background: #2a2a2a;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.likeBtn {
+  background: rgba(255,255,255,.95);
+  color: #333;
+  border: none;
+  padding: 6px 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.likeBtn.liked {
+  color: var(--accent);
+}
+
+.info {
+  padding: 8px 12px 12px;
+}
+
+.title {
+  display: block;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.title:hover { color: var(--accent); }

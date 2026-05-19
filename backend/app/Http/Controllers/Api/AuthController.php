@@ -12,7 +12,6 @@ class AuthController extends Controller
     {
         $credenciales = $request->only('email', 'password');
 
-        // Busca el usuario y lo autentica
         if (Auth::attempt($credenciales)) {
             $user = Auth::user();
             /** @var \App\Models\User $user */
