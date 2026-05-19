@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <NavLink to="/home" className={styles.brand}>
-        <span className={styles.brandDot} />
+        <span className={styles} />
         Moodly
       </NavLink>
 

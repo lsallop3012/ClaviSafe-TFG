@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import Header from '../components/Header.jsx';
+import Footer from '../components/Footer.jsx';
 import styles from './AuthPages.module.css';
 
 export default function Login() {

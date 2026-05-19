@@ -1,12 +1,12 @@
 :root {
   --background-light-mode: #F6F2F5;
-  --background-light-mode-header: #FFFFFF;
+  --background-light-mode-header: #FBF9FA;
   --background-light-mode-hover: #EFE9ED;
   --background-light-mode-text: #353535;
   --background-light-mode-text-muted: #6B5B65;
 
   --border: #E4DDE2;
-  --accent: #B5305B;
+  --accent: #5C294E;
   --accent-soft: #F5D9E2;
   --danger: #C2185B;
   --success: #2E7D32;

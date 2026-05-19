@@ -22,14 +22,6 @@
   letter-spacing: -0.5px;
 }
 
-.brandDot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-soft);
-}
-
 .nav {
   display: flex;
   gap: 6px;

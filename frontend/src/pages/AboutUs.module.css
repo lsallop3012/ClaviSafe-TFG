@@ -27,6 +27,7 @@
 
 .lead {
   font-size: 17px;
+  text-align: justify;
   color: var(--background-light-mode-text) !important;
 }
 

@@ -7,12 +7,13 @@ export default function AboutUs() {
 
       <section className={styles.section}>
         <p className={styles.lead}>
-          Moodly is a visual discovery platform — a space to collect, organize, and share the
-          images that inspire you.
+          Moodly is a visual discovery platform designed to inspire creativity through images. 
+          We believe ideas start with what you see, so we’ve built a space where users can explore, save, and organize visual content effortlessly.
+          Our mission is to transform the way people collect inspiration online, making it more intuitive, personalized, and engaging. Moodly lets users discover new ideas, curate their own visual collections, and connect with content that matches their interests and mood.
+          Built with a modern full-stack architecture, Moodly focuses on speed, usability, and a clean user experience. From seamless navigation to interactive features like likes, comments, and collections, everything is designed to keep inspiration flowing.
         </p>
         <p>
-          Save pins to your boards, follow your curiosity, and build a personal library of ideas
-          you can come back to anytime.
+          Moodly isn’t just a gallery — it’s a living space for ideas.
         </p>
       </section>
 
@@ -25,11 +26,6 @@ export default function AboutUs() {
           <li><strong>Like & comment</strong> to engage with content you love.</li>
           <li><strong>Customize</strong> your profile with an avatar, name, and bio.</li>
         </ul>
-      </section>
-
-      <section className={styles.section}>
-        <h2>Built with</h2>
-        <p className={styles.tech}>React 19 · React Router 7 · localStorage persistence</p>
       </section>
     </div>
   );
