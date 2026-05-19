@@ -13,7 +13,7 @@ export default function NotFound() {
       background: 'var(--background-light-mode)'
     }}>
       <h1 style={{ fontSize: '72px', margin: 0, color: 'var(--accent)' }}>404</h1>
-      <p style={{ color: 'var(--text-muted)' }}>This page doesn't exist.</p>
+      <p style={{ color: 'var(--background-light-mode-text-muted)' }}>This page doesn't exist.</p>
       <Link
         to="/home"
         style={{

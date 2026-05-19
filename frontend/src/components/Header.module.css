@@ -6,7 +6,7 @@
   align-items: center;
   gap: 24px;
   padding: 14px 28px;
-  background: var(--header);
+  background: var(--background-light-mode-header);
   border-bottom: 1px solid var(--border);
   /* backdrop-filter: blur(12px); */
 }
@@ -41,7 +41,7 @@
   padding: 8px 14px;
   border-radius: 999px;
   text-decoration: none;
-  color: var(--text-muted);
+  color: var(--background-light-mode-text-muted);
   font-weight: 600;
   font-size: 14px;
   transition: background .15s, color .15s;
@@ -49,7 +49,7 @@
 
 .link:hover {
   background: var(--background-light-mode-hover);
-  color: var(--text);
+  color: var(--background-light-mode-text);
 }
 
 .activeLink {
@@ -93,7 +93,7 @@
 .logout {
   border: 1px solid var(--border);
   background: transparent;
-  color: var(--text);
+  color: var(--background-light-mode-text);
   padding: 8px 14px;
   border-radius: 999px;
   cursor: pointer;

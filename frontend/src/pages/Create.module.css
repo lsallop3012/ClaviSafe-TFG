@@ -12,7 +12,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
-  background: var(--header);
+  background: var(--background-light-mode-header);
   padding: 24px;
   border-radius: 18px;
 }
@@ -38,7 +38,7 @@
 
 .placeholder {
   text-align: center;
-  color: var(--text-muted);
+  color: var(--background-light-mode-text-muted);
   padding: 20px;
 }
 
@@ -75,7 +75,7 @@
   border-radius: 12px;
   background: var(--background-light-mode);
   font-size: 14px;
-  color: var(--text);
+  color: var(--background-light-mode-text);
   outline: none;
 }
 
@@ -85,7 +85,7 @@
   border-radius: 12px;
   background: var(--background-light-mode);
   font-size: 14px;
-  color: var(--text);
+  color: var(--background-light-mode-text);
   outline: none;
   resize: vertical;
   font-family: inherit;

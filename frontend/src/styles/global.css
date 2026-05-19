@@ -1,16 +1,17 @@
 :root {
   --background-light-mode: #F6F2F5;
-  --header: #FFFFFF;
+  --background-light-mode-header: #FFFFFF;
   --background-light-mode-hover: #EFE9ED;
-  --text: #2A1A24;
-  --text-muted: #6B5B65;
+  --background-light-mode-text: #353535;
+  --background-light-mode-text-muted: #6B5B65;
+
   --border: #E4DDE2;
   --accent: #B5305B;
   --accent-soft: #F5D9E2;
   --danger: #C2185B;
   --success: #2E7D32;
 
-  --background-text-color-light-mode: #353535;
+  
   --background-dark-mode: #49213E;
   --background-text-color-dark-mode: #F5F5F5;
 
@@ -28,6 +29,7 @@
   --card-secondary-color: rgb(222, 238, 180);
   --card-text-color: rgb(5, 24, 24);
 }
+
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Quicksand:wght@300..700&display=swap');
 body{
   font-family: 'Poppins', sans-serif;

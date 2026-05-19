@@ -6,7 +6,7 @@
 .card {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  background: var(--header);
+  background: var(--background-light-mode-header);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 8px 28px rgba(0,0,0,.08);
@@ -46,13 +46,13 @@
 
 .likeBtn {
   border: 1px solid var(--border);
-  background: var(--header);
+  background: var(--background-light-mode-header);
   padding: 8px 16px;
   border-radius: 999px;
   cursor: pointer;
   font-weight: 700;
   font-size: 14px;
-  color: var(--text);
+  color: var(--background-light-mode-text);
 }
 
 .likeBtn:hover { background: var(--background-light-mode-hover); }
@@ -77,7 +77,7 @@
   letter-spacing: -0.5px;
 }
 
-.desc { margin: 0; color: var(--text-muted); }
+.desc { margin: 0; color: var(--background-light-mode-text-muted); }
 
 .author {
   display: flex;
@@ -94,7 +94,7 @@
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: var(--text);
+  color: var(--background-light-mode-text);
 }
 
 .authorAvatar, .authorAvatarFb {
@@ -111,7 +111,7 @@
 }
 
 .authorName { font-weight: 700; font-size: 14px; }
-.authorMeta { font-size: 12px; color: var(--text-muted); }
+.authorMeta { font-size: 12px; color: var(--background-light-mode-text-muted); }
 
 .ownerActions { display: flex; gap: 6px; }
 
@@ -122,7 +122,7 @@
   font-size: 12px;
   cursor: pointer;
   border: 1px solid var(--border);
-  background: var(--header);
+  background: var(--background-light-mode-header);
 }
 
 .editBtn:hover { background: var(--background-light-mode-hover); }
@@ -136,7 +136,7 @@
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: .5px;
-  color: var(--text-muted);
+  color: var(--background-light-mode-text-muted);
 }
 
 .boardChips { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -162,7 +162,7 @@
   border-radius: 999px;
   background: var(--background-light-mode);
   font-size: 14px;
-  color: var(--text);
+  color: var(--background-light-mode-text);
   outline: none;
 }
 
@@ -186,7 +186,7 @@
 .emptyComments {
   margin: 0;
   text-align: center;
-  color: var(--text-muted);
+  color: var(--background-light-mode-text-muted);
   font-size: 13px;
   padding: 10px;
 }
@@ -227,13 +227,13 @@
 }
 
 .commentName { font-weight: 700; font-size: 13px; }
-.commentDate { font-size: 11px; color: var(--text-muted); }
-.commentText { font-size: 14px; color: var(--text); }
+.commentDate { font-size: 11px; color: var(--background-light-mode-text-muted); }
+.commentText { font-size: 14px; color: var(--background-light-mode-text); }
 
 .commentDelete {
   background: transparent;
   border: none;
-  color: var(--text-muted);
+  color: var(--background-light-mode-text-muted);
   cursor: pointer;
   font-size: 14px;
   padding: 4px;
@@ -249,7 +249,7 @@
   border-radius: 12px;
   background: var(--background-light-mode);
   font-size: 14px;
-  color: var(--text);
+  color: var(--background-light-mode-text);
   outline: none;
   font-family: inherit;
 }
@@ -266,7 +266,7 @@
   cursor: pointer;
   border: 1px solid var(--border);
   background: transparent;
-  color: var(--text);
+  color: var(--background-light-mode-text);
 }
 
 .saveEditBtn {
@@ -283,7 +283,7 @@
 .notfound {
   padding: 60px 20px;
   text-align: center;
-  color: var(--text-muted);
+  color: var(--background-light-mode-text-muted);
 }
 
 .notfound a { color: var(--accent); font-weight: 700; }

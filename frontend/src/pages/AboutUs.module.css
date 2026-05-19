@@ -11,7 +11,7 @@
 }
 
 .section {
-  background: var(--header);
+  background: var(--background-light-mode-header);
   padding: 24px 28px;
   border-radius: 16px;
   margin-bottom: 16px;
@@ -23,11 +23,11 @@
   color: var(--accent);
 }
 
-.section p { margin: 0 0 10px; line-height: 1.6; color: var(--text); }
+.section p { margin: 0 0 10px; line-height: 1.6; color: var(--background-light-mode-text); }
 
 .lead {
   font-size: 17px;
-  color: var(--text) !important;
+  color: var(--background-light-mode-text) !important;
 }
 
 .list {
@@ -39,5 +39,5 @@
 .tech {
   font-family: ui-monospace, SFMono-Regular, monospace;
   font-size: 13px;
-  color: var(--text-muted);
+  color: var(--background-light-mode-text-muted);
 }
