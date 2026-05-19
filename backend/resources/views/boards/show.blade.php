@@ -1,15 +1,15 @@
 @extends('layouts.main')
 
-<h1>Ver Tablero</h1>
+<h1>View Board</h1>
 
-<label>Nombre</label>
-<input type="text" name="name" value="{{ $tablero->nombre }}" disabled />
-
-<br /><br />
-
-<label>Descripcion</label>
-<input type="text" name="description" value="{{ $tablero->descripcion }}" disabled />
+<label>Name</label>
+<input type="text" name="name" value="{{ $board->name }}" disabled />
 
 <br /><br />
 
-<a href="{{ route('tableros.index') }}">Volver</a>
+<label>Description</label>
+<input type="text" name="description" value="{{ $board->description }}" disabled />
+
+<br /><br />
+
+<a href="{{ route('boards.index') }}">Back</a>

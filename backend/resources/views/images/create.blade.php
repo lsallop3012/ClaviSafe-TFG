@@ -1,33 +1,33 @@
 @extends('layouts.main')
-<form action="{{ route('imagenes.store') }}" method="POST">
+<form action="{{ route('images.store') }}" method="POST">
     @csrf
 
-    <label>Nombre</label>
-    <input type="text" name="nombre" value="{{ old('nombre') }}">
-    @error('nombre')
+    <label>Name</label>
+    <input type="text" name="name" value="{{ old('name') }}">
+    @error('name')
     <div class="error">{{ $message }}</div>
     @enderror
 
-    <label>Ruta</label>
-    <input type="text" name="ruta" value="{{ old('ruta') }}">
-    @error('ruta')
+    <label>Path</label>
+    <input type="text" name="path" value="{{ old('path') }}">
+    @error('path')
     <div class="error">{{ $message }}</div>
     @enderror
 
-    <label>Descripción</label>
-    <textarea name="descripcion">{{ old('descripcion') }}</textarea>
-    @error('descripcion')
+    <label>Description</label>
+    <textarea name="description">{{ old('description') }}</textarea>
+    @error('description')
     <div class="error">{{ $message }}</div>
     @enderror
 
-    <label>Fecha_subida</label>
-    <input type="date" name="fecha_subida" value="{{ old('fecha_subida') }}">
-    @error('fecha_subida')
+    <label>Created At</label>
+    <input type="date" name="created_at" value="{{ old('created_at') }}">
+    @error('created_at')
     <div class="error">{{ $message }}</div>
     @enderror
 
     <select name="user_id">
-        <option value="">-- Selecciona un usuario --</option>
+        <option value="">-- Select a user --</option>
         @foreach($users as $user)
         <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
             {{ $user->name }}
@@ -38,5 +38,5 @@
     <div class="error">{{ $message }}</div>
     @enderror
 
-    <button type="submit">Crear</button>
+    <button type="submit">Create</button>
 </form>

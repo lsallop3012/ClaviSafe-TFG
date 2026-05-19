@@ -1,35 +1,35 @@
 @extends('layouts.main')
-<h1>Editar Tablero</h1>
-<form action="{{ route('tableros.update', $tablero->id) }}" method="POST">
+<h1>Edit Board</h1>
+<form action="{{ route('boards.update', $board->id) }}" method="POST">
     @csrf
     @method('PUT')
 
-    <label>Nombre</label>
-    <input type="text" name="nombre" value="{{ old('nombre', $tablero->nombre) }}">
-    @error('nombre')
+    <label>Name</label>
+    <input type="text" name="name" value="{{ old('name', $board->name) }}">
+    @error('name')
     <div class="error">{{ $message }}</div>
     @enderror
 
     <br /><br />
     
-    <label>Descripción:</label>
-    <textarea name="descripcion">{{ old('descripcion', $tablero->descripcion) }}</textarea>
-    @error('descripcion')
+    <label>Description:</label>
+    <textarea name="description">{{ old('description', $board->description) }}</textarea>
+    @error('description')
     <div class="error">{{ $message }}</div>
     @enderror
 
     <br /><br />
 
-    <label>Fecha_creacion</label>
-    <input type="date" name="fecha_creacion" value="{{ old('fecha_creacion', $tablero->fecha_creacion) }}">
-    @error('fecha_creacion')
+    <label>Created At</label>
+    <input type="date" name="created_at" value="{{ old('created_at', $board->created_at) }}">
+    @error('created_at')
     <div class="error">{{ $message }}</div>
     @enderror
 
     <br /><br />
 
     <select name="user_id">
-        <option value="">-- Selecciona un usuario --</option>
+        <option value="">-- Select an user --</option>
         @foreach($users as $user)
         <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
             {{ $user->name }}
@@ -42,7 +42,7 @@
 
     <br /><br />
 
-    <button type="submit">Modificar</button>
+    <button type="submit">Update</button>
 </form>
 
-<p><a href="{{ route('tableros.index') }}">Volver a la lista de tableros</a></p>
+<p><a href="{{ route('boards.index') }}">Back to Boards List</a></p>

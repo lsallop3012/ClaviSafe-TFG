@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class RolAdminMiddleware
+class RolMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,12 +18,12 @@ class RolAdminMiddleware
     {
         $user = Auth::user();
 
-        if ($user->rol->id !== $role) {
-            // Si no cumple el rol, se deniega el acceso
+        if ($user->role->id !== $role) {
+            
             abort(403);
         }
 
-        // Pasa a evaluar el siguiente middleware (si lo hubiere)
+        
         return $next($request);
     }
 }
