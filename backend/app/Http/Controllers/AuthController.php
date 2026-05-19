@@ -16,7 +16,6 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        // Autenticación
         if (Auth::attempt($credentials)) {
 
             $request->session()->regenerate();
@@ -28,7 +27,6 @@ class AuthController extends Controller
         }
     }
 
-    // Logout del usuario
     public function logout()
     {
         Auth::logout();
