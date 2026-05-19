@@ -9,10 +9,6 @@ use Illuminate\Notifications\Notifiable;
 use App\Enums\RoleSlug;
 use Laravel\Sanctum\HasApiTokens;
 
-<<<<<<< HEAD
-=======
-// Authenticatable proporciona la funcionalidad de autenticación al modelo User
->>>>>>> 346013204ac35c6a35bf1f1bb8275a080992db44
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
