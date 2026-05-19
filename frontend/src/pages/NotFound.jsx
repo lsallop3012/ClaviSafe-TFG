@@ -10,7 +10,7 @@ export default function NotFound() {
       justifyContent: 'center',
       gap: '16px',
       padding: '20px',
-      background: 'var(--bg)'
+      background: 'var(--background-light-mode)'
     }}>
       <h1 style={{ fontSize: '72px', margin: 0, color: 'var(--accent)' }}>404</h1>
       <p style={{ color: 'var(--text-muted)' }}>This page doesn't exist.</p>

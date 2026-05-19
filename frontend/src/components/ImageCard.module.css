@@ -4,7 +4,7 @@
   margin: 0 0 16px;
   border-radius: 16px;
   overflow: hidden;
-  background: var(--surface);
+  background: var(--header);
   transition: transform .2s, box-shadow .2s;
 }
 

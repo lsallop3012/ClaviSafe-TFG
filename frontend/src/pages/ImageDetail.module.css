@@ -6,7 +6,7 @@
 .card {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  background: var(--surface);
+  background: var(--header);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 8px 28px rgba(0,0,0,.08);
@@ -17,7 +17,7 @@
 }
 
 .imageSide {
-  background: var(--bg);
+  background: var(--background-light-mode);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,7 +46,7 @@
 
 .likeBtn {
   border: 1px solid var(--border);
-  background: var(--surface);
+  background: var(--header);
   padding: 8px 16px;
   border-radius: 999px;
   cursor: pointer;
@@ -55,7 +55,7 @@
   color: var(--text);
 }
 
-.likeBtn:hover { background: var(--bg-hover); }
+.likeBtn:hover { background: var(--background-light-mode-hover); }
 .likeBtn.liked { color: var(--accent); border-color: var(--accent); }
 
 .saveBtn {
@@ -122,10 +122,10 @@
   font-size: 12px;
   cursor: pointer;
   border: 1px solid var(--border);
-  background: var(--surface);
+  background: var(--header);
 }
 
-.editBtn:hover { background: var(--bg-hover); }
+.editBtn:hover { background: var(--background-light-mode-hover); }
 .deleteBtn { color: var(--danger); }
 .deleteBtn:hover { background: var(--accent-soft); }
 
@@ -160,7 +160,7 @@
   padding: 10px 14px;
   border: 1px solid var(--border);
   border-radius: 999px;
-  background: var(--bg);
+  background: var(--background-light-mode);
   font-size: 14px;
   color: var(--text);
   outline: none;
@@ -214,7 +214,7 @@
 
 .commentBody {
   flex: 1;
-  background: var(--bg);
+  background: var(--background-light-mode);
   border-radius: 12px;
   padding: 8px 12px;
 }
@@ -247,7 +247,7 @@
   padding: 10px 14px;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: var(--bg);
+  background: var(--background-light-mode);
   font-size: 14px;
   color: var(--text);
   outline: none;

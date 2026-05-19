@@ -13,7 +13,7 @@
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 .modal {
-  background: var(--surface);
+  background: var(--header);
   border-radius: 16px;
   width: 100%;
   max-width: 420px;
@@ -72,7 +72,7 @@
   font-weight: 500;
 }
 
-.boardRow:hover:not(:disabled) { background: var(--bg-hover); }
+.boardRow:hover:not(:disabled) { background: var(--background-light-mode-hover); }
 .boardRow:disabled { opacity: .5; cursor: default; }
 
 .boardName { flex: 1; }
@@ -115,7 +115,7 @@
   border: 1px solid var(--border);
   border-radius: 999px;
   font-size: 14px;
-  background: var(--bg);
+  background: var(--background-light-mode);
   color: var(--text);
   outline: none;
 }

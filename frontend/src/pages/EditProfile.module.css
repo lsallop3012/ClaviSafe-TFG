@@ -10,7 +10,7 @@
 }
 
 .form {
-  background: var(--surface);
+  background: var(--header);
   padding: 28px;
   border-radius: 18px;
   display: flex;
@@ -37,7 +37,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border: 4px solid var(--bg);
+  border: 4px solid var(--background-light-mode);
 }
 
 .avatarPreview {
@@ -99,7 +99,7 @@
   padding: 10px 14px;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: var(--bg);
+  background: var(--background-light-mode);
   font-size: 14px;
   color: var(--text);
   outline: none;
@@ -146,7 +146,7 @@
   color: var(--text);
 }
 
-.cancelBtn:hover { background: var(--bg-hover); }
+.cancelBtn:hover { background: var(--background-light-mode-hover); }
 
 .saveBtn {
   background: var(--accent);
