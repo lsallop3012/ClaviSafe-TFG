@@ -1,13 +1,17 @@
+import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
-import instagramIcon from '../assets/mdi_instagram.png';
-import linkedinIcon from '../assets/mdi_linkedin.png';
+import instagramIcon from '../assets/social/mdi_instagram.png';
+import linkedinIcon from '../assets/social/mdi_linkedin.png';
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div>© {new Date().getFullYear()} Moodly</div>
-      <div className={styles.divs}>by Lucía Salido</div>
-      <div className={styles.divs}>
+      <nav className={styles.links}>
+        <Link to="/explore">Explore</Link>
+        <Link to="/about">About</Link>
+      </nav>
+       <div className={styles.divs}>
         <a href="https://www.instagram.com/luciasalidoo_/" target="_blank" rel="noopener noreferrer">
           <img src={instagramIcon} alt="Instagram" />
         </a>

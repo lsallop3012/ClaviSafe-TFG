@@ -1,36 +1,36 @@
 :root {
-  --background-light-mode: #F6F2F5;
-  --background-light-mode-header: #FBF9FA;
-  --background-light-mode-hover: #EFE9ED;
-  --background-light-mode-text: #353535;
-  --background-light-mode-text-muted: #6B5B65;
-
+  --bg: #e1d6de;
+  --surface: #f6f2f5;
+  --bg-hover: #EFE9ED;
+  --text: #353535;
+  --text-muted: #6B5B65;
   --border: #E4DDE2;
   --accent: #5C294E;
-  --accent-soft: #F5D9E2;
+  --accent-soft: #7a3768;
   --danger: #C2185B;
   --success: #2E7D32;
-
-  
-  --background-dark-mode: #49213E;
-  --background-text-color-dark-mode: #F5F5F5;
-
-  /* Buttons colors */
-  --button-border-color: rgb(0, 4, 255);
-  --button-background-color: rgb(196, 197, 226);
-
-  /* Grid colors */
-  --grid-border-color: rgb(30, 255, 0);
-  --grid-background-color: rgb(216, 226, 216);
-
-  /* Cards colors */
-  --card-border-color: rgb(204, 0, 255);
-  --card-background-color: rgb(230, 209, 235);
-  --card-secondary-color: rgb(222, 238, 180);
-  --card-text-color: rgb(5, 24, 24);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Quicksand:wght@300..700&display=swap');
-body{
-  font-family: 'Poppins', sans-serif;
+* { box-sizing: border-box; }
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+a { color: inherit; }
+
+button { font-family: inherit; }
+
+img { max-width: 100%; }
+
+input, textarea { font-family: inherit; }
+
+h1, h2, h3 { color: var(--text); }

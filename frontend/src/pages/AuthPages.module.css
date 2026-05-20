@@ -4,11 +4,11 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--background-light-mode) 60%);
+  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--bg) 60%);
 }
 
 .card {
-  background: var(--background-light-mode-header);
+  background: var(--surface);
   width: 100%;
   max-width: 420px;
   padding: 36px 32px;
@@ -39,7 +39,7 @@
 }
 
 .subtitle {
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
   margin: 0 0 24px;
   font-size: 14px;
 }
@@ -52,16 +52,16 @@
   gap: 6px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--background-light-mode-text);
+  color: var(--text);
 }
 
 .input {
   padding: 12px 14px;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: var(--background-light-mode);
+  background: var(--bg);
   font-size: 14px;
-  color: var(--background-light-mode-text);
+  color: var(--text);
   outline: none;
   transition: border-color .15s;
 }
@@ -96,7 +96,7 @@
   text-align: center;
   margin: 20px 0 0;
   font-size: 14px;
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
 }
 
 .link {
@@ -110,10 +110,10 @@
 .hint {
   margin-top: 20px;
   padding: 10px 14px;
-  background: var(--background-light-mode);
+  background: var(--bg);
   border-radius: 10px;
   font-size: 12px;
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
   text-align: center;
 }
 
@@ -124,3 +124,65 @@
   border-radius: 4px;
   font-family: ui-monospace, SFMono-Regular, monospace;
 }
+
+.googleWrap {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 16px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+  margin: 8px 0 16px;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.inputError {
+  border-color: var(--danger) !important;
+}
+
+.helpError {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--danger);
+  margin-top: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.helpOk {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--success);
+  margin-top: 2px;
+}
+
+.suggestBtn {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: none;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.suggestBtn:hover { filter: brightness(.95); }

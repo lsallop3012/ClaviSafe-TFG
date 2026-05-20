@@ -2,35 +2,35 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import "react-alice-carousel/lib/scss/alice-carousel.scss";
 import 'react-alice-carousel/lib/alice-carousel.css';
 import AliceCarousel from 'react-alice-carousel';
-import styles from "./carrusel.module.css";
+import styles from "./carousel.module.css";
 
 
 const handleDragStart = (e) => e.preventDefault();
 
 const items = [
   <img 
-    src="/carrusel/carrusel1.avif"
+    src="/carousel/carrusel1.avif"
     onDragStart={handleDragStart}
     role="presentation"
     alt="imagen1"
     className={styles.carouselImg}
   />,
   <img
-    src="/carrusel/carrusel2.avif"
+    src="/carousel/carrusel2.avif"
     onDragStart={handleDragStart}
     role="presentation"
     alt="imagen2"
     className={styles.carouselImg}
   />,
   <img
-    src="/carrusel/carrusel3.avif"
+    src="/carousel/carrusel3.avif"
     onDragStart={handleDragStart}
     role="presentation"
     alt="imagen3"
     className={styles.carouselImg}
   />,
   <img
-    src="/carrusel/carrusel4.avif"
+    src="/carousel/carrusel4.avif"
     onDragStart={handleDragStart}
     role="presentation"
     alt="imagen4"
@@ -40,8 +40,6 @@ const items = [
 
 const Gallery = () => <AliceCarousel mouseTracking items={items} autoPlayInterval={3000} autoPlay={true} infinite={true} />;
 
-function carousel() {
+export default function Carousel() {
   return <Gallery />;
 }
-
-export default carousel;

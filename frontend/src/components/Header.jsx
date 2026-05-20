@@ -1,22 +1,22 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext.jsx';
+import { useAuth } from '../Context/AuthContext.jsx';
 import styles from './Header.module.css';
 
 export default function Header() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  const onLogout = () => {
-    logout();
+  const onLogout = async () => {
+    await logout();
     navigate('/login');
   };
 
   const initial = (user?.name || '?').charAt(0).toUpperCase();
+  const isAdmin = user?.role === 'admin';
 
   return (
     <header className={styles.header}>
       <NavLink to="/home" className={styles.brand}>
-        <span className={styles} />
         Moodly
       </NavLink>
 
@@ -24,6 +24,11 @@ export default function Header() {
         <NavLink to="/home" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>Home</NavLink>
         <NavLink to="/explore" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>Explore</NavLink>
         <NavLink to="/create" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>Create</NavLink>
+        {isAdmin && (
+          <NavLink to="/admin/users" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>
+            Admin
+          </NavLink>
+        )}
         <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>About</NavLink>
       </nav>
 

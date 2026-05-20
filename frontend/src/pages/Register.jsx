@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext.jsx';
+import { useAuth } from '../Context/AuthContext.jsx';
+import { validateEmail } from '../utils/validateEmail.js';
 import styles from './AuthPages.module.css';
 
 export default function Register() {
@@ -14,7 +15,18 @@ export default function Register() {
     if (user) navigate('/home');
   }, [user, navigate]);
 
+  const emailCheck = useMemo(
+    () => (form.email ? validateEmail(form.email) : { valid: false }),
+    [form.email]
+  );
+
   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const applySuggestion = () => {
+    if (emailCheck.suggestion) {
+      setForm({ ...form, email: emailCheck.suggestion });
+    }
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -32,6 +44,22 @@ export default function Register() {
     }
   };
 
+  const emailHelp =
+    form.email && !emailCheck.valid
+      ? emailCheck.suggestion
+        ? (
+            <span className={styles.helpError}>
+              {emailCheck.error}{' '}
+              <button type="button" className={styles.suggestBtn} onClick={applySuggestion}>
+                Use it
+              </button>
+            </span>
+          )
+        : <span className={styles.helpError}>{emailCheck.error}</span>
+      : form.email && emailCheck.valid
+        ? <span className={styles.helpOk}>✓ Looks good</span>
+        : null;
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.card}>
@@ -41,6 +69,8 @@ export default function Register() {
         </div>
         <p className={styles.subtitle}>Join the community. Start collecting inspiration.</p>
 
+        <div className={styles.divider}><span>or</span></div>
+
         <form onSubmit={onSubmit} className={styles.form}>
           <label className={styles.label}>
             Username
@@ -48,7 +78,16 @@ export default function Register() {
           </label>
           <label className={styles.label}>
             Email
-            <input name="email" type="email" value={form.email} onChange={onChange} className={styles.input} required />
+            <input
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={onChange}
+              className={`${styles.input} ${form.email && !emailCheck.valid ? styles.inputError : ''}`}
+              required
+              autoComplete="email"
+            />
+            {emailHelp}
           </label>
           <label className={styles.label}>
             Password
@@ -61,7 +100,7 @@ export default function Register() {
 
           {error && <p className={styles.error}>{error}</p>}
 
-          <button type="submit" disabled={loading} className={styles.submit}>
+          <button type="submit" disabled={loading || !emailCheck.valid} className={styles.submit}>
             {loading ? 'Creating...' : 'Create account'}
           </button>
         </form>

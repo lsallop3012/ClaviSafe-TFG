@@ -6,9 +6,8 @@
   align-items: center;
   gap: 24px;
   padding: 14px 28px;
-  background: var(--background-light-mode-header);
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
-  /* backdrop-filter: blur(12px); */
 }
 
 .brand {
@@ -33,15 +32,15 @@
   padding: 8px 14px;
   border-radius: 999px;
   text-decoration: none;
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
   font-weight: 600;
   font-size: 14px;
   transition: background .15s, color .15s;
 }
 
 .link:hover {
-  background: var(--background-light-mode-hover);
-  color: var(--background-light-mode-text);
+  background: var(--bg-hover);
+  color: var(--text);
 }
 
 .activeLink {
@@ -85,7 +84,7 @@
 .logout {
   border: 1px solid var(--border);
   background: transparent;
-  color: var(--background-light-mode-text);
+  color: var(--text);
   padding: 8px 14px;
   border-radius: 999px;
   cursor: pointer;
@@ -95,7 +94,7 @@
 }
 
 .logout:hover {
-  background: var(--background-light-mode-hover);
+  background: var(--bg-hover);
 }
 
 @media (max-width: 720px) {

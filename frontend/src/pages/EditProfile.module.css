@@ -10,7 +10,7 @@
 }
 
 .form {
-  background: var(--background-light-mode-header);
+  background: var(--surface);
   padding: 28px;
   border-radius: 18px;
   display: flex;
@@ -37,7 +37,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border: 4px solid var(--background-light-mode);
+  border: 4px solid var(--bg);
 }
 
 .avatarPreview {
@@ -99,9 +99,9 @@
   padding: 10px 14px;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: var(--background-light-mode);
+  background: var(--bg);
   font-size: 14px;
-  color: var(--background-light-mode-text);
+  color: var(--text);
   outline: none;
   font-family: inherit;
 }
@@ -113,7 +113,7 @@
   bottom: 6px;
   right: 10px;
   font-size: 11px;
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
   font-weight: 500;
 }
 
@@ -143,10 +143,10 @@
 
 .cancelBtn {
   background: transparent;
-  color: var(--background-light-mode-text);
+  color: var(--text);
 }
 
-.cancelBtn:hover { background: var(--background-light-mode-hover); }
+.cancelBtn:hover { background: var(--bg-hover); }
 
 .saveBtn {
   background: var(--accent);

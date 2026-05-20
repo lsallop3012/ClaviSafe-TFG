@@ -1,0 +1,219 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 767px) {
+  .wrap { grid-template-columns: 1fr; }
+  .sidebar { position: static !important; }
+}
+
+.sidebar {
+  background: var(--surface);
+  padding: 18px;
+  border-radius: 14px;
+  position: sticky;
+  top: 90px;
+  align-self: flex-start;
+}
+
+.heading {
+  margin: 0 0 12px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.nav { display: flex; flex-direction: column; gap: 4px; }
+
+.link, .linkActive {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.link:hover { background: var(--bg-hover); }
+
+.linkActive {
+  background: var(--accent);
+  color: white;
+}
+
+.content { min-width: 0; }
+
+.pageHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 24px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.search, .select {
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 13px;
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+}
+
+.search:focus, .select:focus { border-color: var(--accent); }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.table th, .table td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.table th {
+  background: var(--bg);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.table tr:last-child td { border-bottom: none; }
+
+.cardList { display: flex; flex-direction: column; gap: 10px; }
+
+.cardRow {
+  background: var(--surface);
+  padding: 14px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cardField {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.cardField strong { color: var(--text); font-weight: 600; }
+
+.actions { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.btn, .btnDanger, .btnPrimary {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.btn:hover { background: var(--bg-hover); }
+
+.btnPrimary {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.btnPrimary:hover { filter: brightness(.95); }
+
+.btnDanger {
+  color: var(--danger);
+  border-color: var(--accent-soft);
+}
+
+.btnDanger:hover { background: var(--accent-soft); }
+
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tagAdmin { background: #2A1A24; color: white; }
+.tagUser { background: var(--accent-soft); color: var(--accent); }
+.tagGoogle { background: #e8f0fe; color: #1a73e8; }
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-muted);
+  background: var(--surface);
+  border-radius: 14px;
+}
+
+.error {
+  background: var(--accent-soft);
+  color: var(--danger);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.thumbCell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.thumbFb {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-weight: 700;
+}

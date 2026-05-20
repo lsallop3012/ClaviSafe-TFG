@@ -13,7 +13,7 @@
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 .modal {
-  background: var(--background-light-mode-header);
+  background: var(--surface);
   border-radius: 16px;
   width: 100%;
   max-width: 420px;
@@ -38,7 +38,7 @@
   border: none;
   font-size: 20px;
   cursor: pointer;
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
 }
 
 .list {
@@ -52,9 +52,18 @@
 
 .hint {
   text-align: center;
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
   padding: 16px;
   margin: 0;
+}
+
+.error {
+  margin: 8px 16px 0;
+  padding: 8px 12px;
+  background: var(--accent-soft);
+  color: var(--danger);
+  border-radius: 8px;
+  font-size: 13px;
 }
 
 .boardRow {
@@ -72,7 +81,7 @@
   font-weight: 500;
 }
 
-.boardRow:hover:not(:disabled) { background: var(--background-light-mode-hover); }
+.boardRow:hover:not(:disabled) { background: var(--bg-hover); }
 .boardRow:disabled { opacity: .5; cursor: default; }
 
 .boardName { flex: 1; }
@@ -115,7 +124,7 @@
   border: 1px solid var(--border);
   border-radius: 999px;
   font-size: 14px;
-  background: var(--background-light-mode);
+  background: var(--bg);
   color: var(--text);
   outline: none;
 }

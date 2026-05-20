@@ -15,7 +15,7 @@
 
 .subtitle {
   margin: 0;
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
 }
 
 .newBtn {
@@ -36,7 +36,7 @@
   gap: 10px;
   margin-bottom: 24px;
   flex-wrap: wrap;
-  background: var(--background-light-mode-header);
+  background: var(--surface);
   padding: 14px;
   border-radius: 14px;
   border: 1px solid var(--border);
@@ -49,8 +49,8 @@
   border: 1px solid var(--border);
   border-radius: 999px;
   font-size: 14px;
-  background: var(--background-light-mode);
-  color: var(--background-light-mode-text);
+  background: var(--bg);
+  color: var(--text);
   outline: none;
 }
 
@@ -81,7 +81,7 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 14px;
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
 }
 
 .tabActive {
@@ -99,7 +99,7 @@
   display: block;
   text-decoration: none;
   color: inherit;
-  background: var(--background-light-mode-header);
+  background: var(--surface);
   border-radius: 16px;
   overflow: hidden;
   transition: transform .15s, box-shadow .15s;
@@ -112,7 +112,7 @@
 
 .boardCover {
   aspect-ratio: 4/3;
-  background: var(--background-light-mode);
+  background: var(--bg);
   overflow: hidden;
 }
 
@@ -145,14 +145,14 @@
 
 .boardMeta {
   font-size: 12px;
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
 }
 
 .empty {
   padding: 60px 20px;
   text-align: center;
-  color: var(--background-light-mode-text-muted);
-  background: var(--background-light-mode-header);
+  color: var(--text-muted);
+  background: var(--surface);
   border-radius: 16px;
   border: 1px dashed var(--border);
 }

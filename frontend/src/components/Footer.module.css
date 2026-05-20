@@ -4,13 +4,23 @@
   align-items: center;
   padding: 18px 28px;
   border-top: 1px solid var(--border);
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
   font-size: 13px;
 }
 
-.divs { opacity: .8; }
+.links {
+  display: flex;
+  gap: 18px;
+}
+
+.links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+.links a:hover { color: var(--accent); }
 .divs img {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin-left: 10px;
 }

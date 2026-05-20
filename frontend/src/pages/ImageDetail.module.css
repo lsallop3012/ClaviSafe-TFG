@@ -6,7 +6,7 @@
 .card {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  background: var(--background-light-mode-header);
+  background: var(--surface);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 8px 28px rgba(0,0,0,.08);
@@ -17,7 +17,7 @@
 }
 
 .imageSide {
-  background: var(--background-light-mode);
+  background: var(--bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,16 +46,16 @@
 
 .likeBtn {
   border: 1px solid var(--border);
-  background: var(--background-light-mode-header);
+  background: var(--surface);
   padding: 8px 16px;
   border-radius: 999px;
   cursor: pointer;
   font-weight: 700;
   font-size: 14px;
-  color: var(--background-light-mode-text);
+  color: var(--text);
 }
 
-.likeBtn:hover { background: var(--background-light-mode-hover); }
+.likeBtn:hover { background: var(--bg-hover); }
 .likeBtn.liked { color: var(--accent); border-color: var(--accent); }
 
 .saveBtn {
@@ -77,7 +77,7 @@
   letter-spacing: -0.5px;
 }
 
-.desc { margin: 0; color: var(--background-light-mode-text-muted); }
+.desc { margin: 0; color: var(--text-muted); }
 
 .author {
   display: flex;
@@ -94,7 +94,7 @@
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: var(--background-light-mode-text);
+  color: var(--text);
 }
 
 .authorAvatar, .authorAvatarFb {
@@ -111,7 +111,7 @@
 }
 
 .authorName { font-weight: 700; font-size: 14px; }
-.authorMeta { font-size: 12px; color: var(--background-light-mode-text-muted); }
+.authorMeta { font-size: 12px; color: var(--text-muted); }
 
 .ownerActions { display: flex; gap: 6px; }
 
@@ -122,10 +122,10 @@
   font-size: 12px;
   cursor: pointer;
   border: 1px solid var(--border);
-  background: var(--background-light-mode-header);
+  background: var(--surface);
 }
 
-.editBtn:hover { background: var(--background-light-mode-hover); }
+.editBtn:hover { background: var(--bg-hover); }
 .deleteBtn { color: var(--danger); }
 .deleteBtn:hover { background: var(--accent-soft); }
 
@@ -136,7 +136,7 @@
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: .5px;
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
 }
 
 .boardChips { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -160,9 +160,9 @@
   padding: 10px 14px;
   border: 1px solid var(--border);
   border-radius: 999px;
-  background: var(--background-light-mode);
+  background: var(--bg);
   font-size: 14px;
-  color: var(--background-light-mode-text);
+  color: var(--text);
   outline: none;
 }
 
@@ -186,7 +186,7 @@
 .emptyComments {
   margin: 0;
   text-align: center;
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
   font-size: 13px;
   padding: 10px;
 }
@@ -214,7 +214,7 @@
 
 .commentBody {
   flex: 1;
-  background: var(--background-light-mode);
+  background: var(--bg);
   border-radius: 12px;
   padding: 8px 12px;
 }
@@ -227,13 +227,13 @@
 }
 
 .commentName { font-weight: 700; font-size: 13px; }
-.commentDate { font-size: 11px; color: var(--background-light-mode-text-muted); }
-.commentText { font-size: 14px; color: var(--background-light-mode-text); }
+.commentDate { font-size: 11px; color: var(--text-muted); }
+.commentText { font-size: 14px; color: var(--text); }
 
 .commentDelete {
   background: transparent;
   border: none;
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
   cursor: pointer;
   font-size: 14px;
   padding: 4px;
@@ -247,9 +247,9 @@
   padding: 10px 14px;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: var(--background-light-mode);
+  background: var(--bg);
   font-size: 14px;
-  color: var(--background-light-mode-text);
+  color: var(--text);
   outline: none;
   font-family: inherit;
 }
@@ -266,7 +266,7 @@
   cursor: pointer;
   border: 1px solid var(--border);
   background: transparent;
-  color: var(--background-light-mode-text);
+  color: var(--text);
 }
 
 .saveEditBtn {
@@ -283,7 +283,7 @@
 .notfound {
   padding: 60px 20px;
   text-align: center;
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
 }
 
 .notfound a { color: var(--accent); font-weight: 700; }

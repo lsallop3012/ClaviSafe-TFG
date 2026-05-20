@@ -4,7 +4,7 @@
   margin: 0 0 16px;
   border-radius: 16px;
   overflow: hidden;
-  background: var(--background-light-mode-header);
+  background: var(--surface);
   transition: transform .2s, box-shadow .2s;
 }
 
@@ -89,7 +89,7 @@
 
 .title {
   display: block;
-  color: var(--background-light-mode-text);
+  color: var(--text);
   font-weight: 600;
   font-size: 14px;
   text-decoration: none;

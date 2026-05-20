@@ -1,6 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import RoleRoute from './components/RoleRoute.jsx';
+
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Home from './pages/Home.jsx';
@@ -11,7 +13,14 @@ import ImageDetail from './pages/ImageDetail.jsx';
 import UserProfile from './pages/UserProfile.jsx';
 import EditProfile from './pages/EditProfile.jsx';
 import AboutUs from './pages/AboutUs.jsx';
+import Contact from './pages/Contact.jsx';
+import Privacy from './pages/Privacy.jsx';
 import NotFound from './pages/NotFound.jsx';
+
+import AdminLayout from './pages/admin/AdminLayout.jsx';
+import AdminUsers from './pages/admin/AdminUsers.jsx';
+import AdminImages from './pages/admin/AdminImages.jsx';
+import AdminBoards from './pages/admin/AdminBoards.jsx';
 
 export default function App() {
   return (
@@ -36,7 +45,24 @@ export default function App() {
         <Route path="profile" element={<UserProfile />} />
         <Route path="profile/edit" element={<EditProfile />} />
         <Route path="profile/:userId" element={<UserProfile />} />
+        <Route path="profile/edit/:userId" element={<EditProfile />} />
         <Route path="about" element={<AboutUs />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="privacy" element={<Privacy />} />
+
+        <Route
+          path="admin"
+          element={
+            <RoleRoute roles={['admin']}>
+              <AdminLayout />
+            </RoleRoute>
+          }
+        >
+          <Route index element={<Navigate to="/admin/users" replace />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="images" element={<AdminImages />} />
+          <Route path="boards" element={<AdminBoards />} />
+        </Route>
       </Route>
 
       <Route path="*" element={<NotFound />} />

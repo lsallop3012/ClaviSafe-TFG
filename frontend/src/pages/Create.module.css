@@ -12,7 +12,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
-  background: var(--background-light-mode-header);
+  background: var(--surface);
   padding: 24px;
   border-radius: 18px;
 }
@@ -26,7 +26,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--background-light-mode);
+  background: var(--bg);
   border: 2px dashed var(--border);
   border-radius: 14px;
   min-height: 320px;
@@ -38,7 +38,7 @@
 
 .placeholder {
   text-align: center;
-  color: var(--background-light-mode-text-muted);
+  color: var(--text-muted);
   padding: 20px;
 }
 
@@ -73,9 +73,9 @@
   padding: 10px 14px;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: var(--background-light-mode);
+  background: var(--bg);
   font-size: 14px;
-  color: var(--background-light-mode-text);
+  color: var(--text);
   outline: none;
 }
 
@@ -83,9 +83,9 @@
   padding: 10px 14px;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: var(--background-light-mode);
+  background: var(--bg);
   font-size: 14px;
-  color: var(--background-light-mode-text);
+  color: var(--text);
   outline: none;
   resize: vertical;
   font-family: inherit;
