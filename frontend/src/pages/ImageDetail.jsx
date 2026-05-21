@@ -5,6 +5,9 @@ import * as imagesApi from '../api/imagesApi.js';
 import * as commentsApi from '../api/commentsApi.js';
 import useFetch from '../hooks/useFetch.js';
 import SaveToBoardModal from '../components/SaveToBoardModal.jsx';
+import ConfirmDialog from '../components/ConfirmDialog.jsx';
+import Spinner from '../components/Spinner.jsx';
+import { useToast } from '../Context/ToastContext.jsx';
 import styles from './ImageDetail.module.css';
 
 const formatDate = (iso) => new Date(iso).toLocaleDateString(undefined, {
@@ -15,6 +18,7 @@ export default function ImageDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const toast = useToast();
 
   const image = useFetch(() => imagesApi.getImage(id), [id]);
   const comments = useFetch(() => commentsApi.listComments(id), [id]);
@@ -24,9 +28,10 @@ export default function ImageDetail() {
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
-  const [error, setError] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [confirmDeleteCommentId, setConfirmDeleteCommentId] = useState(null);
 
-  if (image.loading) return <div className={styles.notfound}>Loading...</div>;
+  if (image.loading) return <Spinner label="Loading pin..." fullPage />;
   if (image.error || !image.data) {
     return (
       <div className={styles.notfound}>
@@ -35,27 +40,48 @@ export default function ImageDetail() {
     );
   }
   const img = image.data;
-  const isOwner = user.id === img.user_id || user.role === 'admin';
+  const isOwner = !!user && (user.id === img.user_id || user.role === 'admin');
+
+  const requireAuth = () => {
+    if (!user) { navigate('/login'); return false; }
+    return true;
+  };
 
   const onLike = async () => {
-    try { await imagesApi.toggleLike(img.id); image.refetch(); } catch (e) { setError(e.message); }
+    if (!requireAuth()) return;
+    try { await imagesApi.toggleLike(img.id); image.refetch(); } catch (e) { toast.error(e.message); }
+  };
+
+  const onSaveClick = () => {
+    if (!requireAuth()) return;
+    setShowSave(true);
   };
 
   const onComment = async (e) => {
     e.preventDefault();
+    if (!requireAuth()) return;
     if (!comment.trim()) return;
-    try { await commentsApi.createComment(img.id, comment.trim()); setComment(''); comments.refetch(); }
-    catch (err) { setError(err.message); }
+    try {
+      await commentsApi.createComment(img.id, comment.trim());
+      setComment('');
+      comments.refetch();
+    } catch (err) { toast.error(err.message); }
   };
 
-  const onDeleteComment = async (cid) => {
-    try { await commentsApi.deleteComment(cid); comments.refetch(); } catch (e) { setError(e.message); }
+  const doDeleteComment = async () => {
+    try {
+      await commentsApi.deleteComment(confirmDeleteCommentId);
+      toast.success('Comment deleted.');
+      comments.refetch();
+    } catch (e) { toast.error(e.message); }
   };
 
-  const onDelete = async () => {
-    if (!window.confirm('Delete this pin? This cannot be undone.')) return;
-    await imagesApi.deleteImage(img.id);
-    navigate('/home');
+  const doDelete = async () => {
+    try {
+      await imagesApi.deleteImage(img.id);
+      toast.success('Pin deleted.');
+      navigate('/home');
+    } catch (e) { toast.error(e.message); }
   };
 
   const startEdit = () => {
@@ -66,8 +92,10 @@ export default function ImageDetail() {
     e.preventDefault();
     try {
       await imagesApi.updateImage(img.id, { name: name.trim(), description: desc.trim() });
-      setEditing(false); image.refetch();
-    } catch (err) { setError(err.message); }
+      toast.success('Pin updated.');
+      setEditing(false);
+      image.refetch();
+    } catch (err) { toast.error(err.message); }
   };
 
   const author = img.author;
@@ -85,7 +113,7 @@ export default function ImageDetail() {
             <button onClick={onLike} className={`${styles.likeBtn} ${img.liked_by_me ? styles.liked : ''}`}>
               {img.liked_by_me ? '♥' : '♡'} {img.like_count}
             </button>
-            <button onClick={() => setShowSave(true)} className={styles.saveBtn}>
+            <button onClick={onSaveClick} className={styles.saveBtn}>
               {img.saved_by_me ? 'Saved' : 'Save'}
             </button>
           </div>
@@ -119,7 +147,7 @@ export default function ImageDetail() {
             {isOwner && !editing && (
               <div className={styles.ownerActions}>
                 <button onClick={startEdit} className={styles.editBtn}>Edit</button>
-                <button onClick={onDelete} className={styles.deleteBtn}>Delete</button>
+                <button onClick={() => setConfirmDelete(true)} className={styles.deleteBtn}>Delete</button>
               </div>
             )}
           </div>
@@ -138,22 +166,26 @@ export default function ImageDetail() {
           <div className={styles.section}>
             <div className={styles.sectionTitle}>Comments ({commentList.length})</div>
 
-            <form onSubmit={onComment} className={styles.commentForm}>
-              <input type="text" value={comment} onChange={(e) => setComment(e.target.value)}
-                     placeholder="Add a comment..." className={styles.commentInput} maxLength={300} />
-              <button type="submit" className={styles.postBtn} disabled={!comment.trim()}>Post</button>
-            </form>
-
-            {error && <div style={{ color: 'var(--danger)', fontSize: 13 }}>{error}</div>}
+            {user ? (
+              <form onSubmit={onComment} className={styles.commentForm}>
+                <input type="text" value={comment} onChange={(e) => setComment(e.target.value)}
+                       placeholder="Add a comment..." className={styles.commentInput} maxLength={300} />
+                <button type="submit" className={styles.postBtn} disabled={!comment.trim()}>Post</button>
+              </form>
+            ) : (
+              <p className={styles.emptyComments}>
+                <Link to="/login">Log in</Link> to leave a comment.
+              </p>
+            )}
 
             <div className={styles.commentList}>
-              {comments.loading && <p className={styles.emptyComments}>Loading...</p>}
+              {comments.loading && <Spinner label="Loading comments..." />}
               {!comments.loading && commentList.length === 0 && (
                 <p className={styles.emptyComments}>No comments yet. Be the first.</p>
               )}
               {commentList.map((c) => {
                 const cu = c.user;
-                const canDelete = c.user_id === user.id || user.role === 'admin';
+                const canDelete = !!user && (c.user_id === user.id || user.role === 'admin');
                 return (
                   <div key={c.id} className={styles.comment}>
                     {cu?.avatar
@@ -167,7 +199,7 @@ export default function ImageDetail() {
                       <div className={styles.commentText}>{c.content}</div>
                     </div>
                     {canDelete && (
-                      <button onClick={() => onDeleteComment(c.id)} className={styles.commentDelete} title="Delete">✕</button>
+                      <button onClick={() => setConfirmDeleteCommentId(c.id)} className={styles.commentDelete} title="Delete">✕</button>
                     )}
                   </div>
                 );
@@ -180,6 +212,25 @@ export default function ImageDetail() {
       {showSave && (
         <SaveToBoardModal image={img} onClose={() => setShowSave(false)} onSavedChange={() => image.refetch()} />
       )}
+
+      <ConfirmDialog
+        open={confirmDelete}
+        title="Delete this pin?"
+        message="This action cannot be undone."
+        confirmText="Delete"
+        danger
+        onConfirm={async () => { await doDelete(); setConfirmDelete(false); }}
+        onCancel={() => setConfirmDelete(false)}
+      />
+
+      <ConfirmDialog
+        open={confirmDeleteCommentId !== null}
+        title="Delete this comment?"
+        confirmText="Delete"
+        danger
+        onConfirm={async () => { await doDeleteComment(); setConfirmDeleteCommentId(null); }}
+        onCancel={() => setConfirmDeleteCommentId(null)}
+      />
     </div>
   );
 }

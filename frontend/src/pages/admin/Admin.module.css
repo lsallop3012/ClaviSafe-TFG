@@ -5,8 +5,25 @@
 }
 
 @media (max-width: 767px) {
-  .wrap { grid-template-columns: 1fr; }
-  .sidebar { position: static !important; }
+  .wrap { grid-template-columns: 1fr; gap: 12px; }
+  .sidebar {
+    position: static !important;
+    padding: 10px;
+  }
+  .heading { display: none; }
+  .nav {
+    flex-direction: row;
+    gap: 6px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .link, .linkActive {
+    padding: 8px 14px;
+    white-space: nowrap;
+    font-size: 13px;
+  }
+  .table { font-size: 13px; }
+  .pageTitle { font-size: 20px; }
 }
 
 .sidebar {

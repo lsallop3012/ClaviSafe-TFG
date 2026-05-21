@@ -6,26 +6,27 @@ import * as boardsApi from '../api/boardsApi.js';
 import * as imagesApi from '../api/imagesApi.js';
 import useFetch from '../hooks/useFetch.js';
 import MasonryGrid from '../components/MasonryGrid.jsx';
+import Spinner from '../components/Spinner.jsx';
 import styles from './UserProfile.module.css';
 
 export default function UserProfile() {
   const { userId } = useParams();
   const navigate = useNavigate();
   const { user: me } = useAuth();
-  const targetId = userId ? Number(userId) : me.id;
+  const targetId = userId ? Number(userId) : me?.id;
 
   const profile = useFetch(() => usersApi.getUser(targetId), [targetId]);
   const pins = useFetch(() => imagesApi.listImages({ user_id: targetId, perPage: 50 }), [targetId]);
   const userBoards = useFetch(() => boardsApi.listBoards({ user_id: targetId, perPage: 50 }), [targetId]);
-  const isSelf = targetId === me.id;
+  const isSelf = !!me && targetId === me.id;
   const savedPins = useFetch(
     () => (isSelf ? imagesApi.listImages({ saved_by: me.id, perPage: 50 }) : Promise.resolve({ data: [] })),
-    [isSelf, me.id]
+    [isSelf, me?.id]
   );
 
   const [tab, setTab] = useState('pins');
 
-  if (profile.loading) return <div className={styles.notfound}>Loading...</div>;
+  if (profile.loading) return <Spinner label="Loading profile..." fullPage />;
   if (profile.error || !profile.data) {
     return (
       <div className={styles.notfound}>

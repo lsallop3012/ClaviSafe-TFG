@@ -36,8 +36,6 @@ export default function Login() {
       <Header />  
       <div className={styles.wrapper}>
         <div className={styles.main}>
-        <div className={styles.bgCarousel}>
-         </div>
         <div className={styles.card}>
           <div className={styles.brand}>
             <h1>Moodly</h1>

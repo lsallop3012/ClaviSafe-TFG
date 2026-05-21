@@ -4,12 +4,16 @@ import { useAuth } from '../Context/AuthContext.jsx';
 import * as boardsApi from '../api/boardsApi.js';
 import useFetch from '../hooks/useFetch.js';
 import MasonryGrid from '../components/MasonryGrid.jsx';
+import ConfirmDialog from '../components/ConfirmDialog.jsx';
+import Spinner from '../components/Spinner.jsx';
+import { useToast } from '../Context/ToastContext.jsx';
 import styles from './BoardDetail.module.css';
 
 export default function BoardDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const toast = useToast();
 
   const board = useFetch(() => boardsApi.getBoard(id), [id]);
   const images = useFetch(() => boardsApi.listBoardImages(id), [id]);
@@ -17,8 +21,9 @@ export default function BoardDetail() {
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
-  if (board.loading) return <div className={styles.notfound}>Loading...</div>;
+  if (board.loading) return <Spinner label="Loading board..." fullPage />;
   if (board.error) {
     return (
       <div className={styles.notfound}>
@@ -27,7 +32,7 @@ export default function BoardDetail() {
     );
   }
   const b = board.data;
-  const isOwner = user.id === b.user_id || user.role === 'admin';
+  const isOwner = !!user && (user.id === b.user_id || user.role === 'admin');
 
   const startEdit = () => {
     setName(b.name);
@@ -37,15 +42,20 @@ export default function BoardDetail() {
 
   const onSave = async (e) => {
     e.preventDefault();
-    await boardsApi.updateBoard(b.id, { name: name.trim(), description: desc.trim() });
-    setEditing(false);
-    board.refetch();
+    try {
+      await boardsApi.updateBoard(b.id, { name: name.trim(), description: desc.trim() });
+      toast.success('Board updated.');
+      setEditing(false);
+      board.refetch();
+    } catch (err) { toast.error(err.message); }
   };
 
-  const onDelete = async () => {
-    if (!window.confirm(`Delete board "${b.name}"? This cannot be undone.`)) return;
-    await boardsApi.deleteBoard(b.id);
-    navigate('/home');
+  const doDelete = async () => {
+    try {
+      await boardsApi.deleteBoard(b.id);
+      toast.success(`Board "${b.name}" deleted.`);
+      navigate('/home');
+    } catch (e) { toast.error(e.message); }
   };
 
   return (
@@ -61,7 +71,7 @@ export default function BoardDetail() {
             {isOwner && (
               <div className={styles.actions}>
                 <button onClick={startEdit} className={styles.editBtn}>Edit</button>
-                <button onClick={onDelete} className={styles.deleteBtn}>Delete</button>
+                <button onClick={() => setConfirmDelete(true)} className={styles.deleteBtn}>Delete</button>
               </div>
             )}
           </>
@@ -78,10 +88,20 @@ export default function BoardDetail() {
         )}
       </div>
 
-      {images.loading ? <div className={styles.notfound}>Loading...</div>
+      {images.loading ? <Spinner label="Loading pins..." />
                       : <MasonryGrid images={images.data?.data || []}
                                      empty="This board has no pins yet."
                                      onChange={images.refetch} />}
+
+      <ConfirmDialog
+        open={confirmDelete}
+        title={`Delete board "${b.name}"?`}
+        message="The board will be removed. Pins inside are kept."
+        confirmText="Delete"
+        danger
+        onConfirm={async () => { await doDelete(); setConfirmDelete(false); }}
+        onCancel={() => setConfirmDelete(false)}
+      />
     </div>
   );
 }

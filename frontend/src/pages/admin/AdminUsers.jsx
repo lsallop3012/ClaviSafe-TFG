@@ -4,38 +4,63 @@ import * as usersApi from '../../api/usersApi.js';
 import useFetch from '../../hooks/useFetch.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { useAuth } from '../../Context/AuthContext.jsx';
+import { useToast } from '../../Context/ToastContext.jsx';
 import CreateUserModal from '../../components/CreateUserModal.jsx';
+import ConfirmDialog from '../../components/ConfirmDialog.jsx';
+import Spinner from '../../components/Spinner.jsx';
 import styles from './Admin.module.css';
- 
+
 const PER_PAGE = 10;
- 
+
 export default function AdminUsers() {
   const { user: me } = useAuth();
   const isMobile = useIsMobile();
- 
+  const toast = useToast();
+
   const [q, setQ] = useState('');
   const [page, setPage] = useState(1);
-  const [error, setError] = useState(null);
   const [showCreate, setShowCreate] = useState(false);
- 
+  const [confirm, setConfirm] = useState(null);
+
   const { data, loading, error: fetchError, refetch } = useFetch(
     () => usersApi.listUsers({ q, page, perPage: PER_PAGE }),
     [q, page]
   );
- 
+
   const users = data?.data || [];
   const meta = data?.meta;
   const totalPages = meta?.totalPages || 1;
- 
-  const onDelete = async (u) => {
-    if (!window.confirm(`Delete user "${u.name}"? This deletes their pins and boards too.`)) return;
-    try { await usersApi.deleteUser(u.id); refetch(); } catch (e) { setError(e.message); }
+
+  const onDelete = (u) => {
+    setConfirm({
+      title: `Delete user "${u.name}"?`,
+      message: 'This deletes their pins and boards too. This action cannot be undone.',
+      confirmText: 'Delete',
+      danger: true,
+      action: async () => {
+        try {
+          await usersApi.deleteUser(u.id);
+          toast.success(`User "${u.name}" deleted.`);
+          refetch();
+        } catch (e) { toast.error(e.message); }
+      },
+    });
   };
- 
-  const onToggleRole = async (u) => {
+
+  const onToggleRole = (u) => {
     const newRole = u.role === 'admin' ? 'user' : 'admin';
-    if (!window.confirm(`Set ${u.name}'s role to "${newRole}"?`)) return;
-    try { await usersApi.updateUser(u.id, { role: newRole }); refetch(); } catch (e) { setError(e.message); }
+    setConfirm({
+      title: `Change role for ${u.name}?`,
+      message: `Set role to "${newRole}".`,
+      confirmText: 'Change role',
+      action: async () => {
+        try {
+          await usersApi.updateUser(u.id, { role: newRole });
+          toast.success(`${u.name} is now ${newRole}.`);
+          refetch();
+        } catch (e) { toast.error(e.message); }
+      },
+    });
   };
  
   const RoleTag = ({ role }) => (
@@ -58,9 +83,9 @@ export default function AdminUsers() {
                placeholder="Search by name or email..." className={styles.search} />
       </div>
  
-      {(error || fetchError) && <div className={styles.error}>{error || fetchError}</div>}
+      {fetchError && <div className={styles.error}>{fetchError}</div>}
  
-      {loading ? <div className={styles.empty}>Loading...</div>
+      {loading ? <Spinner label="Loading users..." />
        : users.length === 0 ? <div className={styles.empty}>No users found.</div>
        : isMobile ? (
         <div className={styles.cardList}>
@@ -149,6 +174,19 @@ export default function AdminUsers() {
           onCreated={() => refetch()}
         />
       )}
+
+      <ConfirmDialog
+        open={!!confirm}
+        title={confirm?.title}
+        message={confirm?.message}
+        confirmText={confirm?.confirmText}
+        danger={confirm?.danger}
+        onConfirm={async () => {
+          await confirm.action();
+          setConfirm(null);
+        }}
+        onCancel={() => setConfirm(null)}
+      />
     </div>
   );
 }

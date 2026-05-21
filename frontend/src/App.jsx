@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import RoleRoute from './components/RoleRoute.jsx';
+import { useAuth } from './Context/AuthContext.jsx';
 
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
@@ -22,33 +23,35 @@ import AdminUsers from './pages/admin/AdminUsers.jsx';
 import AdminImages from './pages/admin/AdminImages.jsx';
 import AdminBoards from './pages/admin/AdminBoards.jsx';
 
+function IndexRedirect() {
+  const { user, loading } = useAuth();
+  if (loading) return null;
+  return <Navigate to={user ? '/home' : '/explore'} replace />;
+}
+
 export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <Layout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<Navigate to="/home" replace />} />
-        <Route path="home" element={<Home />} />
+      <Route path="/" element={<Layout />}>
+        <Route index element={<IndexRedirect />} />
         <Route path="explore" element={<Explore />} />
-        <Route path="create" element={<Create />} />
         <Route path="boards/:id" element={<BoardDetail />} />
         <Route path="images/:id" element={<ImageDetail />} />
-        <Route path="profile" element={<UserProfile />} />
-        <Route path="profile/edit" element={<EditProfile />} />
         <Route path="profile/:userId" element={<UserProfile />} />
-        <Route path="profile/edit/:userId" element={<EditProfile />} />
         <Route path="about" element={<AboutUs />} />
         <Route path="contact" element={<Contact />} />
         <Route path="privacy" element={<Privacy />} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="home" element={<Home />} />
+          <Route path="create" element={<Create />} />
+          <Route path="profile" element={<UserProfile />} />
+          <Route path="profile/edit" element={<EditProfile />} />
+          <Route path="profile/edit/:userId" element={<EditProfile />} />
+        </Route>
 
         <Route
           path="admin"

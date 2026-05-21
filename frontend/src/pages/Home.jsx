@@ -5,6 +5,7 @@ import * as boardsApi from '../api/boardsApi.js';
 import { listImages } from '../api/imagesApi.js';
 import useFetch from '../hooks/useFetch.js';
 import MasonryGrid from '../components/MasonryGrid.jsx';
+import Spinner from '../components/Spinner.jsx';
 import styles from './Home.module.css';
 
 export default function Home() {
@@ -66,7 +67,7 @@ export default function Home() {
       </div>
 
       {tab === 'boards' && (
-        myBoards.loading ? <div className={styles.empty}>Loading...</div>
+        myBoards.loading ? <Spinner label="Loading..." />
         : myBoards.error ? <div className={styles.empty}>Error: {myBoards.error}</div>
         : boards.length === 0 ? (
           <div className={styles.empty}>
@@ -91,7 +92,7 @@ export default function Home() {
       )}
 
       {tab === 'saved' && (
-        saved.loading ? <div className={styles.empty}>Loading...</div>
+        saved.loading ? <Spinner label="Loading..." />
         : <MasonryGrid images={savedImages} empty="No saved pins yet." onChange={saved.refetch} />
       )}
     </div>

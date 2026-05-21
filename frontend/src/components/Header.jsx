@@ -16,14 +16,18 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      <NavLink to="/home" className={styles.brand}>
+      <NavLink to="/" className={styles.brand}>
         Moodly
       </NavLink>
 
       <nav className={styles.nav}>
-        <NavLink to="/home" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>Home</NavLink>
+        {user && (
+          <NavLink to="/home" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>Home</NavLink>
+        )}
         <NavLink to="/explore" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>Explore</NavLink>
-        <NavLink to="/create" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>Create</NavLink>
+        {user && (
+          <NavLink to="/create" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>Create</NavLink>
+        )}
         {isAdmin && (
           <NavLink to="/admin/users" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>
             Admin
@@ -33,14 +37,23 @@ export default function Header() {
       </nav>
 
       <div className={styles.right}>
-        <NavLink to="/profile" className={styles.avatarLink} title={user?.name}>
-          {user?.avatar ? (
-            <img src={user.avatar} alt={user.name} className={styles.avatar} />
-          ) : (
-            <span className={styles.avatarFallback}>{initial}</span>
-          )}
-        </NavLink>
-        <button onClick={onLogout} className={styles.logout}>Log out</button>
+        {user ? (
+          <>
+            <NavLink to="/profile" className={styles.avatarLink} title={user?.name}>
+              {user?.avatar ? (
+                <img src={user.avatar} alt={user.name} className={styles.avatar} />
+              ) : (
+                <span className={styles.avatarFallback}>{initial}</span>
+              )}
+            </NavLink>
+            <button onClick={onLogout} className={styles.logout}>Log out</button>
+          </>
+        ) : (
+          <>
+            <NavLink to="/login" className={styles.authLink}>Log in</NavLink>
+            <NavLink to="/register" className={styles.authPrimary}>Sign up</NavLink>
+          </>
+        )}
       </div>
     </header>
   );

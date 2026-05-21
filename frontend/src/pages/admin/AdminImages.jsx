@@ -3,28 +3,41 @@ import { Link } from 'react-router-dom';
 import * as imagesApi from '../../api/imagesApi.js';
 import useFetch from '../../hooks/useFetch.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { useToast } from '../../Context/ToastContext.jsx';
+import ConfirmDialog from '../../components/ConfirmDialog.jsx';
+import Spinner from '../../components/Spinner.jsx';
 import styles from './Admin.module.css';
- 
+
 const PER_PAGE = 12;
- 
+
 export default function AdminImages() {
   const isMobile = useIsMobile();
+  const toast = useToast();
   const [q, setQ] = useState('');
   const [page, setPage] = useState(1);
-  const [error, setError] = useState(null);
- 
+  const [confirm, setConfirm] = useState(null);
+
   const { data, loading, refetch } = useFetch(
     () => imagesApi.listImages({ q, page, perPage: PER_PAGE, sort: 'recent' }),
     [q, page]
   );
- 
+
   const images = data?.data || [];
   const meta = data?.meta;
   const totalPages = meta?.totalPages || 1;
- 
-  const onDelete = async (img) => {
-    if (!window.confirm(`Delete pin "${img.name}"?`)) return;
-    try { await imagesApi.deleteImage(img.id); refetch(); } catch (e) { setError(e.message); }
+
+  const onDelete = (img) => {
+    setConfirm({
+      title: `Delete pin "${img.name}"?`,
+      message: 'This action cannot be undone.',
+      action: async () => {
+        try {
+          await imagesApi.deleteImage(img.id);
+          toast.success(`Pin "${img.name}" deleted.`);
+          refetch();
+        } catch (e) { toast.error(e.message); }
+      },
+    });
   };
  
   return (
@@ -39,9 +52,7 @@ export default function AdminImages() {
                placeholder="Search by title or description..." className={styles.search} />
       </div>
  
-      {error && <div className={styles.error}>{error}</div>}
- 
-      {loading ? <div className={styles.empty}>Loading...</div>
+      {loading ? <Spinner label="Loading images..." />
        : images.length === 0 ? <div className={styles.empty}>No images.</div>
        : isMobile ? (
         <div className={styles.cardList}>
@@ -99,6 +110,19 @@ export default function AdminImages() {
           <button disabled={page >= totalPages} onClick={() => setPage((p) => p + 1)} className={styles.btn}>Next →</button>
         </div>
       )}
+
+      <ConfirmDialog
+        open={!!confirm}
+        title={confirm?.title}
+        message={confirm?.message}
+        confirmText="Delete"
+        danger
+        onConfirm={async () => {
+          await confirm.action();
+          setConfirm(null);
+        }}
+        onCancel={() => setConfirm(null)}
+      />
     </div>
   );
 }

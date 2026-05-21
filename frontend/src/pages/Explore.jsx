@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { listImages } from '../api/imagesApi.js';
 import useFetch from '../hooks/useFetch.js';
 import MasonryGrid from '../components/MasonryGrid.jsx';
+import Spinner from '../components/Spinner.jsx';
 import styles from './Explore.module.css';
 
 const PER_PAGE = 24;
@@ -40,7 +41,7 @@ export default function Explore() {
         </form>
       </div>
 
-      {loading && <div className={styles.empty}>Loading...</div>}
+      {loading && <Spinner label="Loading pins..." />}
       {error && <div className={styles.empty}>Error: {error}</div>}
       {!loading && !error && (
         <>

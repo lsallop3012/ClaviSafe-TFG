@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { toggleLike } from '../api/imagesApi.js';
 import { useAuth } from '../Context/AuthContext.jsx';
@@ -7,6 +7,7 @@ import styles from './ImageCard.module.css';
 
 export default function ImageCard({ image, onChange }) {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [showSave, setShowSave] = useState(false);
   // Optimistic local state so the heart toggles instantly.
   const [liked, setLiked] = useState(Boolean(image.liked_by_me));
@@ -15,7 +16,7 @@ export default function ImageCard({ image, onChange }) {
 
   const onLike = async (e) => {
     e.preventDefault();
-    if (!user) return;
+    if (!user) { navigate('/login'); return; }
     const prev = { liked, count };
     setLiked(!liked);
     setCount(liked ? count - 1 : count + 1);
@@ -44,7 +45,7 @@ export default function ImageCard({ image, onChange }) {
         <div className={styles.overlay}>
           <button
             type="button"
-            onClick={() => setShowSave(true)}
+            onClick={() => user ? setShowSave(true) : navigate('/login')}
             className={`${styles.saveBtn} ${saved ? styles.saveBtnActive : ''}`}
             title={saved ? 'Saved' : 'Save'}
           >

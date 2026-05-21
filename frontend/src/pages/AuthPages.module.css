@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--bg) 60%);
+  background-image: url("../assets/carousel/carrusel2.avif");  
 }
 
 .card {

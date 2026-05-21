@@ -3,33 +3,45 @@ import { Link } from 'react-router-dom';
 import * as boardsApi from '../../api/boardsApi.js';
 import useFetch from '../../hooks/useFetch.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { useToast } from '../../Context/ToastContext.jsx';
+import ConfirmDialog from '../../components/ConfirmDialog.jsx';
+import Spinner from '../../components/Spinner.jsx';
 import styles from './Admin.module.css';
- 
+
 const PER_PAGE = 12;
- 
+
 export default function AdminBoards() {
   const isMobile = useIsMobile();
+  const toast = useToast();
   const [q, setQ] = useState('');
   const [page, setPage] = useState(1);
-  const [error, setError] = useState(null);
- 
-  // Creación inline (no merece modal — solo 2 campos)
+  const [confirm, setConfirm] = useState(null);
+
   const [creating, setCreating] = useState(false);
   const [newName, setNewName] = useState('');
   const [newDesc, setNewDesc] = useState('');
- 
+
   const { data, loading, refetch } = useFetch(
     () => boardsApi.listBoards({ q, page, perPage: PER_PAGE }),
     [q, page]
   );
- 
+
   const boards = data?.data || [];
   const meta = data?.meta;
   const totalPages = meta?.totalPages || 1;
- 
-  const onDelete = async (b) => {
-    if (!window.confirm(`Delete board "${b.name}"?`)) return;
-    try { await boardsApi.deleteBoard(b.id); refetch(); } catch (e) { setError(e.message); }
+
+  const onDelete = (b) => {
+    setConfirm({
+      title: `Delete board "${b.name}"?`,
+      message: 'The board will be removed; pins inside are kept.',
+      action: async () => {
+        try {
+          await boardsApi.deleteBoard(b.id);
+          toast.success(`Board "${b.name}" deleted.`);
+          refetch();
+        } catch (e) { toast.error(e.message); }
+      },
+    });
   };
  
   const onCreate = async (e) => {
@@ -37,10 +49,11 @@ export default function AdminBoards() {
     if (!newName.trim()) return;
     try {
       await boardsApi.createBoard({ name: newName.trim(), description: newDesc.trim() });
+      toast.success(`Board "${newName.trim()}" created.`);
       setNewName(''); setNewDesc(''); setCreating(false);
       refetch();
     } catch (err) {
-      setError(err.message);
+      toast.error(err.message);
     }
   };
  
@@ -78,9 +91,7 @@ export default function AdminBoards() {
                placeholder="Search board name..." className={styles.search} />
       </div>
  
-      {error && <div className={styles.error}>{error}</div>}
- 
-      {loading ? <div className={styles.empty}>Loading...</div>
+      {loading ? <Spinner label="Loading boards..." />
        : boards.length === 0 ? <div className={styles.empty}>No boards.</div>
        : isMobile ? (
         <div className={styles.cardList}>
@@ -142,6 +153,19 @@ export default function AdminBoards() {
           <button disabled={page >= totalPages} onClick={() => setPage((p) => p + 1)} className={styles.btn}>Next →</button>
         </div>
       )}
+
+      <ConfirmDialog
+        open={!!confirm}
+        title={confirm?.title}
+        message={confirm?.message}
+        confirmText="Delete"
+        danger
+        onConfirm={async () => {
+          await confirm.action();
+          setConfirm(null);
+        }}
+        onCancel={() => setConfirm(null)}
+      />
     </div>
   );
 }
