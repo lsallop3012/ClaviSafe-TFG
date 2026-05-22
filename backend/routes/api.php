@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BoardController;
-use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\Api\UserController;
 
@@ -32,8 +31,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('images', ImageController::class);
     Route::post('/images/{image}/like', [ImageController::class, 'toggleLike']);
     Route::post('/images/{image}/save', [ImageController::class, 'toggleSave']);
-
-    Route::get('/images/{image}/comments',  [CommentController::class, 'listForImage']);
-    Route::post('/images/{image}/comments', [CommentController::class, 'storeForImage']);
-    Route::delete('/comments/{comment}',    [CommentController::class, 'destroy']);
 });

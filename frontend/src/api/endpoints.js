@@ -29,7 +29,3 @@ export const IMAGES_ENDPOINT = `${API_BASE_URL}/images`;
 export const imageEndpoint = (id) => `${API_BASE_URL}/images/${id}`;
 export const imageLikeEndpoint = (id) => `${API_BASE_URL}/images/${id}/like`;
 export const imageSaveEndpoint = (id) => `${API_BASE_URL}/images/${id}/save`;
-
-// COMMENTS
-export const imageCommentsEndpoint = (id) => `${API_BASE_URL}/images/${id}/comments`;
-export const commentEndpoint = (id) => `${API_BASE_URL}/comments/${id}`;

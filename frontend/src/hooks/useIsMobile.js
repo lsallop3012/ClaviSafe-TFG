@@ -1,6 +1,3 @@
-// Reports true when the viewport is below 768px wide.
-// Used to switch between desktop tables and mobile cards in CRUD views.
-
 import { useEffect, useState } from 'react';
 
 const QUERY = '(max-width: 767px)';

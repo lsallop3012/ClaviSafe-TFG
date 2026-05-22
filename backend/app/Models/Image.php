@@ -31,11 +31,6 @@ class Image extends Model
         return $this->belongsToMany(Board::class, 'boards_images', 'image_id', 'board_id');
     }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
     public function likes()
     {
         return $this->hasMany(Like::class);

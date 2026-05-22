@@ -1,12 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
-<<<<<<< HEAD
-=======
-import RoleRoute from './components/RoleRoute.jsx';
-import { useAuth } from './Context/AuthContext.jsx';
-
->>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Home from './pages/Home.jsx';
@@ -17,52 +11,22 @@ import ImageDetail from './pages/ImageDetail.jsx';
 import UserProfile from './pages/UserProfile.jsx';
 import EditProfile from './pages/EditProfile.jsx';
 import AboutUs from './pages/AboutUs.jsx';
-<<<<<<< HEAD
-import NotFound from './pages/NotFound.jsx';
-
-=======
 import Contact from './pages/Contact.jsx';
 import Privacy from './pages/Privacy.jsx';
 import NotFound from './pages/NotFound.jsx';
-
-import AdminLayout from './pages/admin/AdminLayout.jsx';
+import AdminLayout from './components/AdminLayout.jsx';
 import AdminUsers from './pages/admin/AdminUsers.jsx';
 import AdminImages from './pages/admin/AdminImages.jsx';
 import AdminBoards from './pages/admin/AdminBoards.jsx';
+import RoleRoute from './components/RoleRoute.jsx';
+import IndexRedirect from './components/IndexRedirect.jsx';
 
-function IndexRedirect() {
-  const { user, loading } = useAuth();
-  if (loading) return null;
-  return <Navigate to={user ? '/home' : '/explore'} replace />;
-}
-
->>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-<<<<<<< HEAD
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <Layout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<Navigate to="/home" replace />} />
-        <Route path="home" element={<Home />} />
-        <Route path="explore" element={<Explore />} />
-        <Route path="create" element={<Create />} />
-        <Route path="boards/:id" element={<BoardDetail />} />
-        <Route path="images/:id" element={<ImageDetail />} />
-        <Route path="profile" element={<UserProfile />} />
-        <Route path="profile/edit" element={<EditProfile />} />
-        <Route path="profile/:userId" element={<UserProfile />} />
-        <Route path="about" element={<AboutUs />} />
-=======
       <Route path="/" element={<Layout />}>
         <Route index element={<IndexRedirect />} />
         <Route path="explore" element={<Explore />} />
@@ -94,7 +58,6 @@ export default function App() {
           <Route path="images" element={<AdminImages />} />
           <Route path="boards" element={<AdminBoards />} />
         </Route>
->>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
       </Route>
 
       <Route path="*" element={<NotFound />} />

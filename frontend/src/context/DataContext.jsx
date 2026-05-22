@@ -7,7 +7,6 @@ const K_IMAGES = 'moodly_images';
 const K_BOARDS = 'moodly_boards';
 const K_BOARD_IMAGES = 'moodly_board_images';
 const K_LIKES = 'moodly_likes';
-const K_COMMENTS = 'moodly_comments';
 const K_SAVED = 'moodly_saved';
 
 const read = (k) => {
@@ -59,7 +58,6 @@ function seed() {
     ]);
   }
   if (read(K_LIKES).length === 0) write(K_LIKES, []);
-  if (read(K_COMMENTS).length === 0) write(K_COMMENTS, []);
   if (read(K_SAVED).length === 0) write(K_SAVED, []);
 }
 
@@ -69,7 +67,6 @@ export function DataProvider({ children }) {
   const [boards, setBoards] = useState([]);
   const [boardImages, setBoardImages] = useState([]);
   const [likes, setLikes] = useState([]);
-  const [comments, setComments] = useState([]);
   const [saved, setSaved] = useState([]);
 
   const refresh = useCallback(() => {
@@ -77,7 +74,6 @@ export function DataProvider({ children }) {
     setBoards(read(K_BOARDS));
     setBoardImages(read(K_BOARD_IMAGES));
     setLikes(read(K_LIKES));
-    setComments(read(K_COMMENTS));
     setSaved(read(K_SAVED));
   }, []);
 
@@ -122,7 +118,6 @@ export function DataProvider({ children }) {
     write(K_IMAGES, read(K_IMAGES).filter((x) => x.id !== Number(id)));
     write(K_BOARD_IMAGES, read(K_BOARD_IMAGES).filter((x) => x.image_id !== Number(id)));
     write(K_LIKES, read(K_LIKES).filter((x) => x.image_id !== Number(id)));
-    write(K_COMMENTS, read(K_COMMENTS).filter((x) => x.image_id !== Number(id)));
     write(K_SAVED, read(K_SAVED).filter((x) => x.image_id !== Number(id)));
     refresh();
   }, [refresh]);
@@ -219,28 +214,6 @@ export function DataProvider({ children }) {
     [saved, user]
   );
 
-  // COMMENTS
-  const addComment = useCallback((imageId, content) => {
-    if (!content.trim()) return;
-    const all = read(K_COMMENTS);
-    const c = {
-      id: nextId(all),
-      user_id: user.id,
-      image_id: Number(imageId),
-      content: content.trim(),
-      created_at: new Date().toISOString(),
-    };
-    all.push(c);
-    write(K_COMMENTS, all);
-    refresh();
-    return c;
-  }, [user, refresh]);
-
-  const deleteComment = useCallback((id) => {
-    write(K_COMMENTS, read(K_COMMENTS).filter((x) => x.id !== Number(id)));
-    refresh();
-  }, [refresh]);
-
   // Derived helpers
   const getBoardImages = useCallback((boardId) => {
     const ids = boardImages
@@ -255,13 +228,6 @@ export function DataProvider({ children }) {
       .map((x) => x.board_id);
     return boards.filter((b) => ids.includes(b.id));
   }, [boardImages, boards]);
-
-  const getImageComments = useCallback((imageId) =>
-    comments.filter((c) => c.image_id === Number(imageId)).sort((a, b) =>
-      new Date(b.created_at) - new Date(a.created_at)
-    ),
-    [comments]
-  );
 
   const getUserBoards = useCallback((userId) =>
     boards.filter((b) => b.user_id === Number(userId)),
@@ -281,14 +247,13 @@ export function DataProvider({ children }) {
   return (
     <DataContext.Provider
       value={{
-        images, boards, comments, likes,
+        images, boards, likes,
         createImage, updateImage, deleteImage,
         createBoard, updateBoard, deleteBoard,
         addImageToBoard, removeImageFromBoard,
         toggleLike, isLiked, likeCount,
         toggleSave, isSaved,
-        addComment, deleteComment,
-        getBoardImages, getImageBoards, getImageComments,
+        getBoardImages, getImageBoards,
         getUserBoards, getUserImages, getSavedImages,
         refresh,
       }}
