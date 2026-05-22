@@ -1,19 +1,25 @@
 <?php
 
-namespace Database\Seeders;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Role;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class RolSeeder extends Seeder
+class AuthController extends Controller
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function login(Request $request)
     {
-        Rol::firstOrCreate(['slug' => 'admin', 'name' => 'Administrador']);
-        Rol::firstOrCreate(['slug' => 'user', 'name' => 'Usuario']);
+        $credenciales = $request->only('email', 'password');
+
+        // Busca el usuario y lo autentica
+        if (Auth::attempt($credenciales)) {
+            $user = Auth::user();
+            /** @var \App\Models\User $user */
+            $token = $user->createToken('api-token')->plainTextToken;
+            return response()->json(['token' => $token]);
+        } else {
+            return response()->json(['message' => 'Credenciales incorrectas'], 401);
+        }
     }
 }

@@ -18,9 +18,15 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
-            BoardSeeder::class,
-            ImageSeeder::class,
-            LikeSeeder::class
         ]);
+
+        if (app()->environment('local')) {
+            // Sólo se ejecutan estos seeders en el entorno local
+            $this->call([
+                BoardSeeder::class,
+                ImageSeeder::class,
+                LikeSeeder::class
+            ]);
+        }
     }
 }

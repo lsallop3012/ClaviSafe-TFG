@@ -10,4 +10,21 @@ class UserService
     {
         return User::all();
     }
+
+    public function create(array $data): User
+    {
+        $user = User::create($data);
+        return $user;
+    }
+
+    public function update(User $user, array $data): User
+    {
+        $user->update($data);
+        return $user;
+    }
+
+    public function delete(User $user): void
+    {
+        $user->delete();
+    }
 }
