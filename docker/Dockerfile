@@ -6,9 +6,6 @@ RUN apt-get update && apt-get install -y unzip git libzip-dev && docker-php-ext-
 # Habilitar mod_rewrite de Apache
 RUN a2enmod rewrite
 
-# Apuntar Apache a backend/public (Laravel)
-COPY vhost.conf /etc/apache2/sites-available/000-default.conf
-
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
