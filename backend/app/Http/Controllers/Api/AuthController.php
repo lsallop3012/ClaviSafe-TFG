@@ -1,39 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    // Muestra la vista con el formulario de login
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
-    // Procesa el login del usuario
     public function login(Request $request)
     {
         $credenciales = $request->only('email', 'password');
 
         // Busca el usuario y lo autentica
         if (Auth::attempt($credenciales)) {
-            // Regenerar la sesión para evitar fijación de sesión
-            $request->session()->regenerate();
-            return redirect()->route('dashboard.index');
+            $user = Auth::user();
+            /** @var \App\Models\User $user */
+            $token = $user->createToken('api-token')->plainTextToken;
+            return response()->json(['token' => $token]);
         } else {
-            return back()->withErrors([
-                'email' => 'Credenciales incorrectas',
-            ]);
+            return response()->json(['message' => 'Credenciales incorrectas'], 401);
         }
-    }
-
-    // Procesa el logout del usuario
-    public function logout()
-    {
-        Auth::logout();
-        return redirect()->route('home.index');
     }
 }
