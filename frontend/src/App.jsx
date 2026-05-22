@@ -1,6 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import RoleRoute from './components/RoleRoute.jsx';
+import IndexRedirect from './components/IndexRedirect.jsx';
+
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Home from './pages/Home.jsx';
@@ -14,12 +17,11 @@ import AboutUs from './pages/AboutUs.jsx';
 import Contact from './pages/Contact.jsx';
 import Privacy from './pages/Privacy.jsx';
 import NotFound from './pages/NotFound.jsx';
-import AdminLayout from './components/AdminLayout.jsx';
+
+import AdminLayout from './pages/admin/AdminLayout.jsx';
 import AdminUsers from './pages/admin/AdminUsers.jsx';
 import AdminImages from './pages/admin/AdminImages.jsx';
 import AdminBoards from './pages/admin/AdminBoards.jsx';
-import RoleRoute from './components/RoleRoute.jsx';
-import IndexRedirect from './components/IndexRedirect.jsx';
 
 export default function App() {
   return (

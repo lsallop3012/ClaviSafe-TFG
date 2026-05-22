@@ -1,5 +1,4 @@
 :root {
-<<<<<<< HEAD
   --bg: #F6F2F5;
   --surface: #FFFFFF;
   --bg-hover: #EFE9ED;
@@ -8,7 +7,6 @@
   --border: #E4DDE2;
   --accent: #B5305B;
   --accent-soft: #F5D9E2;
-=======
   --bg: #e1d6de;
   --surface: #f6f2f5;
   --bg-hover: #EFE9ED;
@@ -17,8 +15,7 @@
   --border: #E4DDE2;
   --accent: #5C294E;
   --accent-soft: #7a3768;
->>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
-  --danger: #C2185B;
+  --danger: #ecdde3;
   --success: #2E7D32;
 }
 

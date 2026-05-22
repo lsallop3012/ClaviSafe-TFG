@@ -4,11 +4,8 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-<<<<<<< HEAD
   background: linear-gradient(135deg, var(--accent-soft) 0%, var(--bg) 60%);
-=======
   background-image: url("../assets/carousel/carrusel2.avif");  
->>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 }
 
 .card {
@@ -128,8 +125,6 @@
   border-radius: 4px;
   font-family: ui-monospace, SFMono-Regular, monospace;
 }
-<<<<<<< HEAD
-=======
 
 .googleWrap {
   display: flex;
@@ -192,4 +187,3 @@
 }
 
 .suggestBtn:hover { filter: brightness(.95); }
->>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c

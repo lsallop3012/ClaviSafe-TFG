@@ -1,22 +1,7 @@
-<<<<<<< HEAD
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { useData } from '../context/DataContext.jsx';
-import SaveToBoardModal from './SaveToBoardModal.jsx';
-import styles from './ImageCard.module.css';
-
-export default function ImageCard({ image }) {
-  const { isLiked, likeCount, toggleLike, isSaved } = useData();
-  const [showSave, setShowSave] = useState(false);
-
-  const liked = isLiked(image.id);
-  const saved = isSaved(image.id);
-  const count = likeCount(image.id);
-=======
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { toggleLike } from '../api/imagesApi.js';
-import { useAuth } from '../Context/AuthContext.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 import SaveToBoardModal from './SaveToBoardModal.jsx';
 import styles from './ImageCard.module.css';
 
@@ -49,7 +34,6 @@ export default function ImageCard({ image, onChange }) {
     setSaved(newState);
     onChange?.();
   };
->>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 
   return (
     <>
@@ -61,11 +45,7 @@ export default function ImageCard({ image, onChange }) {
         <div className={styles.overlay}>
           <button
             type="button"
-<<<<<<< HEAD
-            onClick={() => setShowSave(true)}
-=======
             onClick={() => user ? setShowSave(true) : navigate('/login')}
->>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
             className={`${styles.saveBtn} ${saved ? styles.saveBtnActive : ''}`}
             title={saved ? 'Saved' : 'Save'}
           >
@@ -75,11 +55,7 @@ export default function ImageCard({ image, onChange }) {
           <div className={styles.actions}>
             <button
               type="button"
-<<<<<<< HEAD
-              onClick={(e) => { e.preventDefault(); toggleLike(image.id); }}
-=======
               onClick={onLike}
->>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
               className={`${styles.likeBtn} ${liked ? styles.liked : ''}`}
               aria-label="like"
             >
@@ -94,15 +70,11 @@ export default function ImageCard({ image, onChange }) {
       </div>
 
       {showSave && (
-<<<<<<< HEAD
-        <SaveToBoardModal image={image} onClose={() => setShowSave(false)} />
-=======
         <SaveToBoardModal
           image={image}
           onClose={() => setShowSave(false)}
           onSavedChange={onSaved}
         />
->>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
       )}
     </>
   );

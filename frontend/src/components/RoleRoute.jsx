@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../Context/AuthContext.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 
 /**
  * Wrap routes that should be visible only to certain roles.
@@ -11,7 +11,7 @@ export default function RoleRoute({ children, roles = [] }) {
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
         Loading...
       </div>
     );

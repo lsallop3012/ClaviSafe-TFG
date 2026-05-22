@@ -12,6 +12,9 @@ export const listUsers = (params) =>
 export const getUser = (id) =>
   request(userEndpoint(id));
 
+export const createUser = (payload) =>
+  request(USERS_ENDPOINT, { method: 'POST', body: payload });
+
 export const updateUser = (id, payload) =>
   request(userEndpoint(id), { method: 'PUT', body: payload });
 

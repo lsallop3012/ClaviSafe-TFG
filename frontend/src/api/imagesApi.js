@@ -1,8 +1,5 @@
 import { request } from './client.js';
-import {
-  IMAGES_ENDPOINT, imageEndpoint,
-  imageLikeEndpoint, imageSaveEndpoint,
-} from './endpoints.js';
+import { IMAGES_ENDPOINT, imageEndpoint, imageLikeEndpoint } from './endpoints.js';
 
 const qs = (params) => {
   const cleaned = Object.entries(params || {}).filter(([, v]) => v !== undefined && v !== '');
@@ -26,6 +23,3 @@ export const deleteImage = (id) =>
 
 export const toggleLike = (id) =>
   request(imageLikeEndpoint(id), { method: 'POST' });
-
-export const toggleSave = (id) =>
-  request(imageSaveEndpoint(id), { method: 'POST' });

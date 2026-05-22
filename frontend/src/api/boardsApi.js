@@ -1,5 +1,8 @@
 import { request } from './client.js';
-import { BOARDS_ENDPOINT, boardEndpoint, boardImagesEndpoint } from './endpoints.js';
+import {
+  BOARDS_ENDPOINT, boardEndpoint,
+  boardImagesEndpoint, boardSaveEndpoint,
+} from './endpoints.js';
 
 const qs = (params) => {
   const cleaned = Object.entries(params || {}).filter(([, v]) => v !== undefined && v !== '');
@@ -24,8 +27,6 @@ export const deleteBoard = (id) =>
 export const listBoardImages = (id, params) =>
   request(`${boardImagesEndpoint(id)}${qs(params)}`);
 
-export const addImageToBoard = (boardId, imageId) =>
-  request(boardImagesEndpoint(boardId), { method: 'POST', body: { image_id: imageId } });
-
-export const removeImageFromBoard = (boardId, imageId) =>
-  request(boardImagesEndpoint(boardId), { method: 'DELETE', body: { image_id: imageId } });
+// Save an image into one of the user's boards (the canonical save endpoint).
+export const saveImageToBoard = (boardId, imageId) =>
+  request(boardSaveEndpoint(boardId), { method: 'POST', body: { image_id: imageId } });

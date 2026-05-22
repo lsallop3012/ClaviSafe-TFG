@@ -76,25 +76,26 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'        => ['required', 'string', 'max:255'],
-            'url'         => ['required', 'string'],
-            'description' => ['nullable', 'string'],
-            'board_id'    => ['nullable', 'integer', 'exists:boards,id'],
-        ]);
+        'name'        => ['required', 'string', 'max:255'],
+        'url'         => ['required', 'string'],
+        'description' => ['nullable', 'string'],
+        'user_id'     => ['nullable', 'integer', 'exists:users,id'],
+        'board_id'    => ['nullable', 'integer', 'exists:boards,id'],
+    ]);
 
-        $image = Image::create([
-            'name'        => $data['name'],
-            'url'         => $data['url'],
-            'description' => $data['description'] ?? null,
-            'user_id'     => $request->user()->id,
-        ]);
+    $image = Image::create([
+        'name'        => $data['name'],
+        'url'         => $data['url'],
+        'description' => $data['description'] ?? null,
+        'user_id'     => $data['user_id'] ?? $request->user()->id,
+    ]);
 
-        if (!empty($data['board_id'])) {
-            $image->boards()->attach($data['board_id']);
-        }
-
-        return response()->json($this->annotate($image, $request->user()->id), 201);
+    if (!empty($data['board_id'])) {
+        $image->boards()->attach($data['board_id']);
     }
+
+    return response()->json($this->annotate($image, $request->user()->id), 201);
+}
 
     public function show(Request $request, Image $image)
     {
@@ -114,25 +115,17 @@ class ImageController extends Controller
 
     public function update(Request $request, Image $image)
     {
-        if ($image->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
-            return response()->json(['message' => 'Forbidden.'], 403);
-        }
-
         $data = $request->validate([
-            'name'        => ['sometimes', 'string', 'max:255'],
-            'description' => ['sometimes', 'nullable', 'string'],
+        'name'        => ['sometimes', 'string', 'max:255'],
+        'description' => ['sometimes', 'nullable', 'string'],
         ]);
 
         $image->update($data);
-
         return response()->json($this->annotate($image->fresh(), $request->user()->id));
     }
 
     public function destroy(Request $request, Image $image)
     {
-        if ($image->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
-            return response()->json(['message' => 'Forbidden.'], 403);
-        }
         $image->delete();
         return response()->json(['ok' => true]);
     }
@@ -141,6 +134,7 @@ class ImageController extends Controller
     {
         $userId = $request->user()->id;
         $like = Like::where('user_id', $userId)->where('image_id', $image->id)->first();
+
         if ($like) {
             $like->delete();
             $liked = false;
@@ -148,8 +142,11 @@ class ImageController extends Controller
             Like::create(['user_id' => $userId, 'image_id' => $image->id]);
             $liked = true;
         }
-        $count = Like::where('image_id', $image->id)->count();
-        return response()->json(['liked' => $liked, 'count' => $count]);
+
+        return response()->json([
+            'liked' => $liked,
+            'count' => Like::where('image_id', $image->id)->count(),
+        ]);
     }
 
     public function toggleSave(Request $request, Image $image)

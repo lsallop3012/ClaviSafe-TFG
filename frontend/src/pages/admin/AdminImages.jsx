@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as imagesApi from '../../api/imagesApi.js';
 import useFetch from '../../hooks/useFetch.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { useToast } from '../../Context/ToastContext.jsx';
+import { useToast } from '../../context/ToastContext.jsx';
 import ConfirmDialog from '../../components/ConfirmDialog.jsx';
 import Spinner from '../../components/Spinner.jsx';
 import styles from './Admin.module.css';
