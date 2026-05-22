@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -116,3 +117,13 @@ export default function UserProfile() {
     </div>
   );
 }
+=======
+import React from 'react'
+import styles from './styles/UserProfile.module.css'
+
+export default function UserProfile() {
+  return (
+    <div>UserProfile</div>
+  )
+}
+>>>>>>> 346013204ac35c6a35bf1f1bb8275a080992db44

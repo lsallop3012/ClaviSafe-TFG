@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -103,4 +104,13 @@ export default function Home() {
       {tab === 'saved' && <MasonryGrid images={savedImages} empty="No saved pins yet." />}
     </div>
   );
+=======
+import React from 'react'
+import styles from './styles/Home.module.css'
+
+export default function Home() {
+  return (
+    <div>Home</div>
+  )
+>>>>>>> 346013204ac35c6a35bf1f1bb8275a080992db44
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -121,4 +122,13 @@ export default function Create() {
       </form>
     </div>
   );
+=======
+import React from 'react'
+import styles from './styles/Create.module.css'
+
+export default function Create() {
+  return (
+    <div>Create</div>
+  )
+>>>>>>> 346013204ac35c6a35bf1f1bb8275a080992db44
 }
