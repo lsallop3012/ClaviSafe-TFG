@@ -9,9 +9,6 @@ use Illuminate\Http\Request;
 
 class BoardController extends Controller
 {
-    /**
-     * Add image_count and cover (first image URL) to a board collection.
-     */
     private function enrich($boards)
     {
         $isCollection = is_iterable($boards) && !($boards instanceof Board);
@@ -27,7 +24,6 @@ class BoardController extends Controller
         return $isCollection ? $list : $list->first();
     }
 
-    /** GET /api/boards?user_id=&q=&page=&perPage= */
     public function index(Request $request)
     {
         $perPage = max(1, min(100, (int) $request->query('perPage', 20)));
@@ -53,7 +49,6 @@ class BoardController extends Controller
         ]);
     }
 
-    /** POST /api/boards */
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -70,7 +65,6 @@ class BoardController extends Controller
         return response()->json($this->enrich($board), 201);
     }
 
-    /** GET /api/boards/{board} */
     public function show(Board $board)
     {
         return response()->json($this->enrich($board));
@@ -92,7 +86,6 @@ class BoardController extends Controller
         return response()->json($this->enrich($board->fresh()));
     }
 
-    /** DELETE /api/boards/{board} */
     public function destroy(Request $request, Board $board)
     {
         if ($board->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
@@ -126,7 +119,6 @@ class BoardController extends Controller
         ]);
     }
 
-    /** POST /api/boards/{board}/images { image_id } */
     public function addImage(Request $request, Board $board)
     {
         if ($board->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
@@ -137,7 +129,6 @@ class BoardController extends Controller
         return response()->json(['ok' => true]);
     }
 
-    /** DELETE /api/boards/{board}/images { image_id } */
     public function removeImage(Request $request, Board $board)
     {
         if ($board->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
