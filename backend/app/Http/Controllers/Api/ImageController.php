@@ -10,9 +10,6 @@ use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
-    /**
-     * Add liked_by_me / like_count / saved_by_me to an image (or collection).
-     */
     private function annotate($images, ?int $meId)
     {
         $isCollection = is_iterable($images) && !($images instanceof Image);
@@ -41,9 +38,6 @@ class ImageController extends Controller
         return $isCollection ? $list : $list->first();
     }
 
-    /**
-     * GET /api/images?q=&page=&perPage=&user_id=&saved_by=&sort=recent
-     */
     public function index(Request $request)
     {
         $q       = $request->query('q');
@@ -79,7 +73,6 @@ class ImageController extends Controller
         ]);
     }
 
-    /** POST /api/images */
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -103,7 +96,6 @@ class ImageController extends Controller
         return response()->json($this->annotate($image, $request->user()->id), 201);
     }
 
-    /** GET /api/images/{image} */
     public function show(Request $request, Image $image)
     {
         $annotated = $this->annotate($image, optional($request->user())->id);
@@ -120,7 +112,6 @@ class ImageController extends Controller
         return response()->json($annotated);
     }
 
-    /** PUT /api/images/{image} */
     public function update(Request $request, Image $image)
     {
         if ($image->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
@@ -137,7 +128,6 @@ class ImageController extends Controller
         return response()->json($this->annotate($image->fresh(), $request->user()->id));
     }
 
-    /** DELETE /api/images/{image} */
     public function destroy(Request $request, Image $image)
     {
         if ($image->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
@@ -147,7 +137,6 @@ class ImageController extends Controller
         return response()->json(['ok' => true]);
     }
 
-    /** POST /api/images/{image}/like — toggle */
     public function toggleLike(Request $request, Image $image)
     {
         $userId = $request->user()->id;
@@ -163,7 +152,6 @@ class ImageController extends Controller
         return response()->json(['liked' => $liked, 'count' => $count]);
     }
 
-    /** POST /api/images/{image}/save — toggle */
     public function toggleSave(Request $request, Image $image)
     {
         $userId = $request->user()->id;
