@@ -8,7 +8,10 @@
   padding: 14px 28px;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
+<<<<<<< HEAD
   backdrop-filter: blur(12px);
+=======
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 }
 
 .brand {
@@ -22,6 +25,7 @@
   letter-spacing: -0.5px;
 }
 
+<<<<<<< HEAD
 .brandDot {
   width: 12px;
   height: 12px;
@@ -30,6 +34,8 @@
   box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
+=======
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 .nav {
   display: flex;
   gap: 6px;
@@ -106,6 +112,39 @@
   background: var(--bg-hover);
 }
 
+<<<<<<< HEAD
+=======
+.authLink {
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  transition: background .15s;
+}
+
+.authLink:hover {
+  background: var(--bg-hover);
+}
+
+.authPrimary {
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  background: var(--accent);
+  color: white;
+  transition: opacity .15s;
+}
+
+.authPrimary:hover {
+  opacity: .9;
+}
+
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 @media (max-width: 720px) {
   .header { padding: 12px 16px; gap: 12px; flex-wrap: wrap; }
   .nav { order: 3; width: 100%; overflow-x: auto; }

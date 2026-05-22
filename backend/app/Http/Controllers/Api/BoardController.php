@@ -4,59 +4,147 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Board;
+use App\Models\Image;
 use Illuminate\Http\Request;
-use App\Services\BoardService;
 
 class BoardController extends Controller
 {
-
-    public function index(BoardService $boardService)
+    /**
+     * Add image_count and cover (first image URL) to a board collection.
+     */
+    private function enrich($boards)
     {
-        $boards = $boardService->list();
-        return response()->json($boards);
+        $isCollection = is_iterable($boards) && !($boards instanceof Board);
+        $list = $isCollection ? collect($boards) : collect([$boards]);
+
+        $list->each(function ($b) {
+            $b->load(['images' => function ($q) { $q->oldest()->limit(1); }]);
+            $first = $b->images->first();
+            $b->image_count = $b->images()->count();
+            $b->cover = $first?->url;
+        });
+
+        return $isCollection ? $list : $list->first();
     }
 
-    public function store(Request $request, BoardService $boardService)
+    /** GET /api/boards?user_id=&q=&page=&perPage= */
+    public function index(Request $request)
     {
+        $perPage = max(1, min(100, (int) $request->query('perPage', 20)));
+        $query = Board::query();
 
-        $name = $request->input("name");
-        $description = $request->input("description");
-        $user_id = $request->input("user_id");
-        $image_ids = $request->input("image_ids", []);
+        if ($request->filled('user_id')) $query->where('user_id', (int) $request->query('user_id'));
+        if ($request->filled('q')) {
+            $q = $request->query('q');
+            $query->where('name', 'like', "%{$q}%");
+        }
 
-        $boardService->create(['name' => $name, 'description' => $description, 'user_id' => $user_id]);
+        $paginator = $query->paginate($perPage);
+        $items     = $this->enrich($paginator->items());
 
-        return response()->json(['message' => 'Board created successfully'], 201);
+        return response()->json([
+            'data' => $items->values(),
+            'meta' => [
+                'page'       => $paginator->currentPage(),
+                'perPage'    => $paginator->perPage(),
+                'total'      => $paginator->total(),
+                'totalPages' => $paginator->lastPage(),
+            ],
+        ]);
     }
 
-    public function show(Board $board)
-    {
-        return $board->load(['user', 'images']);
-    }
-
-    public function update(Request $request, Board $board)
+    /** POST /api/boards */
+    public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => ['sometimes', 'string', 'max:255'],
+            'name'        => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+        ]);
+
+        $board = Board::create([
+            'name'        => $data['name'],
+            'description' => $data['description'] ?? null,
+            'user_id'     => $request->user()->id,
+        ]);
+
+        return response()->json($this->enrich($board), 201);
+    }
+
+    /** GET /api/boards/{board} */
+    public function show(Board $board)
+    {
+        return response()->json($this->enrich($board));
+    }
+
+    /** PUT /api/boards/{board} */
+    public function update(Request $request, Board $board)
+    {
+        if ($board->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
+            return response()->json(['message' => 'Forbidden.'], 403);
+        }
+
+        $data = $request->validate([
+            'name'        => ['sometimes', 'string', 'max:255'],
             'description' => ['sometimes', 'nullable', 'string'],
-            'user_id' => ['sometimes', 'exists:users,id'],
-            'image_id' => ['sometimes', 'array'],
-            'image_id.*' => ['integer', 'exists:images,id'],
         ]);
 
         $board->update($data);
-
-        if (array_key_exists('image_id', $data)) {
-            $board->images()->sync($data['image_id']);
-        }
-
-        return $board->load(['user', 'images']);
+        return response()->json($this->enrich($board->fresh()));
     }
 
-    public function destroy(Board $board)
+    /** DELETE /api/boards/{board} */
+    public function destroy(Request $request, Board $board)
     {
+        if ($board->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
+            return response()->json(['message' => 'Forbidden.'], 403);
+        }
         $board->delete();
+        return response()->json(['ok' => true]);
+    }
 
-        return response()->noContent();
+    /** GET /api/boards/{board}/images */
+    public function listImages(Request $request, Board $board)
+    {
+        $perPage = max(1, min(100, (int) $request->query('perPage', 24)));
+        $paginator = $board->images()->paginate($perPage);
+
+        // Use the same annotator as ImageController.
+        $controller = app(ImageController::class);
+        $ref = new \ReflectionClass($controller);
+        $method = $ref->getMethod('annotate');
+        $method->setAccessible(true);
+        $items = $method->invoke($controller, $paginator->items(), optional($request->user())->id);
+
+        return response()->json([
+            'data' => collect($items)->values(),
+            'meta' => [
+                'page'       => $paginator->currentPage(),
+                'perPage'    => $paginator->perPage(),
+                'total'      => $paginator->total(),
+                'totalPages' => $paginator->lastPage(),
+            ],
+        ]);
+    }
+
+    /** POST /api/boards/{board}/images { image_id } */
+    public function addImage(Request $request, Board $board)
+    {
+        if ($board->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
+            return response()->json(['message' => 'Forbidden.'], 403);
+        }
+        $data = $request->validate(['image_id' => ['required', 'integer', 'exists:images,id']]);
+        $board->images()->syncWithoutDetaching([$data['image_id']]);
+        return response()->json(['ok' => true]);
+    }
+
+    /** DELETE /api/boards/{board}/images { image_id } */
+    public function removeImage(Request $request, Board $board)
+    {
+        if ($board->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
+            return response()->json(['message' => 'Forbidden.'], 403);
+        }
+        $data = $request->validate(['image_id' => ['required', 'integer']]);
+        $board->images()->detach($data['image_id']);
+        return response()->json(['ok' => true]);
     }
 }

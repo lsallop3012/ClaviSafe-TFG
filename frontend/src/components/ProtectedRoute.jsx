@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -20,53 +21,28 @@ export default function ProtectedRoute({ children }) {
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { TOKEN_VERIFY_ENDPOINT } from "../../endpoints";
+=======
+import { Navigate, Outlet } from 'react-router-dom';
+import { useAuth } from '../Context/AuthContext.jsx';
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 
-function ProtectedRoute({ children }) {
-  const [loading, setLoading] = useState(true);
-  const [auth, setAuth] = useState(false);
+export default function ProtectedRoute({ children }) {
+  const { user, loading } = useAuth();
 
-  const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      if (!token) {
-        setAuth(false);
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const res = await fetch(TOKEN_VERIFY_ENDPOINT, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/json",
-          },
-        });
-
-        if (res.ok) {
-          setAuth(true);
-        } else {
-          setAuth(false);
-          localStorage.removeItem("token"); 
-        }
-      } catch (err) {
-        setAuth(false);
-      }
-
-      setLoading(false);
-    };
-
-    checkAuth();
-  }, [token]);
-
-  if (loading) return <h1>Loading...</h1>;
-
-  if (!auth) {
-    return <Navigate to="/" replace />;
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+        Loading...
+      </div>
+    );
   }
 
-  return children;
+  if (!user) return <Navigate to="/login" replace />;
+  return children ?? <Outlet />;
 }
+<<<<<<< HEAD
 
 export default ProtectedRoute;
 >>>>>>> 346013204ac35c6a35bf1f1bb8275a080992db44
+=======
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c

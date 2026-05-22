@@ -3,7 +3,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+<<<<<<< HEAD
   margin-bottom: 24px;
+=======
+  margin-bottom: 16px;
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
   flex-wrap: wrap;
 }
 
@@ -13,6 +17,17 @@
   letter-spacing: -0.5px;
 }
 
+<<<<<<< HEAD
+=======
+.controls {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 .search {
   flex: 1;
   max-width: 360px;
@@ -26,3 +41,82 @@
 }
 
 .search:focus { border-color: var(--accent); }
+<<<<<<< HEAD
+=======
+
+.searchForm { display: flex; flex: 1; max-width: 360px; }
+.searchForm .search { flex: 1; }
+
+.empty {
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-muted);
+  background: var(--surface);
+  border-radius: 16px;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 16px;
+}
+
+.pageBtn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.pageBtn:hover:not(:disabled) { background: var(--bg-hover); }
+.pageBtn:disabled { opacity: .4; cursor: default; }
+
+.pageInfo {
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.select {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+}
+
+.meta {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+}
+
+.loadMoreWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.loadMore {
+  padding: 12px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.loadMore:hover { background: var(--bg-hover); }
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c

@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+=======
+import { useState, useEffect, useMemo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../Context/AuthContext.jsx';
+import { validateEmail } from '../utils/validateEmail.js';
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 import styles from './AuthPages.module.css';
 
 export default function Register() {
@@ -14,8 +21,24 @@ export default function Register() {
     if (user) navigate('/home');
   }, [user, navigate]);
 
+<<<<<<< HEAD
   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
+=======
+  const emailCheck = useMemo(
+    () => (form.email ? validateEmail(form.email) : { valid: false }),
+    [form.email]
+  );
+
+  const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const applySuggestion = () => {
+    if (emailCheck.suggestion) {
+      setForm({ ...form, email: emailCheck.suggestion });
+    }
+  };
+
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
   const onSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -32,6 +55,25 @@ export default function Register() {
     }
   };
 
+<<<<<<< HEAD
+=======
+  const emailHelp =
+    form.email && !emailCheck.valid
+      ? emailCheck.suggestion
+        ? (
+            <span className={styles.helpError}>
+              {emailCheck.error}{' '}
+              <button type="button" className={styles.suggestBtn} onClick={applySuggestion}>
+                Use it
+              </button>
+            </span>
+          )
+        : <span className={styles.helpError}>{emailCheck.error}</span>
+      : form.email && emailCheck.valid
+        ? <span className={styles.helpOk}>✓ Looks good</span>
+        : null;
+
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
   return (
     <div className={styles.wrapper}>
       <div className={styles.card}>
@@ -41,6 +83,11 @@ export default function Register() {
         </div>
         <p className={styles.subtitle}>Join the community. Start collecting inspiration.</p>
 
+<<<<<<< HEAD
+=======
+        <div className={styles.divider}><span>or</span></div>
+
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
         <form onSubmit={onSubmit} className={styles.form}>
           <label className={styles.label}>
             Username
@@ -48,7 +95,20 @@ export default function Register() {
           </label>
           <label className={styles.label}>
             Email
+<<<<<<< HEAD
             <input name="email" type="email" value={form.email} onChange={onChange} className={styles.input} required />
+=======
+            <input
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={onChange}
+              className={`${styles.input} ${form.email && !emailCheck.valid ? styles.inputError : ''}`}
+              required
+              autoComplete="email"
+            />
+            {emailHelp}
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
           </label>
           <label className={styles.label}>
             Password
@@ -61,7 +121,11 @@ export default function Register() {
 
           {error && <p className={styles.error}>{error}</p>}
 
+<<<<<<< HEAD
           <button type="submit" disabled={loading} className={styles.submit}>
+=======
+          <button type="submit" disabled={loading || !emailCheck.valid} className={styles.submit}>
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
             {loading ? 'Creating...' : 'Create account'}
           </button>
         </form>

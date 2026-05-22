@@ -57,6 +57,18 @@
   margin: 0;
 }
 
+<<<<<<< HEAD
+=======
+.error {
+  margin: 8px 16px 0;
+  padding: 8px 12px;
+  background: var(--accent-soft);
+  color: var(--danger);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 .boardRow {
   display: flex;
   align-items: center;

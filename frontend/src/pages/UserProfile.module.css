@@ -43,6 +43,47 @@
 .email {
   color: var(--text-muted);
   font-size: 14px;
+<<<<<<< HEAD
+=======
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.verified {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: var(--success);
+  color: white;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.googleBadge {
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.adminBadge {
+  background: #2A1A24;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 }
 
 .bio {

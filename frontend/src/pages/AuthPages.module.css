@@ -4,7 +4,11 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
+<<<<<<< HEAD
   background: linear-gradient(135deg, var(--accent-soft) 0%, var(--bg) 60%);
+=======
+  background-image: url("../assets/carousel/carrusel2.avif");  
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 }
 
 .card {
@@ -124,3 +128,68 @@
   border-radius: 4px;
   font-family: ui-monospace, SFMono-Regular, monospace;
 }
+<<<<<<< HEAD
+=======
+
+.googleWrap {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 16px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+  margin: 8px 0 16px;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.inputError {
+  border-color: var(--danger) !important;
+}
+
+.helpError {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--danger);
+  margin-top: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.helpOk {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--success);
+  margin-top: 2px;
+}
+
+.suggestBtn {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: none;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.suggestBtn:hover { filter: brightness(.95); }
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c

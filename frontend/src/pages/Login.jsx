@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -31,45 +32,36 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import styles from "./styles/Login.module.css";
 import { LOGIN_ENDPOINT } from '../../endpoints.js';
+=======
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../Context/AuthContext.jsx';
+import Header from '../components/Header.jsx';
+import Footer from '../components/Footer.jsx';
+import styles from './AuthPages.module.css';
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 
-function Login() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+export default function Login() {
+  const { user, login} = useAuth();
   const navigate = useNavigate();
-
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/contactos");
-    }
-  }, [navigate]);
+    if (user) navigate('/home');
+  }, [user, navigate]);
 
-  const onSubmit = async (data) => {
-    setLoading(true);
+  const onSubmit = async (e) => {
+    e.preventDefault();
     setError(null);
-
-
-    const { name, password } = data;
-
+    setLoading(true);
     try {
-      const loginResult = await fetch(`${LOGIN_ENDPOINT}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, password }),
-      });
-
-      if (!loginResult.ok) throw new Error("Username or password incorrect");
-
-      const responseData = await loginResult.json();
-      console.log("Login success:", responseData);
-
-      localStorage.setItem("token", responseData.token);
-      navigate("/home");
-
-      window.location.reload();
+      await login({ name, password });
+      navigate('/home');
     } catch (err) {
+<<<<<<< HEAD
 
       if (err.message === "Failed to fetch") {
         setError("Network error: connection failed. Please check your internet connection and try again.");
@@ -78,12 +70,16 @@ function Login() {
       }
 
 >>>>>>> 346013204ac35c6a35bf1f1bb8275a080992db44
+=======
+      setError(err.message);
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
     } finally {
       setLoading(false);
     }
   };
 
   return (
+<<<<<<< HEAD
 <<<<<<< HEAD
     <div className={styles.wrapper}>
       <div className={styles.card}>
@@ -138,44 +134,60 @@ function Login() {
 =======
     <main className={styles.main}>
       <h1 className={styles.header}>Log In</h1>
+=======
+    <div className={styles.shell}>
+      <Header />  
+      <div className={styles.wrapper}>
+        <div className={styles.main}>
+        <div className={styles.card}>
+          <div className={styles.brand}>
+            <h1>Moodly</h1>
+          </div>
+          <form onSubmit={onSubmit} className={styles.form}>
+            <label className={styles.label}>
+              Username or email
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className={styles.input}
+                required
+                autoFocus
+              />
+            </label>
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c
 
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="Username"
+            <label className={styles.label}>
+              Password
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={styles.input}
+                required
+              />
+            </label>
 
-          {...register("name", { required: true })}
-        />
-        {errors.name && <p className={styles.error}>Username is required</p>}
-        <input
-          className={styles.input}
-          type="password"
-          placeholder="Password"
-          {...register("password", { required: true })}
+            {error && <p className={styles.error}>{error}</p>}
 
-        />
-        {errors.password && <p className={styles.error}>Password is required</p>}
-        {error && <p className={styles.error}>{error}</p>}
+            <button type="submit" disabled={loading} className={styles.submit}>
+              {loading ? 'Logging in...' : 'Log in'}
+            </button>
+          </form>
 
-        <button className={styles.boton} type="submit" disabled={loading}>
-          {loading ? "Loading..." : "Log In"}
-        </button>
-      </form>
-
-      <form>
-        <button
-          type="button"
-          className={styles.boton}
-          disabled={loading}
-          onClick={() => navigate("/forgot-password")}
-        >
-          ¿Forgot your password?
-        </button>
-      </form>
-    </main>
+          <p className={styles.bottom}>
+            New here? <Link to="/register" className={styles.link}>Create an account</Link>
+          </p>
+        </div>
+      </div>
+      </div>
+      <Footer />  
+    </div>
   );
 }
+<<<<<<< HEAD
 
 export default Login;
 >>>>>>> 346013204ac35c6a35bf1f1bb8275a080992db44
+=======
+>>>>>>> ed91d6fb4c4c8f0d8dd0c47f93450acd7c7d014c

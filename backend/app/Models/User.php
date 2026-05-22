@@ -23,8 +23,15 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role_id'
+        'role_id',
+        'provider',
+        'google_sub',
+        'avatar',
+        'bio',
+        'email_verified_at',
     ];
+
+    protected $appends = ['role'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -54,6 +61,17 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function getRoleAttribute(): ?string
+    {
+        if (array_key_exists('role', $this->relations)) {
+            $slug = $this->relations['role']?->slug;
+        } else {
+            $slug = $this->role()->first()?->slug;
+        }
+        if ($slug instanceof \App\Enums\RoleSlug) return $slug->value;
+        return $slug;
+    }
+
     public function boards()
     {
         return $this->hasMany(Board::class);
@@ -79,14 +97,13 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
-    public function isAdmin()
+    public function isAdmin(): bool
     {
-        $administratorRole = Role::where('slug', RoleSlug::ADMIN)->first();
-        return $this->role->id === $administratorRole->id;
+        return $this->getRoleAttribute() === RoleSlug::ADMIN->value;
     }
 
-    public function isUser()
+    public function isUser(): bool
     {
-        return $this->role->slug === 'user';
+        return $this->getRoleAttribute() === RoleSlug::USER->value;
     }
 }

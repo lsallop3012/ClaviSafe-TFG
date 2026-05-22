@@ -12,13 +12,19 @@ class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     */ 
+     */
     public function run(): void
     {
         $administratorRole = Role::where('slug', RoleSlug::ADMIN)->first();
         $userRole = Role::where('slug', RoleSlug::USER)->first();
-        User::firstOrCreate(['name' => 'admin', 'email' => 'admin@example.com', 'password' => bcrypt('password'), 'role_id' => $administratorRole->id]);
-        User::firstOrCreate(['name' => 'Lucia', 'email' => 'lucia@example.com', 'password' => bcrypt('password'), 'role_id' => $userRole->id]);
+        User::firstOrCreate(
+            ['email' => 'admin@example.com'],
+            ['name' => 'admin', 'password' => bcrypt('password'), 'role_id' => $administratorRole->id]
+        );
+        User::firstOrCreate(
+            ['email' => 'lucia@example.com'],
+            ['name' => 'Lucia', 'password' => bcrypt('password'), 'role_id' => $userRole->id]
+        );
         User::factory()->count(10)->create();
     }
 }
