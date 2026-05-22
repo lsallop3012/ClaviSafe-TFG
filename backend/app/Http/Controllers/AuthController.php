@@ -7,26 +7,30 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    // Muestra la vista con el formulario de login
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
+    // Procesa el login del usuario
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credenciales = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-
+        // Busca el usuario y lo autentica
+        if (Auth::attempt($credenciales)) {
+            // Regenerar la sesión para evitar fijación de sesión
             $request->session()->regenerate();
             return redirect()->route('dashboard.index');
         } else {
             return back()->withErrors([
-                'email' => 'Incorrect email or password.',
+                'email' => 'Credenciales incorrectas',
             ]);
         }
     }
 
+    // Procesa el logout del usuario
     public function logout()
     {
         Auth::logout();
