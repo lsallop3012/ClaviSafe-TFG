@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Board;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Board;
+use \App\Models\User;
 
 /**
  * @extends Factory<Board>
@@ -19,6 +20,9 @@ class BoardFactory extends Factory
     {
         return [
             //
+            'name' => fake()->name(),
+            'description' => fake()->paragraph(),
+            'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
 }

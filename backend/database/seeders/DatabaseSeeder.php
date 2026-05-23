@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -21,7 +20,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         if (app()->environment('local')) {
-            // Sólo se ejecutan estos seeders en el entorno local
             $this->call([
                 BoardSeeder::class,
                 ImageSeeder::class,

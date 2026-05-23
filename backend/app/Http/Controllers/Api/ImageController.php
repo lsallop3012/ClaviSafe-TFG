@@ -73,29 +73,25 @@ class ImageController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+   public function store(Request $request)
     {
-        $data = $request->validate([
-        'name'        => ['required', 'string', 'max:255'],
-        'url'         => ['required', 'string'],
-        'description' => ['nullable', 'string'],
-        'user_id'     => ['nullable', 'integer', 'exists:users,id'],
-        'board_id'    => ['nullable', 'integer', 'exists:boards,id'],
-    ]);
+        $request->validate([
+            'name' => 'required|string',
+            'image' => 'required|image|max:5120',
+            'description' => 'nullable|string'
+        ]);
 
-    $image = Image::create([
-        'name'        => $data['name'],
-        'url'         => $data['url'],
-        'description' => $data['description'] ?? null,
-        'user_id'     => $data['user_id'] ?? $request->user()->id,
-    ]);
+        $path = $request->file('image')->store('images', 'public');
 
-    if (!empty($data['board_id'])) {
-        $image->boards()->attach($data['board_id']);
+        $image = Image::create([
+            'name' => $request->name,
+            'url' => $path,
+            'description' => $request->description,
+            'user_id' => $request->auth()->user()->id,
+        ]);
+
+        return response()->json($image, 201);
     }
-
-    return response()->json($this->annotate($image, $request->user()->id), 201);
-}
 
     public function show(Request $request, Image $image)
     {
@@ -159,5 +155,20 @@ class ImageController extends Controller
         }
         SavedImage::create(['user_id' => $userId, 'image_id' => $image->id]);
         return response()->json(['saved' => true]);
+    }
+
+    public function uploadImage(Request $request) 
+    {
+    if ($request->hasFile('imagen')) {
+        $path = $request->file('imagen')->store('imagenes', 'public');
+        
+        // Genera la URL completa: http://localhost:8000/storage/imagenes/nombre.jpg
+        $url = asset('storage/' . $path);
+
+        return response()->json([
+            'message' => 'Imagen subida con éxito',
+            'url' => $url
+        ], 200);
+    }
     }
 }

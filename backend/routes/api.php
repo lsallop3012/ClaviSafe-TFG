@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::name('api.')->group(function () {
     /*
     |--------------------------------------------------------------------------
-    | Anon
+    | Public routes (no auth)
     |--------------------------------------------------------------------------
     */
     Route::post('/login',    [AuthController::class, 'login'])->name('auth.login');
@@ -23,7 +23,7 @@ Route::name('api.')->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | User (auth:sanctum)
+    | Rutas autenticadas - rol User (auth:sanctum)
     |--------------------------------------------------------------------------
     */
     Route::middleware('auth:sanctum')->group(function () {
@@ -34,19 +34,18 @@ Route::name('api.')->group(function () {
         Route::post('/boards',              [BoardController::class, 'store'])->name('boards.store');
         Route::post('/boards/{board}/save', [BoardController::class, 'saveImage'])->name('boards.save');
 
-        // Self-service profile update (any authed user can edit own profile)
         Route::match(['put', 'patch'], '/users/{user}', [UserController::class, 'update'])
             ->name('users.update');
     });
 
     /*
     |--------------------------------------------------------------------------
-    | Admin (auth:sanctum + admin)
+    | Rutas autenticadas - rol Admin (auth:sanctum) (auth:sanctum + admin)
     |--------------------------------------------------------------------------
     */
     Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::apiResource('users',  UserController::class)->except(['update']);
         Route::apiResource('images', ImageController::class)->except(['index', 'show']);
-        Route::apiResource('boards', BoardController::class)->except(['index', 'show']);
+        Route::apiResource('boards', BoardController::class)->only(['update', 'destroy']);
     });
 });

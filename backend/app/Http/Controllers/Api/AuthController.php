@@ -14,14 +14,14 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $data = $request->validate([
-            'name'     => ['required', 'string'],
+            'email'    => ['required', 'string'],
             'password' => ['required', 'string'],
         ]);
 
-        // El campo "name" del front acepta username o email.
-        $login = strtolower(trim($data['name']));
-        $user  = User::whereRaw('LOWER(name) = ?', [$login])
-            ->orWhere('email', $login)
+        // Acepta email o username en el campo "email"
+        $login = strtolower(trim($data['email']));
+        $user  = User::whereRaw('LOWER(email) = ?', [$login])
+            ->orWhereRaw('LOWER(name) = ?', [$login])
             ->first();
 
         if (!$user || !Hash::check($data['password'], $user->password)) {
@@ -39,15 +39,20 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $data = $request->validate([
-            'name'     => ['required', 'string', 'max:255', 'unique:users,name'],
+            'name'     => ['sometimes', 'string', 'max:255', 'unique:users,name'],
             'email'    => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:6'],
         ]);
 
         $userRole = Role::where('slug', RoleSlug::USER->value)->first();
 
+        // Si el frontend no envía name, se genera a partir del email
+        $name = !empty($data['name'])
+            ? trim($data['name'])
+            : explode('@', strtolower($data['email']))[0];
+
         $user = User::create([
-            'name'     => trim($data['name']),
+            'name'     => $name,
             'email'    => strtolower($data['email']),
             'password' => Hash::make($data['password']),
             'role_id'  => $userRole?->id,

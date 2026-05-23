@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Image;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Image;
+use App\Models\User;
 
 /**
  * @extends Factory<Image>
@@ -19,6 +20,11 @@ class ImageFactory extends Factory
     {
         return [
             //
+            'name' =>  fake()->name(),
+            'url' => fake()->imageUrl(),
+            'description' => fake()->paragraph(),
+            'uploaded_at' => fake()->dateTime(),
+            'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Board;
 
 class BoardSeeder extends Seeder
 {
@@ -13,5 +13,6 @@ class BoardSeeder extends Seeder
     public function run(): void
     {
         //
+        Board::factory()->count(5)->create();
     }
 }

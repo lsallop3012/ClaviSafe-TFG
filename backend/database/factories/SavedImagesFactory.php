@@ -2,8 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\SavedImages;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\SavedImages;
+use \App\Models\User;
+use \App\Models\Image;
 
 /**
  * @extends Factory<SavedImages>
@@ -19,6 +21,8 @@ class SavedImagesFactory extends Factory
     {
         return [
             //
+            'user_id' => User::inRandomOrder()->first()->id,
+            'image_id' => Image::inRandomOrder()->first()->id,
         ];
     }
 }

@@ -9,7 +9,7 @@ return [
     // In production replace * with your frontend URL.
     // For dev with React on :3000 and Laravel on :8000:
     'allowed_origins' => [
-        env('FRONTEND_URL', 'http://localhost:3000'),
+        env('FRONTEND_URL', 'http://localhost:5173'),
     ],
 
     'allowed_origins_patterns' => [],

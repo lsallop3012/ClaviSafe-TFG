@@ -1,0 +1,29 @@
+.page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+}
+
+.page__card {
+  max-width: 720px;
+  width: 100%;
+  text-align: center;
+  background: var(--color-card);
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--radius-md);
+  padding: 48px 32px;
+}
+
+.page__title {
+  margin: 0 0 12px;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--color-accent);
+}
+
+.page__subtitle {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+}

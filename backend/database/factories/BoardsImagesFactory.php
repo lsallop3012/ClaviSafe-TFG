@@ -2,8 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\BoardsImages;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\BoardsImages;
+use \App\Models\Board;
+use \App\Models\Image;
 
 /**
  * @extends Factory<BoardsImages>
@@ -19,6 +21,8 @@ class BoardsImagesFactory extends Factory
     {
         return [
             //
+            'board_id' => Board::inRandomOrder()->first()->id,
+            'image_id' => Image::inRandomOrder()->first()->id,
         ];
     }
 }
