@@ -66,7 +66,7 @@ function EditModal({ user, onClose, onSave }) {
       onSave(updated);
       onClose();
     } catch (err) {
-      setStatus({ loading: false, error: parseApiError(err, 'No se pudo guardar.') });
+      setStatus({ loading: false, error: parseApiError(err, 'Failed to save changes.') });
     }
   };
 
@@ -112,14 +112,14 @@ function NewBoardModal({ onClose, onCreate }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name.trim()) { setStatus({ loading: false, error: 'El nombre es obligatorio.' }); return; }
+    if (!form.name.trim()) { setStatus({ loading: false, error: 'The name is required.' }); return; }
     setStatus({ loading: true, error: '' });
     try {
       const board = await boardService.create({ name: form.name.trim(), description: form.description.trim() || null });
       onCreate(board);
       onClose();
     } catch (err) {
-      setStatus({ loading: false, error: parseApiError(err, 'No se pudo crear el tablero.') });
+      setStatus({ loading: false, error: parseApiError(err, 'Failed to create board.') });
     }
   };
 
@@ -155,7 +155,7 @@ export default function Profile() {
   const { user, loading: authLoading, logout, updateUser } = useAuth();
   const navigate = useNavigate();
 
-  const [tab, setTab] = useState('boards'); // 'boards' | 'images' | 'liked'
+  const [tab, setTab] = useState('boards');
 
   const [boards, setBoards]               = useState([]);
   const [boardsLoading, setBoardsLoading] = useState(true);
@@ -231,7 +231,7 @@ export default function Profile() {
     navigate(ROUTES.HOME);
   };
 
-  if (authLoading) return <div className="profile-loading">Cargando...</div>;
+  if (authLoading) return <div className="profile-loading">Loading...</div>;
   if (!user) return null;
 
   return (
@@ -295,10 +295,10 @@ export default function Profile() {
           </div>
 
           {boardsLoading ? (
-            <p className="profile__empty">Cargando tableros...</p>
+            <p className="profile__empty">Loading boards...</p>
           ) : boards.length === 0 ? (
             <div className="profile__empty">
-              <p>No tienes ningún tablero todavía.</p>
+              <p>You don't have any boards yet.</p>
               <button type="button" className="btn btn--accent" onClick={() => setModal('newBoard')}>
                 Create your first board
               </button>
@@ -326,12 +326,12 @@ export default function Profile() {
           </div>
 
           {myImagesLoading ? (
-            <p className="profile__empty">Cargando...</p>
+            <p className="profile__empty">Loading...</p>
           ) : myImages.length === 0 ? (
             <div className="profile__empty">
-              <p>Aún no has subido ninguna imagen.</p>
+              <p>You haven't uploaded any images yet.</p>
               <button type="button" className="btn btn--accent" onClick={() => navigate(ROUTES.CREATE)}>
-                Subir primera imagen
+                Upload your first image
               </button>
             </div>
           ) : (
@@ -352,12 +352,12 @@ export default function Profile() {
           </div>
 
           {likedLoading ? (
-            <p className="profile__empty">Cargando...</p>
+            <p className="profile__empty">Loading...</p>
           ) : liked.length === 0 ? (
             <div className="profile__empty">
-              <p>Aún no has dado like a ninguna imagen.</p>
+              <p>You haven't liked any images yet.</p>
               <button type="button" className="btn btn--accent" onClick={() => navigate(ROUTES.EXPLORE)}>
-                Explorar imágenes
+                Explore images
               </button>
             </div>
           ) : (

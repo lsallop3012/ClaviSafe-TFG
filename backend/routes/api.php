@@ -12,8 +12,9 @@ Route::name('api.')->group(function () {
     | Public routes (no auth)
     |--------------------------------------------------------------------------
     */
-    Route::post('/login',    [AuthController::class, 'login'])->name('auth.login');
-    Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
+    Route::post('/login',          [AuthController::class, 'login'])->name('auth.login');
+    Route::post('/register',       [AuthController::class, 'register'])->name('auth.register');
+    Route::post('/password/reset', [AuthController::class, 'requestPasswordReset'])->name('auth.password.reset');
 
     Route::get('/images',                [ImageController::class, 'index'])->name('images.index');
     Route::get('/images/{image}',        [ImageController::class, 'show'])->name('images.show');

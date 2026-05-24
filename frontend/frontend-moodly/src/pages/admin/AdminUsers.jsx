@@ -32,7 +32,7 @@ function UserModal({ initial, onClose, onSaved }) {
       }
       onClose();
     } catch (err) {
-      setStatus({ loading: false, error: parseApiError(err, 'Error al guardar.') });
+      setStatus({ loading: false, error: parseApiError(err, 'Error saving user.') });
     }
   };
 
@@ -50,7 +50,7 @@ function UserModal({ initial, onClose, onSaved }) {
           <label className="admin-modal__field"><span>Email</span>
             <input type="email" name="email" value={form.email} onChange={set} required />
           </label>
-          <label className="admin-modal__field"><span>Password {isEdit && <small>(vacío = sin cambio)</small>}</span>
+          <label className="admin-modal__field"><span>Password {isEdit && <small>(empty = no change)</small>}</span>
             <input type="password" name="password" value={form.password} onChange={set} autoComplete="new-password" />
           </label>
           <label className="admin-modal__field"><span>Bio</span>
@@ -79,7 +79,7 @@ export default function AdminUsers() {
   const [users, setUsers]   = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError]   = useState('');
-  const [modal, setModal]   = useState(null); // null | 'create' | user obj
+  const [modal, setModal]   = useState(null);
 
   const load = async () => {
     setLoading(true); setError('');
@@ -87,18 +87,18 @@ export default function AdminUsers() {
       const { data } = await api.get(ENDPOINTS.USERS.LIST, { params: { perPage: 100 } });
       setUsers(data.data ?? data);
     } catch (err) {
-      setError(parseApiError(err, 'No se pudieron cargar los usuarios.'));
+      setError(parseApiError(err, 'Error loading users.'));
     } finally { setLoading(false); }
   };
 
   useEffect(() => { load(); }, []);
 
   const handleDelete = async (id) => {
-    if (!window.confirm('¿Eliminar este usuario?')) return;
+    if (!window.confirm('Delete this user?')) return;
     try {
       await api.delete(ENDPOINTS.USERS.DELETE(id));
       setUsers((p) => p.filter((u) => u.id !== id));
-    } catch (err) { alert(parseApiError(err, 'No se pudo eliminar.')); }
+    } catch (err) { alert(parseApiError(err, 'Error deleting user.')); }
   };
 
   const handleSaved = (saved) => {
@@ -118,7 +118,7 @@ export default function AdminUsers() {
           <button className="admin-btn admin-btn--accent" onClick={() => setModal('create')}>+ New user</button>
         </div>
 
-        {loading && <p className="admin-state">Cargando...</p>}
+        {loading && <p className="admin-state">Loading...</p>}
         {error   && <p className="admin-state">{error}</p>}
 
         {!loading && !error && (

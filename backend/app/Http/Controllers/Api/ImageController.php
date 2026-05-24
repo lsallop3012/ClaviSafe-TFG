@@ -80,7 +80,7 @@ class ImageController extends Controller
         $request->validate([
             'name'        => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image'       => 'nullable|image|max:5120',
+            'image'       => 'nullable|mimes:jpeg,jpg,png,webp,gif,bmp,avif|max:5120',
             'url'         => 'nullable|url|max:2048',
         ]);
 

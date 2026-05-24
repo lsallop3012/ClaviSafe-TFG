@@ -6,69 +6,68 @@ export default function Policies() {
       <div className="static-page__inner">
 
         <div className="static-page__hero">
-          <span className="static-page__tag">Privacidad</span>
-          <h1 className="static-page__title">Política de privacidad</h1>
+          <span className="static-page__tag">Privacy</span>
+          <h1 className="static-page__title">Privacy Policy</h1>
           <p className="static-page__lead">
-            En Moodly nos tomamos en serio la protección de tus datos. Esta política explica qué
-            información recopilamos, cómo la usamos y qué derechos tienes sobre ella.
+            At Moodly, we take the protection of your data seriously. This policy explains what
+            information we collect, how we use it, and what rights you have over it.
           </p>
         </div>
 
         <div className="static-page__section">
-          <h2 className="static-page__section-title">1. Datos que recopilamos</h2>
-          <p className="static-page__text">Al registrarte y usar Moodly podemos recopilar:</p>
+          <h2 className="static-page__section-title">1. Data We Collect</h2>
+          <p className="static-page__text">When you register and use Moodly, we may collect:</p>
           <ul className="static-page__list">
-            <li>Nombre de usuario y dirección de correo electrónico</li>
-            <li>Contraseña (almacenada de forma cifrada, nunca en texto plano)</li>
-            <li>Imágenes que subas a la plataforma</li>
-            <li>Interacciones: likes, tableros creados e imágenes guardadas</li>
-            <li>Datos de sesión y tokens de autenticación</li>
+            <li>Username and email address</li>
+            <li>Password (stored encrypted, never in plain text)</li>
+            <li>Images you upload to the platform</li>
+            <li>Interactions: likes, created boards, and saved images</li>
+            <li>Session data and authentication tokens</li>
           </ul>
         </div>
 
         <div className="static-page__section">
-          <h2 className="static-page__section-title">2. Cómo usamos tus datos</h2>
-          <p className="static-page__text">Los datos recogidos se utilizan exclusivamente para:</p>
+          <h2 className="static-page__section-title">2. How We Use Your Data</h2>
+          <p className="static-page__text">The collected data is used exclusively for:</p>
           <ul className="static-page__list">
-            <li>Gestionar tu cuenta y autenticación</li>
-            <li>Mostrarte contenido personalizado basado en tus interacciones</li>
-            <li>Mejorar el funcionamiento y la seguridad de la plataforma</li>
+            <li>Managing your account and authentication</li>
+            <li>Showing you personalized content based on your interactions</li>
+            <li>Improving the functionality and security of the platform</li>
           </ul>
           <p className="static-page__text">
-            No vendemos ni cedemos tus datos personales a terceros bajo ninguna circunstancia.
+            We do not sell or share your personal data with third parties under any circumstances.
           </p>
         </div>
 
         <div className="static-page__section">
           <h2 className="static-page__section-title">3. Cookies</h2>
           <p className="static-page__text">
-            Moodly utiliza el almacenamiento local del navegador (localStorage) para mantener tu
-            sesión activa mediante un token de autenticación seguro. No utilizamos cookies de
-            seguimiento ni publicidad.
+            Moodly utilizes the browser's local storage (localStorage) to maintain your
+            session active using a secure authentication token. We do not use tracking cookies or advertising.
           </p>
         </div>
 
         <div className="static-page__section">
-          <h2 className="static-page__section-title">4. Tus derechos</h2>
-          <p className="static-page__text">Tienes derecho a:</p>
+          <h2 className="static-page__section-title">4. Your Rights</h2>
+          <p className="static-page__text">You have the right to:</p>
           <ul className="static-page__list">
-            <li>Acceder a los datos que tenemos sobre ti</li>
-            <li>Modificar tu información de perfil en cualquier momento</li>
-            <li>Solicitar la eliminación de tu cuenta y datos asociados</li>
+            <li>Access the data we have about you</li>
+            <li>Modify your profile information at any time</li>
+            <li>Request the deletion of your account and associated data</li>
           </ul>
         </div>
 
         <div className="static-page__section">
-          <h2 className="static-page__section-title">5. Seguridad</h2>
+          <h2 className="static-page__section-title">5. Security</h2>
           <p className="static-page__text">
-            Implementamos medidas técnicas para proteger tus datos: contraseñas cifradas con bcrypt,
-            autenticación mediante tokens Bearer (Laravel Sanctum) y comunicaciones sobre HTTPS
-            en entornos de producción.
+            We implement technical measures to protect your data: passwords encrypted with bcrypt,
+            authentication via Bearer tokens (Laravel Sanctum), and communications over HTTPS
+            in production environments.
           </p>
         </div>
 
         <hr className="static-page__divider" />
-        <p className="static-page__note">Última actualización: mayo 2025 · Moodly</p>
+        <p className="static-page__note">Last updated: May 2025 · Moodly</p>
       </div>
     </div>
   );

@@ -46,9 +46,9 @@ export default function Create() {
   /* ── submit ── */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name.trim()) { setStatus({ loading: false, error: 'El nombre es obligatorio.' }); return; }
-    if (mode === MODE_FILE && !file) { setStatus({ loading: false, error: 'Selecciona una imagen.' }); return; }
-    if (mode === MODE_URL  && !url.trim()) { setStatus({ loading: false, error: 'Introduce una URL válida.' }); return; }
+    if (!name.trim()) { setStatus({ loading: false, error: 'Name is required.' }); return; }
+    if (mode === MODE_FILE && !file) { setStatus({ loading: false, error: 'Select an image.' }); return; }
+    if (mode === MODE_URL  && !url.trim()) { setStatus({ loading: false, error: 'Enter a valid URL.' }); return; }
 
     setStatus({ loading: true, error: '' });
 
@@ -66,14 +66,14 @@ export default function Create() {
       await imageService.create(payload);
       navigate(ROUTES.PROFILE);
     } catch (err) {
-      setStatus({ loading: false, error: parseApiError(err, 'No se pudo subir la imagen.') });
+      setStatus({ loading: false, error: parseApiError(err, 'Error uploading image.') });
     }
   };
 
   return (
     <div className="create-page">
       <div className="create-page__card">
-        <h1 className="create-page__title">Nueva imagen</h1>
+        <h1 className="create-page__title">New Image</h1>
 
         {/* ── mode toggle ── */}
         <div className="create-page__toggle">
@@ -82,14 +82,14 @@ export default function Create() {
             className={`create-page__toggle-btn${mode === MODE_FILE ? ' create-page__toggle-btn--active' : ''}`}
             onClick={() => { setMode(MODE_FILE); setUrl(''); }}
           >
-            Subir archivo
+            Upload File
           </button>
           <button
             type="button"
             className={`create-page__toggle-btn${mode === MODE_URL ? ' create-page__toggle-btn--active' : ''}`}
             onClick={() => { setMode(MODE_URL); clearFile(); }}
           >
-            Usar URL
+            Use URL
           </button>
         </div>
 
@@ -105,7 +105,7 @@ export default function Create() {
               role="button"
               tabIndex={0}
               onKeyDown={(e) => e.key === 'Enter' && !preview && inputRef.current?.click()}
-              aria-label="Zona de carga de imagen"
+              aria-label="Image upload area. Click or drag and drop an image file here."
             >
               {preview ? (
                 <>
@@ -114,7 +114,7 @@ export default function Create() {
                     type="button"
                     className="create-page__remove-btn"
                     onClick={(e) => { e.stopPropagation(); clearFile(); }}
-                    aria-label="Quitar imagen"
+                    aria-label="Remove image"
                   >
                     ✕
                   </button>
@@ -127,8 +127,8 @@ export default function Create() {
                     <circle cx="8.5" cy="8.5" r="1.5" />
                     <polyline points="21 15 16 10 5 21" />
                   </svg>
-                  <p>Arrastra una imagen o <span>haz click</span></p>
-                  <small>JPG, PNG, WEBP · máx 5 MB</small>
+                  <p>Drag an image or <span>click</span></p>
+                  <small>JPG, PNG, WEBP · max 5 MB</small>
                 </div>
               )}
               <input
@@ -164,11 +164,11 @@ export default function Create() {
 
           {/* ── fields ── */}
           <label className="create-page__field">
-            <span>Nombre <span className="create-page__required">*</span></span>
+            <span>Name <span className="create-page__required">*</span></span>
             <input
               type="text"
               className="create-page__input"
-              placeholder="Dale un nombre a tu imagen..."
+              placeholder="Give your image a name..."
               value={name}
               onChange={(e) => setName(e.target.value)}
               maxLength={255}
@@ -176,10 +176,10 @@ export default function Create() {
           </label>
 
           <label className="create-page__field">
-            <span>Descripción <small>(opcional)</small></span>
+            <span>Description <small>(optional)</small></span>
             <textarea
               className="create-page__input create-page__textarea"
-              placeholder="Cuéntanos algo sobre esta imagen..."
+              placeholder="Tell us something about this image..."
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
               rows={3}
@@ -195,14 +195,14 @@ export default function Create() {
               onClick={() => navigate(-1)}
               disabled={status.loading}
             >
-              Cancelar
+              Cancel
             </button>
             <button
               type="submit"
               className="create-page__btn create-page__btn--accent"
               disabled={status.loading}
             >
-              {status.loading ? 'Subiendo...' : 'Publicar imagen'}
+              {status.loading ? 'Uploading...' : 'Publish Image'}
             </button>
           </div>
         </form>

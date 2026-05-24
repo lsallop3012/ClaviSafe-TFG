@@ -13,6 +13,19 @@ class BoardSeeder extends Seeder
     public function run(): void
     {
         //
-        Board::factory()->count(5)->create();
+        Board::factory()->create([
+            'name' => 'Favoritos',
+            'description' => 'Tablero de imágenes favoritas',
+        ]);
+
+        Board::factory()->create([
+            'name' => 'Inspiración',
+            'description' => 'Tablero de imágenes inspiradoras',
+        ]);
+
+        Board::factory()->create([
+            'name' => 'Viajes',
+            'description' => 'Tablero de imágenes de viajes',
+        ]);
     }
 }

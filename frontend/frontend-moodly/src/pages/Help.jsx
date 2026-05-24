@@ -1,36 +1,40 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../routes/paths';
+import explore from '../assets/icons/ix_explore-filled.png';
+import heart from '../assets/icons/icon-park-solid_like.png';
+import publish from '../assets/icons/streamline-sharp_buttons-all-remix.png';
+import save from '../assets/icons/meteor-icons_images.png';
 import './StaticPage.css';
 
 const FAQS = [
   {
-    q: '¿Cómo me registro en Moodly?',
-    a: 'En la página de inicio encontrarás el formulario de registro. Introduce tu nombre, correo electrónico y contraseña. En menos de un minuto tendrás tu cuenta activa.',
+    q: 'How do I create an account?',
+    a: 'On the homepage, you will find the registration form. Enter your name, email address, and password. You will have your account active in less than a minute.',
   },
   {
-    q: '¿Cómo subo una imagen?',
-    a: 'Una vez logueado, ve a la sección "Create" desde el menú. Puedes arrastrar un archivo desde tu ordenador o pegar directamente una URL de imagen externa.',
+    q: 'How do I upload an image?',
+    a: 'Once logged in, go to the "Create" section from the menu. You can drag a file from your computer or paste a URL of an external image.',
   },
   {
-    q: '¿Cómo creo un tablero?',
-    a: 'Accede a tu perfil y pulsa "+ New board". Dale un nombre y descripción opcionales. Después podrás guardar imágenes del Explore en ese tablero.',
+    q: 'How do I create a board?',
+    a: 'Access your profile and click "+ New board". Give it a name and optional description. You can then save images from the Explore section to this board.',
   },
   {
-    q: '¿Cómo guardo una imagen en un tablero?',
-    a: 'En el Explore, pasa el cursor sobre cualquier imagen y pulsa el icono de marcador. Se abrirá un selector con tus tableros; elige el que prefieras.',
+    q: 'How do I save an image to a board?',
+    a: 'In the Explore section, hover over any image and click the bookmark icon. A selector with your boards will open; choose the one you prefer.',
   },
   {
-    q: '¿Puedo quitar una imagen de un tablero?',
-    a: 'Sí. Entra en el detalle del tablero y pasa el cursor sobre la imagen que quieras quitar. Aparecerá un botón ✕ en la esquina superior derecha.',
+    q: 'How do I remove an image from a board?',
+    a: 'Yes. Enter the details of the board and hover over the image you want to remove. A ✕ button will appear in the top right corner.',
   },
   {
-    q: '¿Cómo elimino una imagen que he subido?',
-    a: 'Ve a tu perfil → pestaña "My images", pasa el cursor sobre la imagen y pulsa el icono de papelera. La imagen se eliminará permanentemente.',
+    q: 'How do I delete an image I have uploaded?',
+    a: 'Go to your profile → "My images" tab, hover over the image, and click the trash icon. The image will be permanently deleted.',
   },
   {
-    q: '¿Puedo cambiar mi contraseña?',
-    a: 'Sí. En tu perfil, pulsa "Edit profile". Verás un campo de nueva contraseña; déjalo en blanco si no quieres cambiarla.',
+    q: 'Can I change my password?',
+    a: 'Yes. In your profile, click "Edit profile". You will see a field for the new password; leave it blank if you don\'t want to change it.',
   },
 ];
 
@@ -67,37 +71,36 @@ export default function Help() {
       <div className="static-page__inner">
 
         <div className="static-page__hero">
-          <span className="static-page__tag">Soporte</span>
-          <h1 className="static-page__title">Centro de ayuda</h1>
+          <span className="static-page__tag">Support</span>
+          <h1 className="static-page__title">Help Center</h1>
           <p className="static-page__lead">
-            Encuentra respuestas a las preguntas más frecuentes o descubre cómo sacar el máximo
-            partido a Moodly.
+            Find answers to the most frequently asked questions or discover how to get the most out of Moodly.
           </p>
         </div>
 
         {/* Feature cards */}
         <div className="static-page__section">
-          <h2 className="static-page__section-title">¿Por dónde empezar?</h2>
+          <h2 className="static-page__section-title">Getting Started</h2>
           <div className="static-page__cards">
             <div className="static-page__card">
-              <div className="static-page__card-icon">🔍</div>
-              <p className="static-page__card-title">Explorar</p>
-              <p className="static-page__card-desc">Navega por el Explore y usa el buscador para encontrar imágenes por nombre o descripción.</p>
+              <img src={explore} alt="Explore" className="static-page__card-icon" />
+              <p className="static-page__card-title">Explore</p>
+              <p className="static-page__card-desc">Browse the Explore section and use the search bar to find images by name or description.</p>
             </div>
             <div className="static-page__card">
-              <div className="static-page__card-icon">📌</div>
-              <p className="static-page__card-title">Guardar</p>
-              <p className="static-page__card-desc">Crea tableros temáticos y guarda en ellos las imágenes que más te inspiren.</p>
+              <img src={save} alt="Save" className="static-page__card-icon" />
+              <p className="static-page__card-title">Save</p>
+              <p className="static-page__card-desc">Create themed boards and save the images that inspire you most.</p>
             </div>
             <div className="static-page__card">
-              <div className="static-page__card-icon">📤</div>
-              <p className="static-page__card-title">Publicar</p>
-              <p className="static-page__card-desc">Sube tus propias imágenes desde un archivo o usando una URL externa.</p>
+              <img src={publish} alt="Publish" className="static-page__card-icon" />
+              <p className="static-page__card-title">Publish</p>
+              <p className="static-page__card-desc">Upload your own images from a file or using an external URL.</p>
             </div>
             <div className="static-page__card">
-              <div className="static-page__card-icon">❤️</div>
+              <img src={heart} alt="Likes" className="static-page__card-icon" />
               <p className="static-page__card-title">Likes</p>
-              <p className="static-page__card-desc">Da like a las imágenes que te gusten y encuéntralas todas en la pestaña Liked de tu perfil.</p>
+              <p className="static-page__card-desc">Give likes to the images you like and find them all in the Liked tab of your profile.</p>
             </div>
           </div>
         </div>
@@ -106,7 +109,7 @@ export default function Help() {
 
         {/* FAQ */}
         <div className="static-page__section">
-          <h2 className="static-page__section-title">Preguntas frecuentes</h2>
+          <h2 className="static-page__section-title">Frequently Asked Questions</h2>
           {FAQS.map((item) => (
             <FaqItem key={item.q} q={item.q} a={item.a} />
           ))}
@@ -115,10 +118,10 @@ export default function Help() {
         <hr className="static-page__divider" />
 
         <div className="static-page__section">
-          <h2 className="static-page__section-title">¿Aún tienes dudas?</h2>
+          <h2 className="static-page__section-title">Still have questions?</h2>
           <p className="static-page__text">
-            Si no has encontrado lo que buscabas, puedes crear una cuenta y explorar la plataforma
-            por ti mismo. Está diseñada para ser intuitiva desde el primer momento.
+            If you haven't found what you were looking for, you can create an account and explore the platform
+            on your own. It's designed to be intuitive from the very first moment.
           </p>
           <button
             type="button"
@@ -129,7 +132,7 @@ export default function Help() {
               fontWeight: 700, fontSize: '0.92rem', fontFamily: 'inherit', cursor: 'pointer',
             }}
           >
-            Ir al inicio
+            Go to Home
           </button>
         </div>
 

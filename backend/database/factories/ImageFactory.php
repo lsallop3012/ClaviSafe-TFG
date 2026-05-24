@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 
@@ -13,19 +14,21 @@ class ImageFactory extends Factory
 {
     public function definition(): array
     {
-        // Pick a random file from storage/app/public/images/
-        $files = Storage::disk('public')->files('images');
+        // Coge una imagen aleatoria de storage/app/public/images o usa picsum como fallback
+        /** @var FilesystemAdapter $disk */
+        $disk = Storage::disk('public');
+        $files = $disk->files('images');
 
-        // Filter to real image extensions just in case
+        // Filtra solo los archivos de imagen válidos
         $images = array_values(array_filter($files, function ($f) {
             return preg_match('/\.(jpe?g|png|webp|gif|avif)$/i', $f);
         }));
 
         if (count($images) > 0) {
             $file = $images[array_rand($images)];
-            $url  = Storage::disk('public')->url($file); // → /storage/images/filename.jpg
+            $url  = $disk->url($file);
         } else {
-            // Fallback to picsum if folder is empty
+            // Llama a picsum con un seed aleatorio para obtener una imagen diferente cada vez
             $seed = fake()->numberBetween(1, 1000);
             $url  = "https://picsum.photos/seed/{$seed}/800/600";
         }

@@ -32,7 +32,7 @@ function ImageModal({ initial, onClose, onSaved }) {
       onSaved(data);
       onClose();
     } catch (err) {
-      setStatus({ loading: false, error: parseApiError(err, 'Error al guardar.') });
+      setStatus({ loading: false, error: parseApiError(err, 'Error saving image.') });
     }
   };
 
@@ -81,18 +81,18 @@ export default function AdminImages() {
       const { data } = await api.get(ENDPOINTS.IMAGES.LIST, { params: { perPage: 100 } });
       setImages(data.data ?? data);
     } catch (err) {
-      setError(parseApiError(err, 'No se pudieron cargar las imágenes.'));
+      setError(parseApiError(err, 'Error loading images.'));
     } finally { setLoading(false); }
   };
 
   useEffect(() => { load(); }, []);
 
   const handleDelete = async (id) => {
-    if (!window.confirm('¿Eliminar esta imagen?')) return;
+    if (!window.confirm('Delete this image?')) return;
     try {
       await api.delete(ENDPOINTS.IMAGES.DELETE(id));
       setImages((p) => p.filter((i) => i.id !== id));
-    } catch (err) { alert(parseApiError(err, 'No se pudo eliminar.')); }
+    } catch (err) { alert(parseApiError(err, 'Error deleting image.')); }
   };
 
   const handleSaved = (saved) => {
@@ -112,7 +112,7 @@ export default function AdminImages() {
           <button className="admin-btn admin-btn--accent" onClick={() => setModal('create')}>+ New image</button>
         </div>
 
-        {loading && <p className="admin-state">Cargando...</p>}
+        {loading && <p className="admin-state">Loading...</p>}
         {error   && <p className="admin-state">{error}</p>}
 
         {!loading && !error && (

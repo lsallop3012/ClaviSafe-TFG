@@ -66,6 +66,17 @@ class AuthController extends Controller
         ], 201);
     }
 
+    public function requestPasswordReset(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'email'],
+        ]);
+
+        return response()->json([
+            'message' => 'If the email is registered, you will receive instructions to reset your password.',
+        ]);
+    }
+
     public function logout(Request $request)
     {
         $request->user()?->currentAccessToken()?->delete();

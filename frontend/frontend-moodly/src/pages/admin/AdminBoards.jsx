@@ -16,7 +16,7 @@ function BoardModal({ initial, onClose, onSaved }) {
 
   const submit = async (e) => {
     e.preventDefault();
-    if (!form.name.trim()) { setStatus({ loading: false, error: 'El nombre es obligatorio.' }); return; }
+    if (!form.name.trim()) { setStatus({ loading: false, error: 'Name is required.' }); return; }
     setStatus({ loading: true, error: '' });
     try {
       let data;
@@ -34,7 +34,7 @@ function BoardModal({ initial, onClose, onSaved }) {
       onSaved(data);
       onClose();
     } catch (err) {
-      setStatus({ loading: false, error: parseApiError(err, 'Error al guardar.') });
+      setStatus({ loading: false, error: parseApiError(err, 'Error saving board.') });
     }
   };
 
@@ -69,7 +69,7 @@ export default function AdminBoards() {
   const [boards, setBoards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError]   = useState('');
-  const [modal, setModal]   = useState(null); // null | 'new' | board object
+  const [modal, setModal]   = useState(null);
 
   const load = async () => {
     setLoading(true); setError('');
@@ -77,18 +77,18 @@ export default function AdminBoards() {
       const { data } = await api.get(ENDPOINTS.BOARDS.LIST, { params: { perPage: 100 } });
       setBoards(data.data ?? data);
     } catch (err) {
-      setError(parseApiError(err, 'No se pudieron cargar los tableros.'));
+      setError(parseApiError(err, 'Error loading boards.'));
     } finally { setLoading(false); }
   };
 
   useEffect(() => { load(); }, []);
 
   const handleDelete = async (id) => {
-    if (!window.confirm('¿Eliminar este tablero?')) return;
+    if (!window.confirm('Delete this board?')) return;
     try {
       await api.delete(ENDPOINTS.BOARDS.DELETE(id));
       setBoards((p) => p.filter((b) => b.id !== id));
-    } catch (err) { alert(parseApiError(err, 'No se pudo eliminar.')); }
+    } catch (err) { alert(parseApiError(err, 'Error deleting board.')); }
   };
 
   const handleSaved = (saved) => {
@@ -110,7 +110,7 @@ export default function AdminBoards() {
           </button>
         </div>
 
-        {loading && <p className="admin-state">Cargando...</p>}
+        {loading && <p className="admin-state">Loading...</p>}
         {error   && <p className="admin-state">{error}</p>}
 
         {!loading && !error && (

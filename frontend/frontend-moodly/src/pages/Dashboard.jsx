@@ -5,7 +5,7 @@ export default function Dashboard() {
     <section className="page">
       <div className="page__card">
         <h1 className="page__title">Dashboard</h1>
-        <p className="page__subtitle">Tus tableros e imágenes guardadas.</p>
+        <p className="page__subtitle">Your boards and images.</p>
       </div>
     </section>
   );

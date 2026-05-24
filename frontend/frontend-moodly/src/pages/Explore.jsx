@@ -35,7 +35,7 @@ export default function Explore() {
       setImages(res.data ?? []);
       setMeta(res.meta ?? { page: pg, totalPages: 1, total: 0 });
     } catch {
-      setError('No se pudieron cargar las imágenes.');
+      setError('Error loading images.');
     } finally {
       setLoading(false);
     }
@@ -83,7 +83,7 @@ export default function Explore() {
       {/* ── States ── */}
       {loading && (
         <div className="explore-page__state">
-          <div className="explore-page__spinner" aria-label="Cargando" />
+          <div className="explore-page__spinner" aria-label="Loading" />
         </div>
       )}
 
@@ -93,7 +93,7 @@ export default function Explore() {
 
       {!loading && !error && images.length === 0 && (
         <div className="explore-page__state">
-          No se encontraron imágenes{search ? ` para "${search}"` : ''}.
+          No images found{search ? ` for "${search}"` : ''}.
         </div>
       )}
 

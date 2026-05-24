@@ -25,7 +25,7 @@ export default function BoardDetail() {
       setBoard(boardRes.data ?? boardRes);
       setImages((imagesRes.data ?? imagesRes) ?? []);
     } catch {
-      setError('No se pudo cargar el tablero.');
+      setError('Failed to load board.');
     } finally {
       setLoading(false);
     }
@@ -59,7 +59,7 @@ export default function BoardDetail() {
       <div className="board-detail__state board-detail__state--error">
         <p>{error}</p>
         <button type="button" className="board-detail__back-btn" onClick={() => navigate(-1)}>
-          ← Volver
+          ← Return
         </button>
       </div>
     );
@@ -73,13 +73,13 @@ export default function BoardDetail() {
           type="button"
           className="board-detail__back-btn"
           onClick={() => navigate(ROUTES.PROFILE)}
-          aria-label="Volver al perfil"
+          aria-label="Back to profile"
         >
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
             stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6" />
           </svg>
-          Mi perfil
+          My profile
         </button>
 
         <div className="board-detail__meta">
@@ -88,7 +88,7 @@ export default function BoardDetail() {
             <p className="board-detail__desc">{board.description}</p>
           )}
           <span className="board-detail__count">
-            {images.length} {images.length === 1 ? 'imagen' : 'imágenes'}
+            {images.length} {images.length === 1 ? 'image' : 'images'}
           </span>
         </div>
       </div>
@@ -96,13 +96,13 @@ export default function BoardDetail() {
       {/* ── Empty ── */}
       {images.length === 0 && (
         <div className="board-detail__state">
-          <p>Este tablero aún no tiene imágenes.</p>
+          <p>This board doesn't have any images yet.</p>
           <button
             type="button"
             className="board-detail__cta-btn"
             onClick={() => navigate(ROUTES.EXPLORE)}
           >
-            Explorar imágenes
+            Explore images
           </button>
         </div>
       )}
