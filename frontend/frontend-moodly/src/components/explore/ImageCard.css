@@ -125,6 +125,11 @@
   border-color: rgba(220, 60, 60, 0.5);
 }
 
+.img-card__remove-btn--delete {
+  top: 8px;
+  right: 42px; /* offset so it doesn't overlap ✕ if both shown */
+}
+
 .img-card__remove-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;

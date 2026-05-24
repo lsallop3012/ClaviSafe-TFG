@@ -4,7 +4,7 @@ import { imageService } from '../../api/services/imageService';
 import { boardService } from '../../api/services/boardService';
 import './ImageCard.css';
 
-export default function ImageCard({ image, onUpdate, onRemove }) {
+export default function ImageCard({ image, onUpdate, onRemove, onDelete }) {
   const { user } = useAuth();
   const [likeCount, setLikeCount] = useState(image.like_count  ?? 0);
   const [liked,     setLiked]     = useState(image.liked_by_me ?? false);
@@ -82,7 +82,7 @@ export default function ImageCard({ image, onUpdate, onRemove }) {
 
         {/* overlay on hover */}
         <div className="img-card__overlay" aria-hidden="true">
-          {/* remove from board button — only shown in board detail */}
+          {/* remove from board ✕ — only in board detail */}
           {onRemove && (
             <button
               type="button"
@@ -94,6 +94,25 @@ export default function ImageCard({ image, onUpdate, onRemove }) {
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none"
                 stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          )}
+
+          {/* delete image 🗑 — only in "My images" tab */}
+          {onDelete && (
+            <button
+              type="button"
+              className="img-card__remove-btn img-card__remove-btn--delete"
+              onClick={(e) => { e.stopPropagation(); onDelete(image.id); }}
+              aria-label="Eliminar imagen"
+              disabled={busy}
+            >
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none"
+                stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="3 6 5 6 21 6" />
+                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                <path d="M10 11v6M14 11v6" />
+                <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
               </svg>
             </button>
           )}

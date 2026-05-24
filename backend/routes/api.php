@@ -30,8 +30,9 @@ Route::name('api.')->group(function () {
         Route::get('/me',      [AuthController::class, 'me'])->name('auth.me');
         Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-        Route::post('/images',              [ImageController::class, 'store'])->name('images.store');
-        Route::post('/images/{image}/like', [ImageController::class, 'toggleLike'])->name('images.like');
+        Route::post('/images',                [ImageController::class, 'store'])->name('images.store');
+        Route::delete('/images/{image}',      [ImageController::class, 'destroy'])->name('images.destroy');
+        Route::post('/images/{image}/like',   [ImageController::class, 'toggleLike'])->name('images.like');
         Route::post('/boards',                              [BoardController::class, 'store'])->name('boards.store');
         Route::post('/boards/{board}/save',               [BoardController::class, 'saveImage'])->name('boards.save');
         Route::delete('/boards/{board}/images/{image}',   [BoardController::class, 'removeImage'])->name('boards.images.remove');
@@ -47,7 +48,7 @@ Route::name('api.')->group(function () {
     */
     Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::apiResource('users',  UserController::class)->except(['update']);
-        Route::apiResource('images', ImageController::class)->except(['index', 'show', 'store']);
+        Route::apiResource('images', ImageController::class)->except(['index', 'show', 'store', 'destroy']);
         Route::apiResource('boards', BoardController::class)->only(['update', 'destroy']);
     });
 });

@@ -200,6 +200,13 @@ export default function Profile() {
     setMyImages((prev) => prev.map((img) => img.id === updated.id ? updated : img));
   };
 
+  const handleMyImagesDelete = async (imageId) => {
+    try {
+      await imageService.remove(imageId);
+      setMyImages((prev) => prev.filter((img) => img.id !== imageId));
+    } catch { /* ignore */ }
+  };
+
   /* load liked images lazily (only first time the tab is opened) */
   useEffect(() => {
     if (tab !== 'liked' || !user || likedFetched) return;
@@ -330,7 +337,7 @@ export default function Profile() {
           ) : (
             <div className="profile__liked-grid">
               {myImages.map((img) => (
-                <ImageCard key={img.id} image={img} onUpdate={handleMyImagesUpdate} />
+                <ImageCard key={img.id} image={img} onUpdate={handleMyImagesUpdate} onDelete={handleMyImagesDelete} />
               ))}
             </div>
           )}

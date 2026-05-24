@@ -131,6 +131,9 @@ class ImageController extends Controller
 
     public function destroy(Request $request, Image $image)
     {
+        if (!$request->user()->isAdmin() && $image->user_id !== $request->user()->id) {
+            return response()->json(['message' => 'Forbidden.'], 403);
+        }
         $image->delete();
         return response()->json(['ok' => true]);
     }
