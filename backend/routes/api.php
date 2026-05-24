@@ -44,7 +44,7 @@ Route::name('api.')->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | Rutas autenticadas - rol Admin (auth:sanctum) (auth:sanctum + admin)
+    | Rutas autenticadas - rol Admin (auth:sanctum + admin)
     |--------------------------------------------------------------------------
     */
     Route::middleware(['auth:sanctum', 'admin'])->group(function () {
