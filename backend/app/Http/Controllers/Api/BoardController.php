@@ -17,7 +17,7 @@ class BoardController extends Controller
         $list->each(function ($b) {
             $b->load(['images' => function ($q) { $q->oldest('images.created_at')->limit(1); }]);
             $first = $b->images->first();
-            $b->image_count = $b->images()->count();
+            $b->image_count = $b->images()->count('images.id');
             $b->cover = $first?->url;
         });
 
@@ -92,13 +92,11 @@ class BoardController extends Controller
 
     public function listImages(Request $request, Board $board)
     {
-        $perPage = max(1, min(100, (int) $request->query('perPage', 24)));
-        $paginator = $board->images()->paginate($perPage);
+        $perPage   = max(1, min(100, (int) $request->query('perPage', 24)));
+        $paginator = $board->images()->orderBy('images.id')->paginate($perPage);
 
         $controller = app(ImageController::class);
-        $ref = new \ReflectionClass($controller);
-        $method = $ref->getMethod('annotate');
-        $items = $method->invoke($controller, $paginator->items(), auth('sanctum')->id());
+        $items      = $controller->annotate($paginator->items(), auth('sanctum')->id());
 
         return response()->json([
             'data' => collect($items)->values(),

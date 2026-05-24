@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
-    private function annotate($images, ?int $meId)
+    public function annotate($images, ?int $meId)
     {
         $isCollection = is_iterable($images) && !($images instanceof Image);
         $list = $isCollection ? collect($images) : collect([$images]);
