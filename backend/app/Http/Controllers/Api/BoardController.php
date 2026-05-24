@@ -15,7 +15,7 @@ class BoardController extends Controller
         $list = $isCollection ? collect($boards) : collect([$boards]);
 
         $list->each(function ($b) {
-            $b->load(['images' => function ($q) { $q->oldest()->limit(1); }]);
+            $b->load(['images' => function ($q) { $q->oldest('images.created_at')->limit(1); }]);
             $first = $b->images->first();
             $b->image_count = $b->images()->count();
             $b->cover = $first?->url;
