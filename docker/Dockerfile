@@ -21,13 +21,21 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # 5. Establecer directorio de trabajo y copiar el código del proyecto
+# COPY backend/ para contexto de build = raíz monorepo (Render)
+# docker-compose dev usa volumes y no depende de esta instrucción
 WORKDIR /var/www/html
-COPY . .
+COPY backend/composer.json backend/composer.lock ./
+RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --no-interaction
 
-# 6. Instalar dependencias de producción de Laravel
-RUN composer install --no-dev --optimize-autoloader
+COPY backend/ ./
+RUN composer dump-autoload --optimize --no-dev
 
-# 7. Dar permisos correctos a las carpetas de Laravel
+# 6. Dar permisos correctos a las carpetas de Laravel
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
+# 7. Entrypoint: cachea config y lanza migraciones antes de Apache
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["apache2-foreground"]
