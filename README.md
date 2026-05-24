@@ -8,15 +8,7 @@
   - [4. Funcionalidades](#4-funcionalidades)
   - [5. Arquitectura y tecnología](#5-arquitectura-y-tecnología)
   - [6. Modelo entidad-relación](#6-modelo-entidad-relación)
-- [Documentación del proyecto](#documentación-del-proyecto)
-  - [1. Vídeo](#1-vídeo)
-  - [2. Prototipo y despliegue](#2-prototipo-y-despliegue)
-  - [3. Documentación técnica](#3-documentación-técnica)
-  - [4. Bitácora del proyecto](#4-bitácora-del-proyecto)
-  - [5. Mejoras / propuestas futuras](#5-mejoras--propuestas-futuras)
-  - [6. Bibliografía](#6-bibliografía)
-- [Puesta en marcha local](#puesta-en-marcha-local)
-
+- [Documentación del proyecto](https://github.com/lsallop3012/Moodly-TFG/wiki/Documentaci%C3%B3n-T%C3%A9cnica)
 ---
 ## Vista rápida
 - **Prototipo Figma (alta fidelidad):** [Abrir en Figma](https://www.figma.com/design/G1gFaER6fheSysg1feEXvu/TFG?node-id=2002-3&t=KsD8RBHNGuXWY7K3-1).
