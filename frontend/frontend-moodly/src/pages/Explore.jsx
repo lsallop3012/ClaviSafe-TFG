@@ -41,7 +41,6 @@ export default function Explore() {
     }
   }, []);
 
-  // Reset to page 1 when search changes
   useEffect(() => {
     setPage(1);
   }, [debouncedSearch]);
@@ -61,7 +60,6 @@ export default function Explore() {
 
   return (
     <div className="explore-page" ref={topRef}>
-      {/* ── Top bar ── */}
       <div className="explore-page__topbar">
         <h1 className="explore-page__title">Explore</h1>
         <div className="explore-page__search-wrap">
@@ -80,7 +78,6 @@ export default function Explore() {
         </div>
       </div>
 
-      {/* ── States ── */}
       {loading && (
         <div className="explore-page__state">
           <div className="explore-page__spinner" aria-label="Loading" />
@@ -97,7 +94,6 @@ export default function Explore() {
         </div>
       )}
 
-      {/* ── Grid masonry ── */}
       {!loading && !error && images.length > 0 && (
         <div className="explore-page__grid">
           {images.map((img) => (
@@ -106,7 +102,6 @@ export default function Explore() {
         </div>
       )}
 
-      {/* ── Pagination ── */}
       {!loading && meta.totalPages > 1 && (
         <div className="explore-page__pagination">
           <button

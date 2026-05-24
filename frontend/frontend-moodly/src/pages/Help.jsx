@@ -78,7 +78,6 @@ export default function Help() {
           </p>
         </div>
 
-        {/* Feature cards */}
         <div className="static-page__section">
           <h2 className="static-page__section-title">Getting Started</h2>
           <div className="static-page__cards">

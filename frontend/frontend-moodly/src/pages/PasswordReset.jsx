@@ -32,7 +32,6 @@ export default function PasswordReset() {
   return (
     <div className="pr-page">
       <div className="pr-card">
-        {/* icon */}
         <div className="pr-card__icon">
           <svg viewBox="0 0 24 24" width="32" height="32" fill="none"
             stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

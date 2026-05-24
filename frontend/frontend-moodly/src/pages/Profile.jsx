@@ -9,7 +9,6 @@ import ImageCard from '../components/explore/ImageCard';
 import { ROUTES } from '../routes/paths';
 import './Profile.css';
 
-/* ── Avatar ── */
 function AvatarCircle({ user, size = 96 }) {
   if (user?.avatar) {
     return <img src={user.avatar} alt={user.name} className="profile__avatar-img" style={{ width: size, height: size }} />;
@@ -21,7 +20,6 @@ function AvatarCircle({ user, size = 96 }) {
   );
 }
 
-/* ── Board card ── */
 function BoardCard({ board }) {
   const navigate = useNavigate();
   return (
@@ -45,7 +43,6 @@ function BoardCard({ board }) {
   );
 }
 
-/* ── Edit profile modal ── */
 function EditModal({ user, onClose, onSave }) {
   const [form, setForm]     = useState({ name: user.name ?? '', email: user.email ?? '', bio: user.bio ?? '', password: '' });
   const [status, setStatus] = useState({ loading: false, error: '' });
@@ -104,7 +101,6 @@ function EditModal({ user, onClose, onSave }) {
   );
 }
 
-/* ── New board modal ── */
 function NewBoardModal({ onClose, onCreate }) {
   const [form, setForm]     = useState({ name: '', description: '' });
   const [status, setStatus] = useState({ loading: false, error: '' });
@@ -150,7 +146,6 @@ function NewBoardModal({ onClose, onCreate }) {
   );
 }
 
-/* ── Page ── */
 export default function Profile() {
   const { user, loading: authLoading, logout, updateUser } = useAuth();
   const navigate = useNavigate();
@@ -174,7 +169,6 @@ export default function Profile() {
     if (!authLoading && !user) navigate(ROUTES.LOGIN, { replace: true });
   }, [user, authLoading, navigate]);
 
-  /* load boards */
   useEffect(() => {
     if (!user) return;
     setBoardsLoading(true);
@@ -185,7 +179,6 @@ export default function Profile() {
       .finally(() => setBoardsLoading(false));
   }, [user]);
 
-  /* load user's uploaded images lazily */
   useEffect(() => {
     if (tab !== 'images' || !user || myImagesFetched) return;
     setMyImagesLoading(true);
@@ -207,7 +200,6 @@ export default function Profile() {
     } catch { /* ignore */ }
   };
 
-  /* load liked images lazily (only first time the tab is opened) */
   useEffect(() => {
     if (tab !== 'liked' || !user || likedFetched) return;
     setLikedLoading(true);
@@ -236,7 +228,6 @@ export default function Profile() {
 
   return (
     <div className="profile">
-      {/* ── Hero ── */}
       <section className="profile__hero">
         <div className="profile__hero-inner">
           <AvatarCircle user={user} />
@@ -259,7 +250,6 @@ export default function Profile() {
         </div>
       </section>
 
-      {/* ── Tabs ── */}
       <div className="profile__tabs">
         <button
           type="button"
@@ -284,7 +274,6 @@ export default function Profile() {
         </button>
       </div>
 
-      {/* ── Boards tab ── */}
       {tab === 'boards' && (
         <section className="profile__boards">
           <div className="profile__boards-header">
@@ -311,7 +300,6 @@ export default function Profile() {
         </section>
       )}
 
-      {/* ── My images tab ── */}
       {tab === 'images' && (
         <section className="profile__boards">
           <div className="profile__boards-header">
@@ -344,7 +332,6 @@ export default function Profile() {
         </section>
       )}
 
-      {/* ── Liked tab ── */}
       {tab === 'liked' && (
         <section className="profile__boards">
           <div className="profile__boards-header">

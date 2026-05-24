@@ -21,6 +21,7 @@ import AdminUsers from './pages/admin/AdminUsers';
 import AdminImages from './pages/admin/AdminImages';
 import AdminBoards from './pages/admin/AdminBoards';
 import BoardDetail from './pages/BoardDetail';
+import ImageDetail from './pages/ImageDetail';
 
 export default function App() {
   return (
@@ -47,6 +48,7 @@ export default function App() {
           <Route path={ROUTES.PROFILE}      element={<Profile />} />
           <Route path={ROUTES.CREATE}       element={<Create />} />
           <Route path={ROUTES.BOARD_DETAIL} element={<BoardDetail />} />
+          <Route path={ROUTES.IMAGE_DETAIL} element={<ImageDetail />} />
         </Route>
 
         {/* Admin only */}

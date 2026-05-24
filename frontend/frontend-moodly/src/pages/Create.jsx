@@ -22,7 +22,6 @@ export default function Create() {
 
   const inputRef = useRef(null);
 
-  /* ── file helpers ── */
   const applyFile = (f) => {
     if (!f || !f.type.startsWith('image/')) return;
     setFile(f);
@@ -43,7 +42,6 @@ export default function Create() {
     if (inputRef.current) inputRef.current.value = '';
   };
 
-  /* ── submit ── */
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name.trim()) { setStatus({ loading: false, error: 'Name is required.' }); return; }
@@ -75,7 +73,6 @@ export default function Create() {
       <div className="create-page__card">
         <h1 className="create-page__title">New Image</h1>
 
-        {/* ── mode toggle ── */}
         <div className="create-page__toggle">
           <button
             type="button"
@@ -94,7 +91,6 @@ export default function Create() {
         </div>
 
         <form onSubmit={handleSubmit} noValidate className="create-page__form">
-          {/* ── image input ── */}
           {mode === MODE_FILE ? (
             <div
               className={`create-page__dropzone${drag ? ' create-page__dropzone--drag' : ''}${preview ? ' create-page__dropzone--has-preview' : ''}`}
@@ -162,7 +158,6 @@ export default function Create() {
             </div>
           )}
 
-          {/* ── fields ── */}
           <label className="create-page__field">
             <span>Name <span className="create-page__required">*</span></span>
             <input

@@ -8,6 +8,7 @@ export const ROUTES = Object.freeze({
   DASHBOARD:      '/dashboard',
   PROFILE:        '/profile',
   BOARD_DETAIL:   '/boards/:id',
+  IMAGE_DETAIL:   '/images/:id',
   TERMS:          '/terms',
   POLICIES:       '/policies',
   HELP:           '/help',

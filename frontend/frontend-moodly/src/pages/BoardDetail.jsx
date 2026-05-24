@@ -67,7 +67,6 @@ export default function BoardDetail() {
 
   return (
     <div className="board-detail">
-      {/* ── Header ── */}
       <div className="board-detail__header">
         <button
           type="button"
@@ -93,7 +92,6 @@ export default function BoardDetail() {
         </div>
       </div>
 
-      {/* ── Empty ── */}
       {images.length === 0 && (
         <div className="board-detail__state">
           <p>This board doesn't have any images yet.</p>
@@ -107,7 +105,6 @@ export default function BoardDetail() {
         </div>
       )}
 
-      {/* ── Masonry grid ── */}
       {images.length > 0 && (
         <div className="board-detail__grid">
           {images.map((img) => (

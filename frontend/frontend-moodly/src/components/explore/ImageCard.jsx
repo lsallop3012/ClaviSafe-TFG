@@ -1,23 +1,24 @@
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { imageService } from '../../api/services/imageService';
 import { boardService } from '../../api/services/boardService';
+import { ROUTES } from '../../routes/paths';
 import './ImageCard.css';
 
 export default function ImageCard({ image, onUpdate, onRemove, onDelete }) {
-  const { user } = useAuth();
+  const { user }   = useAuth();
+  const navigate   = useNavigate();
   const [likeCount, setLikeCount] = useState(image.like_count  ?? 0);
   const [liked,     setLiked]     = useState(image.liked_by_me ?? false);
   const [saved,     setSaved]     = useState(image.saved_by_me ?? false);
   const [busy,      setBusy]      = useState(false);
 
-  /* ── board picker ── */
   const [pickerOpen,  setPickerOpen]  = useState(false);
   const [boards,      setBoards]      = useState([]);
   const [boardsLoading, setBoardsLoading] = useState(false);
   const pickerRef = useRef(null);
 
-  /* close picker on outside click */
   useEffect(() => {
     if (!pickerOpen) return;
     const handler = (e) => {
@@ -45,7 +46,7 @@ export default function ImageCard({ image, onUpdate, onRemove, onDelete }) {
   const handleSaveClick = async (e) => {
     e.stopPropagation();
     if (!user) return;
-    if (saved) return; /* already saved — could add unsave later */
+    if (saved) return; 
 
     setBoardsLoading(true);
     setPickerOpen(true);
@@ -71,18 +72,17 @@ export default function ImageCard({ image, onUpdate, onRemove, onDelete }) {
     finally { setBusy(false); }
   };
 
+  const goToDetail = () => navigate(ROUTES.IMAGE_DETAIL.replace(':id', image.id));
+
   return (
-    <article className="img-card">
-      {/* imagen */}
+    <article className="img-card" onClick={goToDetail} style={{ cursor: 'pointer' }}>
       <div className="img-card__media">
         {image.url
           ? <img src={image.url} alt={image.name} loading="lazy" />
           : <div className="img-card__placeholder" aria-hidden="true" />
         }
 
-        {/* overlay on hover */}
         <div className="img-card__overlay" aria-hidden="true">
-          {/* remove from board ✕ — only in board detail */}
           {onRemove && (
             <button
               type="button"
@@ -98,7 +98,6 @@ export default function ImageCard({ image, onUpdate, onRemove, onDelete }) {
             </button>
           )}
 
-          {/* delete image 🗑 — only in "My images" tab */}
           {onDelete && (
             <button
               type="button"
@@ -134,7 +133,6 @@ export default function ImageCard({ image, onUpdate, onRemove, onDelete }) {
               </button>
             )}
 
-            {/* save / board picker */}
             {user && (
               <div className="img-card__picker-wrap" ref={pickerRef}>
                 <button
