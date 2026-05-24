@@ -42,7 +42,7 @@ export default function Policies() {
         <div className="static-page__section">
           <h2 className="static-page__section-title">3. Cookies</h2>
           <p className="static-page__text">
-            Moodly utilizes the browser's local storage (localStorage) to maintain your
+            Moodly utilizes the browser's local storage to maintain your
             session active using a secure authentication token. We do not use tracking cookies or advertising.
           </p>
         </div>

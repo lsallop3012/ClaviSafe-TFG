@@ -15,7 +15,6 @@ api.interceptors.request.use((config) => {
   const token = localStorage.getItem('moodly_token');
   if (token) config.headers.Authorization = `Bearer ${token}`;
 
-  // Let the browser set Content-Type automatically for FormData (needs boundary)
   if (config.data instanceof FormData) {
     delete config.headers['Content-Type'];
   }

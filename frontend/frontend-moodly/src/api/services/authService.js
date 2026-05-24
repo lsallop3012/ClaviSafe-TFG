@@ -3,11 +3,9 @@ import { ENDPOINTS } from '../endpoints';
 
 const TOKEN_KEY = 'moodly_token';
 
-/** Extrae el primer mensaje de error de una respuesta Laravel (422 o genérica) */
 export function parseApiError(err, fallback = 'Error de servidor.') {
   const data = err.response?.data;
   if (!data) return fallback;
-  // Laravel validate() devuelve { message, errors: { field: ['msg'] } }
   if (data.errors) {
     const first = Object.values(data.errors)[0];
     return Array.isArray(first) ? first[0] : String(first);
