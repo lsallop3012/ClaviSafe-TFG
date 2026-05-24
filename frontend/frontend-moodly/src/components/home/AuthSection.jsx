@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { authService, parseApiError } from '../../api/services/authService';
 import { useAuth } from '../../context/AuthContext';
 import loginImg from '../../assets/images/imagen5.avif';
@@ -9,8 +9,9 @@ import './AuthSection.css';
 const INITIAL_FORM = { email: '', password: '', confirmPassword: '' };
 
 export default function AuthSection() {
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  const navigate   = useNavigate();
+  const location   = useLocation();
+  const { login }  = useAuth();
   const [mode, setMode] = useState('login');
   const [form, setForm] = useState(INITIAL_FORM);
   const [status, setStatus] = useState({ loading: false, error: '' });
@@ -51,7 +52,8 @@ export default function AuthSection() {
         result = await authService.login({ email: form.email, password: form.password });
       }
       login(result.user, result.token);
-      navigate(ROUTES.EXPLORE);
+      const destination = location.state?.from ?? ROUTES.EXPLORE;
+      navigate(destination, { replace: true });
     } catch (err) {
       const fallback = isSignup ? 'Your account could not be created.' : 'Incorrect credentials.';
       setStatus({ loading: false, error: parseApiError(err, fallback) });
