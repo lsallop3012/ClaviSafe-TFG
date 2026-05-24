@@ -47,7 +47,7 @@ export default function About() {
           <p className="static-page__text">
             Moodly is built with modern technologies: a backend in <strong>Laravel</strong> with
             secure authentication via Sanctum tokens, and a frontend in <strong>React + Vite</strong>
-            designed to provide a fast and fluid experience. Everything deployed in a containerized environment with <strong>Docker</strong>.
+             designed to provide a fast and fluid experience. Everything deployed in a containerized environment with <strong>Docker</strong>.
           </p>
         </div>
 
