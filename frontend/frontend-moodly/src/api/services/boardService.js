@@ -32,6 +32,11 @@ export const boardService = {
     return data;
   },
 
+  async removeImage(boardId, imageId) {
+    const { data } = await api.delete(ENDPOINTS.BOARDS.REMOVE_IMAGE(boardId, imageId));
+    return data;
+  },
+
   async remove(id) {
     const { data } = await api.delete(ENDPOINTS.BOARDS.DELETE(id));
     return data;

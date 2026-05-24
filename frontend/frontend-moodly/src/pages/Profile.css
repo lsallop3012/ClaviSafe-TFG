@@ -139,12 +139,44 @@
 
 .btn--sm { padding: 7px 16px; font-size: 0.85rem; }
 
-/* ──────────── BOARDS SECTION ──────────── */
+/* ──────────── TABS ──────────── */
+.profile__tabs {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 24px 0;
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.profile__tab {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 10px 20px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  margin-bottom: -1px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.profile__tab:hover { color: var(--color-text); }
+
+.profile__tab--active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+/* ──────────── BOARDS / LIKED SECTION ──────────── */
 .profile__boards {
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
-  padding: 40px 24px 64px;
+  padding: 32px 24px 64px;
 }
 
 .profile__boards-header {
@@ -159,6 +191,12 @@
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--color-text);
+}
+
+/* ──────────── LIKED MASONRY ──────────── */
+.profile__liked-grid {
+  columns: 4 180px;
+  column-gap: 16px;
 }
 
 .profile__empty {

@@ -101,6 +101,35 @@
   cursor: not-allowed;
 }
 
+/* ── remove from board button ── */
+.img-card__remove-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.img-card__remove-btn:hover:not(:disabled) {
+  background: rgba(220, 60, 60, 0.75);
+  border-color: rgba(220, 60, 60, 0.5);
+}
+
+.img-card__remove-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* ── board picker ── */
 .img-card__picker-wrap {
   position: relative;

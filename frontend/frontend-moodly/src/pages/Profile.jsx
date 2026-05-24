@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { boardService } from '../api/services/boardService';
+import { imageService } from '../api/services/imageService';
 import { userService } from '../api/services/userService';
 import { parseApiError } from '../api/services/authService';
+import ImageCard from '../components/explore/ImageCard';
 import { ROUTES } from '../routes/paths';
 import './Profile.css';
 
@@ -21,8 +23,15 @@ function AvatarCircle({ user, size = 96 }) {
 
 /* ── Board card ── */
 function BoardCard({ board }) {
+  const navigate = useNavigate();
   return (
-    <div className="board-card">
+    <div
+      className="board-card"
+      role="button"
+      tabIndex={0}
+      onClick={() => navigate(`/boards/${board.id}`)}
+      onKeyDown={(e) => e.key === 'Enter' && navigate(`/boards/${board.id}`)}
+    >
       <div className="board-card__cover">
         {board.cover
           ? <img src={board.cover} alt={board.name} />
@@ -145,14 +154,27 @@ function NewBoardModal({ onClose, onCreate }) {
 export default function Profile() {
   const { user, loading: authLoading, logout, updateUser } = useAuth();
   const navigate = useNavigate();
+
+  const [tab, setTab] = useState('boards'); // 'boards' | 'images' | 'liked'
+
   const [boards, setBoards]               = useState([]);
   const [boardsLoading, setBoardsLoading] = useState(true);
-  const [modal, setModal]                 = useState(null);
+
+  const [myImages, setMyImages]               = useState([]);
+  const [myImagesLoading, setMyImagesLoading] = useState(false);
+  const [myImagesFetched, setMyImagesFetched] = useState(false);
+
+  const [liked, setLiked]               = useState([]);
+  const [likedLoading, setLikedLoading] = useState(false);
+  const [likedFetched, setLikedFetched] = useState(false);
+
+  const [modal, setModal] = useState(null);
 
   useEffect(() => {
     if (!authLoading && !user) navigate(ROUTES.LOGIN, { replace: true });
   }, [user, authLoading, navigate]);
 
+  /* load boards */
   useEffect(() => {
     if (!user) return;
     setBoardsLoading(true);
@@ -162,6 +184,40 @@ export default function Profile() {
       .catch(() => setBoards([]))
       .finally(() => setBoardsLoading(false));
   }, [user]);
+
+  /* load user's uploaded images lazily */
+  useEffect(() => {
+    if (tab !== 'images' || !user || myImagesFetched) return;
+    setMyImagesLoading(true);
+    imageService
+      .list({ user_id: user.id, perPage: 100, sort: 'recent' })
+      .then((res) => setMyImages(res.data ?? []))
+      .catch(() => setMyImages([]))
+      .finally(() => { setMyImagesLoading(false); setMyImagesFetched(true); });
+  }, [tab, user, myImagesFetched]);
+
+  const handleMyImagesUpdate = (updated) => {
+    setMyImages((prev) => prev.map((img) => img.id === updated.id ? updated : img));
+  };
+
+  /* load liked images lazily (only first time the tab is opened) */
+  useEffect(() => {
+    if (tab !== 'liked' || !user || likedFetched) return;
+    setLikedLoading(true);
+    imageService
+      .list({ liked_by: user.id, perPage: 100, sort: 'recent' })
+      .then((res) => setLiked(res.data ?? []))
+      .catch(() => setLiked([]))
+      .finally(() => { setLikedLoading(false); setLikedFetched(true); });
+  }, [tab, user, likedFetched]);
+
+  const handleLikedUpdate = (updated) => {
+    setLiked((prev) =>
+      updated.liked_by_me
+        ? prev.map((img) => img.id === updated.id ? updated : img)
+        : prev.filter((img) => img.id !== updated.id)   // remove if unliked
+    );
+  };
 
   const handleLogout = async () => {
     await logout();
@@ -196,30 +252,116 @@ export default function Profile() {
         </div>
       </section>
 
-      {/* ── Boards ── */}
-      <section className="profile__boards">
-        <div className="profile__boards-header">
-          <h2 className="profile__section-title">Boards</h2>
-          <button type="button" className="btn btn--accent btn--sm" onClick={() => setModal('newBoard')}>
-            + New board
-          </button>
-        </div>
+      {/* ── Tabs ── */}
+      <div className="profile__tabs">
+        <button
+          type="button"
+          className={`profile__tab${tab === 'boards' ? ' profile__tab--active' : ''}`}
+          onClick={() => setTab('boards')}
+        >
+          Boards
+        </button>
+        <button
+          type="button"
+          className={`profile__tab${tab === 'images' ? ' profile__tab--active' : ''}`}
+          onClick={() => setTab('images')}
+        >
+          My images
+        </button>
+        <button
+          type="button"
+          className={`profile__tab${tab === 'liked' ? ' profile__tab--active' : ''}`}
+          onClick={() => setTab('liked')}
+        >
+          Liked
+        </button>
+      </div>
 
-        {boardsLoading ? (
-          <p className="profile__empty">Cargando tableros...</p>
-        ) : boards.length === 0 ? (
-          <div className="profile__empty">
-            <p>No tienes ningún tablero todavía.</p>
-            <button type="button" className="btn btn--accent" onClick={() => setModal('newBoard')}>
-              Create your first board
+      {/* ── Boards tab ── */}
+      {tab === 'boards' && (
+        <section className="profile__boards">
+          <div className="profile__boards-header">
+            <h2 className="profile__section-title">My boards</h2>
+            <button type="button" className="btn btn--accent btn--sm" onClick={() => setModal('newBoard')}>
+              + New board
             </button>
           </div>
-        ) : (
-          <div className="boards-grid">
-            {boards.map((b) => <BoardCard key={b.id} board={b} />)}
+
+          {boardsLoading ? (
+            <p className="profile__empty">Cargando tableros...</p>
+          ) : boards.length === 0 ? (
+            <div className="profile__empty">
+              <p>No tienes ningún tablero todavía.</p>
+              <button type="button" className="btn btn--accent" onClick={() => setModal('newBoard')}>
+                Create your first board
+              </button>
+            </div>
+          ) : (
+            <div className="boards-grid">
+              {boards.map((b) => <BoardCard key={b.id} board={b} />)}
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* ── My images tab ── */}
+      {tab === 'images' && (
+        <section className="profile__boards">
+          <div className="profile__boards-header">
+            <h2 className="profile__section-title">My images</h2>
+            <button
+              type="button"
+              className="btn btn--accent btn--sm"
+              onClick={() => navigate(ROUTES.CREATE)}
+            >
+              + Upload image
+            </button>
           </div>
-        )}
-      </section>
+
+          {myImagesLoading ? (
+            <p className="profile__empty">Cargando...</p>
+          ) : myImages.length === 0 ? (
+            <div className="profile__empty">
+              <p>Aún no has subido ninguna imagen.</p>
+              <button type="button" className="btn btn--accent" onClick={() => navigate(ROUTES.CREATE)}>
+                Subir primera imagen
+              </button>
+            </div>
+          ) : (
+            <div className="profile__liked-grid">
+              {myImages.map((img) => (
+                <ImageCard key={img.id} image={img} onUpdate={handleMyImagesUpdate} />
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* ── Liked tab ── */}
+      {tab === 'liked' && (
+        <section className="profile__boards">
+          <div className="profile__boards-header">
+            <h2 className="profile__section-title">Liked images</h2>
+          </div>
+
+          {likedLoading ? (
+            <p className="profile__empty">Cargando...</p>
+          ) : liked.length === 0 ? (
+            <div className="profile__empty">
+              <p>Aún no has dado like a ninguna imagen.</p>
+              <button type="button" className="btn btn--accent" onClick={() => navigate(ROUTES.EXPLORE)}>
+                Explorar imágenes
+              </button>
+            </div>
+          ) : (
+            <div className="profile__liked-grid">
+              {liked.map((img) => (
+                <ImageCard key={img.id} image={img} onUpdate={handleLikedUpdate} />
+              ))}
+            </div>
+          )}
+        </section>
+      )}
 
       {modal === 'edit'     && <EditModal     user={user} onClose={() => setModal(null)} onSave={updateUser} />}
       {modal === 'newBoard' && <NewBoardModal            onClose={() => setModal(null)} onCreate={(b) => setBoards((p) => [b, ...p])} />}

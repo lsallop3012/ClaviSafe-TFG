@@ -2,8 +2,8 @@ import api from '../axios';
 import { ENDPOINTS } from '../endpoints';
 
 export const imageService = {
-  async list() {
-    const { data } = await api.get(ENDPOINTS.IMAGES.LIST);
+  async list(params = {}) {
+    const { data } = await api.get(ENDPOINTS.IMAGES.LIST, { params });
     return data;
   },
 

@@ -98,7 +98,7 @@ class BoardController extends Controller
         $controller = app(ImageController::class);
         $ref = new \ReflectionClass($controller);
         $method = $ref->getMethod('annotate');
-        $items = $method->invoke($controller, $paginator->items(), optional($request->user())->id);
+        $items = $method->invoke($controller, $paginator->items(), auth('sanctum')->id());
 
         return response()->json([
             'data' => collect($items)->values(),
@@ -121,14 +121,18 @@ class BoardController extends Controller
         return response()->json(['ok' => true]);
     }
 
-    public function removeImage(Request $request, Board $board)
+    public function removeImage(Request $request, Board $board, Image $image)
     {
         if ($board->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
             return response()->json(['message' => 'Forbidden.'], 403);
         }
-        $data = $request->validate(['image_id' => ['required', 'integer']]);
-        $board->images()->detach($data['image_id']);
-        return response()->json(['ok' => true]);
+        $board->images()->detach($image->id);
+
+        \App\Models\SavedImage::where('user_id', $request->user()->id)
+            ->where('image_id', $image->id)
+            ->delete();
+
+        return response()->json(['ok' => true, 'saved' => false]);
     }
 
     public function saveImage(Request $request, Board $board)

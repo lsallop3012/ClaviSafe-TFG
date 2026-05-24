@@ -20,6 +20,7 @@ import NotFound from './pages/NotFound';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminImages from './pages/admin/AdminImages';
 import AdminBoards from './pages/admin/AdminBoards';
+import BoardDetail from './pages/BoardDetail';
 
 export default function App() {
   return (
@@ -33,18 +34,19 @@ export default function App() {
           <Route path={ROUTES.PASSWORD_RESET} element={<PasswordReset />} />
         </Route>
 
-        {/* Public */}
-        <Route path={ROUTES.EXPLORE}        element={<Explore />} />
-        <Route path={ROUTES.ABOUT}          element={<About />} />
-        <Route path={ROUTES.TERMS}          element={<Terms />} />
-        <Route path={ROUTES.POLICIES}       element={<Policies />} />
-        <Route path={ROUTES.HELP}           element={<Help />} />
+        {/* Public (anónimo y autenticado) */}
+        <Route path={ROUTES.ABOUT}    element={<About />} />
+        <Route path={ROUTES.TERMS}    element={<Terms />} />
+        <Route path={ROUTES.POLICIES} element={<Policies />} />
+        <Route path={ROUTES.HELP}     element={<Help />} />
 
-        {/* Authenticated */}
+        {/* Authenticated (anónimo → Home) */}
         <Route element={<ProtectedRoute />}>
-          <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
-          <Route path={ROUTES.PROFILE}   element={<Profile />} />
-          <Route path={ROUTES.CREATE}    element={<Create />} />
+          <Route path={ROUTES.EXPLORE}      element={<Explore />} />
+          <Route path={ROUTES.DASHBOARD}    element={<Dashboard />} />
+          <Route path={ROUTES.PROFILE}      element={<Profile />} />
+          <Route path={ROUTES.CREATE}       element={<Create />} />
+          <Route path={ROUTES.BOARD_DETAIL} element={<BoardDetail />} />
         </Route>
 
         {/* Admin only */}

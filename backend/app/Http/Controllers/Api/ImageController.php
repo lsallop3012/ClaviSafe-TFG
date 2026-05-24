@@ -43,6 +43,7 @@ class ImageController extends Controller
         $q       = $request->query('q');
         $userId  = $request->query('user_id');
         $savedBy = $request->query('saved_by');
+        $likedBy = $request->query('liked_by');
         $sort    = $request->query('sort');
         $perPage = (int) ($request->query('perPage', 24));
         $perPage = max(1, min(100, $perPage));
@@ -57,10 +58,11 @@ class ImageController extends Controller
         }
         if ($userId)  $query->where('user_id', (int) $userId);
         if ($savedBy) $query->whereIn('id', SavedImage::where('user_id', (int) $savedBy)->pluck('image_id'));
+        if ($likedBy) $query->whereIn('id', Like::where('user_id', (int) $likedBy)->pluck('image_id'));
         if ($sort === 'recent') $query->orderByDesc('created_at');
 
         $paginator = $query->paginate($perPage);
-        $items     = $this->annotate($paginator->items(), optional($request->user())->id);
+        $items     = $this->annotate($paginator->items(), auth('sanctum')->id());
 
         return response()->json([
             'data' => $items->values(),
@@ -73,29 +75,36 @@ class ImageController extends Controller
         ]);
     }
 
-   public function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
-            'image' => 'required|image|max:5120',
-            'description' => 'nullable|string'
+            'name'        => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image'       => 'nullable|image|max:5120',
+            'url'         => 'nullable|url|max:2048',
         ]);
 
-        $path = $request->file('image')->store('images', 'public');
+        if ($request->hasFile('image')) {
+            $url = asset('storage/' . $request->file('image')->store('images', 'public'));
+        } elseif ($request->filled('url')) {
+            $url = $request->url;
+        } else {
+            return response()->json(['message' => 'Se requiere una imagen o una URL.'], 422);
+        }
 
         $image = Image::create([
-            'name' => $request->name,
-            'url' => $path,
+            'name'        => $request->name,
+            'url'         => $url,
             'description' => $request->description,
-            'user_id' => $request->auth()->user()->id,
+            'user_id'     => $request->user()->id,
         ]);
 
-        return response()->json($image, 201);
+        return response()->json($this->annotate($image->fresh(), $request->user()->id), 201);
     }
 
     public function show(Request $request, Image $image)
     {
-        $annotated = $this->annotate($image, optional($request->user())->id);
+        $annotated = $this->annotate($image, auth('sanctum')->id());
 
         $author = $image->user;
         $annotated->author = $author
