@@ -92,7 +92,12 @@ El sistema de roles se basa en el enum `RoleSlug` ([`backend/app/Enums/RoleSlug.
 | Board Detail       | `/boards/:id`       | Usuario      | Detalle de un board con sus imágenes.                    |
 | Image Detail       | `/images/:id`       | Usuario      | Detalle de una imagen, likes y opción de guardar.        |
 
+<<<<<<< HEAD
 ### 4.4. Vistas CRUD de mantenimiento
+=======
+### 2.3. Figma
+- [Enlace al figma del proyecto.](https://www.figma.com/design/G1gFaER6fheSysg1feEXvu/TFG?node-id=2002-3&t=KsD8RBHNGuXWY7K3-1)
+>>>>>>> bb789a01ec2caf7ca87767715bbd01a6049af19c
 
 | Recurso  | Vista                                | Operaciones | Acceso        |
 | -------- | ------------------------------------ | ----------- | ------------- |
@@ -105,6 +110,7 @@ El sistema de roles se basa en el enum `RoleSlug` ([`backend/app/Enums/RoleSlug.
 
 Las rutas se agrupan en [`src/App.jsx`](frontend/frontend-moodly/src/App.jsx) bajo tres guards: `GuestRoute` (solo invitados), `ProtectedRoute` (solo autenticados) y `AdminRoute` (solo administradores).
 
+<<<<<<< HEAD
 ## 5. Arquitectura y tecnología
 
 ### 5.1. Frontend
@@ -213,3 +219,7 @@ Las rutas se agrupan en [`src/App.jsx`](frontend/frontend-moodly/src/App.jsx) ba
 - Todas las FKs usan `onDelete('cascade')`: al eliminar un User se eliminan sus boards, imágenes, likes y saved_images.
 
 ---
+=======
+## 4. Proceso
+- [Enlace al bitácora del proyecto.]()
+>>>>>>> bb789a01ec2caf7ca87767715bbd01a6049af19c
