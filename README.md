@@ -55,7 +55,7 @@ Desarrollar una aplicación web full stack que permita:
 - AWS (backend en producción)
 
 ### 2.3. Figma
-- [Enlace al figma del proyecto.]()
+- [Enlace al figma del proyecto.](https://www.figma.com/design/G1gFaER6fheSysg1feEXvu/TFG?node-id=2002-3&t=KsD8RBHNGuXWY7K3-1)
 
 ## 3. Características
 
@@ -68,4 +68,4 @@ Desarrollar una aplicación web full stack que permita:
 - Rutas públicas para invitados, rutas protegidas para usuarios autenticados (`ProtectedRoute`), rutas por rol (`RoleRoute`)
 
 ## 4. Proceso
-- [Enlace al bitácora del proyecto.](https://github.com/lsallop3012/Vaultix-TFG/wiki/Proceso)
+- [Enlace al bitácora del proyecto.]()
