@@ -7,6 +7,7 @@ use App\Models\Image;
 use App\Models\Like;
 use App\Models\SavedImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
@@ -85,7 +86,8 @@ class ImageController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $url = asset('storage/' . $request->file('image')->store('images', 'public'));
+            $path = $request->file('image')->store('', 'supabase');
+            $url  = Storage::disk('supabase')->url($path);
         } elseif ($request->filled('url')) {
             $url = $request->url;
         } else {
