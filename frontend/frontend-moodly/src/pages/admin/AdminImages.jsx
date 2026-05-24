@@ -9,8 +9,8 @@ function ImageModal({ initial, onClose, onSaved }) {
   const isEdit = Boolean(initial);
   const [form, setForm] = useState(
     isEdit
-      ? { title: initial.title ?? '', description: initial.description ?? '', url: initial.url ?? '', tags: (initial.tags ?? []).join(', ') }
-      : { title: '', description: '', url: '', tags: '' }
+      ? { name: initial.name ?? '', description: initial.description ?? '', url: initial.url ?? '' }
+      : { name: '', description: '', url: '' }
   );
   const [status, setStatus] = useState({ loading: false, error: '' });
   const set = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
@@ -18,10 +18,7 @@ function ImageModal({ initial, onClose, onSaved }) {
   const submit = async (e) => {
     e.preventDefault();
     setStatus({ loading: true, error: '' });
-    const payload = {
-      ...form,
-      tags: form.tags ? form.tags.split(',').map((t) => t.trim()).filter(Boolean) : [],
-    };
+    const payload = { ...form };
     try {
       let data;
       if (isEdit) {
@@ -44,17 +41,14 @@ function ImageModal({ initial, onClose, onSaved }) {
           <button type="button" className="admin-modal__close" onClick={onClose}>✕</button>
         </div>
         <form className="admin-modal__form" onSubmit={submit} noValidate>
-          <label className="admin-modal__field"><span>Title</span>
-            <input name="title" value={form.title} onChange={set} required />
+          <label className="admin-modal__field"><span>Name</span>
+            <input name="name" value={form.name} onChange={set} required />
           </label>
           <label className="admin-modal__field"><span>URL</span>
             <input name="url" value={form.url} onChange={set} required />
           </label>
           <label className="admin-modal__field"><span>Description</span>
             <textarea name="description" value={form.description} onChange={set} rows={2} />
-          </label>
-          <label className="admin-modal__field"><span>Tags <small>(comma separated)</small></span>
-            <input name="tags" value={form.tags} onChange={set} placeholder="nature, minimal, mood" />
           </label>
           {status.error && <p className="admin-modal__error">{status.error}</p>}
           <div className="admin-modal__actions">
@@ -119,7 +113,7 @@ export default function AdminImages() {
           <div className="admin-table-wrap">
             <table className="admin-table">
               <thead>
-                <tr><th>Thumb</th><th>ID</th><th>Title</th><th>Tags</th><th>Likes</th><th>Actions</th></tr>
+                <tr><th>Thumb</th><th>ID</th><th>Name</th><th>Likes</th><th>Actions</th></tr>
               </thead>
               <tbody>
                 {images.map((img) => (
@@ -130,9 +124,8 @@ export default function AdminImages() {
                         : <div className="admin-table__empty-thumb" />}
                     </td>
                     <td>{img.id}</td>
-                    <td>{img.title ?? '—'}</td>
-                    <td>{Array.isArray(img.tags) ? img.tags.join(', ') : (img.tags ?? '—')}</td>
-                    <td>{img.likes_count ?? 0}</td>
+                    <td>{img.name ?? '—'}</td>
+                    <td>{img.like_count ?? 0}</td>
                     <td>
                       <div className="admin-table__actions">
                         <button className="admin-btn admin-btn--ghost admin-btn--sm" onClick={() => setModal(img)}>Edit</button>
