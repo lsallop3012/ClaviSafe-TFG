@@ -295,7 +295,6 @@
   align-items: center;
   justify-content: center;
   padding: 24px;
-  backdrop-filter: blur(4px);
 }
 
 .modal {
